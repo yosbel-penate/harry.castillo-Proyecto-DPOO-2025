@@ -64,7 +64,7 @@ Eduardo Cortés Odio: modo campaña y sus escenas (cutscenes).
 # R3/ 
 El juego constará de varias clases (algunas pueden surgir sin haber sido planeadas, debido al tamaño del proyecto y sus funcionalidades), de las que se enumerarán la carpeta a la que corresponden, la cantidad que tienen y cada una de ellas:
 
-Main:
+### Main:
 
 1- AssetsManager: gestor de recursos del juego.
 
@@ -87,7 +87,7 @@ Main:
 10- UI: interfaz de usuario.
 
 
-Entities:
+### Entities:
 
 1- Entity: entidad general, de la que heredan Characters y Enemies.
 
@@ -95,7 +95,7 @@ Entities:
 
 3- Enemies: clase enemigos.
 
-AI:
+### AI:
 
 1- Node: clase nodo (véase Teoría de Grafos).
 
@@ -103,13 +103,13 @@ AI:
 
 3- CombatActions: acciones de la Inteligencia Artificial del enemigo en el combate.
 
-HexMap:
+### HexMap:
 
 1- HexGrid: matriz de hexágonos que se usará como mapa.
 
 2- HexGridManager: gestor de dicha matriz.
 
-HexMap Interactions:
+### HexMap Interactions:
 
 1- EvP Interactions: interacciones Enemigo y Jugador en el Mapa.
 
@@ -117,7 +117,11 @@ HexMap Interactions:
 
 3- RvE Interactions: interacciones Relieve y Enemigo en el Mapa.
 
-R4/ De momento, solamente usaremos la librería JavaFX (ampliamente usada y actualizada para crear interfaces gráficas) y las librerías estándar del vigésimo tercer Kit de Desarrollo de Java. 
+
+# R4/ 
+
+De momento, solamente usaremos la librería JavaFX (ampliamente usada y actualizada para crear interfaces gráficas) y las librerías estándar del vigésimo tercer Kit de Desarrollo de Java. 
+
 
 # R5/ 
 
