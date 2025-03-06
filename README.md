@@ -62,60 +62,23 @@ Eduardo Cortés Odio: modo campaña y sus escenas (cutscenes).
 
 
 # R3/ 
-El juego constará de varias clases (algunas pueden surgir sin haber sido planeadas, debido al tamaño del proyecto y sus funcionalidades), de las que se enumerarán la carpeta a la que corresponden, la cantidad que tienen y cada una de ellas:
+Las tecnologías que de momento se piensan usar son las siguientes:
 
-### Main:
+##IDEs: 
 
-1- AssetsManager: gestor de recursos del juego.
+1- Intellij IDEA.
 
-2- CollisionChecker: comprobador de colisiones.
+2- Net Beans.
 
-3- Config: gestión de configuraciones.
+## UML:
 
-4- Cutscene: escenas no jugables dentro del juego.
+1- UMLet.
 
-5- EntityGenerator: generador de entidades.
+2- Página web que convierte de UXF (tipo de archivo que exporta el programa UMLet) a código de Java: https://charlycimino.github.io/uxf-to-java
 
-6- Event Handler: gestor de eventos.
+Lenguaje de programación Java, a través del Kit de Desarrollo 23, el actualizado hasta la fecha.
 
-7- Game Panel: marco del juego (o sea, la ventana que se crea y gestionará todo lo gráfico del juego).
-
-8- Main: método principal por el que correrá todo lo demás.
-
-9- Sound: gestor de los efectos de sonido y música del juego.
-
-10- UI: interfaz de usuario.
-
-
-### Entities:
-
-1- Entity: entidad general, de la que heredan Characters y Enemies.
-
-2- Characters: clase personajes.
-
-3- Enemies: clase enemigos.
-
-### AI:
-
-1- Node: clase nodo (véase Teoría de Grafos).
-
-2- PathFinding: para encontrar el camino y llegar al jugador a través de los nodos.
-
-3- CombatActions: acciones de la Inteligencia Artificial del enemigo en el combate.
-
-### HexMap:
-
-1- HexGrid: matriz de hexágonos que se usará como mapa.
-
-2- HexGridManager: gestor de dicha matriz.
-
-### HexMap Interactions:
-
-1- EvP Interactions: interacciones Enemigo y Jugador en el Mapa.
-
-2- RvP Interactions: interacciones Relieve y Jugador en el Mapa.
-
-3- RvE Interactions: interacciones Relieve y Enemigo en el Mapa.
+Tiled, un editor de mapas 2D tanto de hexágonos como de cuadrados.
 
 
 # R4/ 
