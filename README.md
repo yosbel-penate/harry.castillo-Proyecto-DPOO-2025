@@ -51,9 +51,13 @@ on efectos de sonido y música.
 Para cada miembro en este equipo, se han dividido las tareas según ciertas funcionalidades del juego y la afinidad de estos integrantes a esas tareas. Muestro entonces la repartición inicial que hemos hecho con tal de crear el esqueleto de buena parte de las funciones del juego:
 
 Harry Pérez Castillo: controles e inteligencia artificial de los enemigos.
+
 Lázaro Luis Ayala Oquendo: sistema de combate y de consumibles.
+
 Arturo Manuel Álvarez González: mapa y menús.
+
 Xavier Alejandro Alfonso Borges: roaster e implementación del equipo de personajes en el juego.
+
 Eduardo Cortés Odio: modo campaña y sus escenas (cutscenes).
 
 
@@ -61,38 +65,58 @@ Eduardo Cortés Odio: modo campaña y sus escenas (cutscenes).
 El juego constará de varias clases (algunas pueden surgir sin haber sido planeadas, debido al tamaño del proyecto y sus funcionalidades), de las que se enumerarán la carpeta a la que corresponden, la cantidad que tienen y cada una de ellas:
 
 Main:
+
 1- AssetsManager: gestor de recursos del juego.
+
 2- CollisionChecker: comprobador de colisiones.
+
 3- Config: gestión de configuraciones.
+
 4- Cutscene: escenas no jugables dentro del juego.
+
 5- EntityGenerator: generador de entidades.
+
 6- Event Handler: gestor de eventos.
+
 7- Game Panel: marco del juego (o sea, la ventana que se crea y gestionará todo lo gráfico del juego).
+
 8- Main: método principal por el que correrá todo lo demás.
+
 9- Sound: gestor de los efectos de sonido y música del juego.
+
 10- UI: interfaz de usuario.
 
 
 Entities:
+
 1- Entity: entidad general, de la que heredan Characters y Enemies.
+
 2- Characters: clase personajes.
+
 3- Enemies: clase enemigos.
 
 AI:
+
 1- Node: clase nodo (véase Teoría de Grafos).
+
 2- PathFinding: para encontrar el camino y llegar al jugador a través de los nodos.
+
 3- CombatActions: acciones de la Inteligencia Artificial del enemigo en el combate.
 
 HexMap:
 
 1- HexGrid: matriz de hexágonos que se usará como mapa.
+
 2- HexGridManager: gestor de dicha matriz.
 
 HexMap Interactions:
 
 1- EvP Interactions: interacciones Enemigo y Jugador en el Mapa.
+
 2- RvP Interactions: interacciones Relieve y Jugador en el Mapa.
+
 3- RvE Interactions: interacciones Relieve y Enemigo en el Mapa.
+
 R4/ De momento, solamente usaremos la librería JavaFX (ampliamente usada y actualizada para crear interfaces gráficas) y las librerías estándar del vigésimo tercer Kit de Desarrollo de Java. 
 
 # R5/ 
@@ -100,8 +124,11 @@ R4/ De momento, solamente usaremos la librería JavaFX (ampliamente usada y actu
 El juego tiene muchas funcionalidades, que aquí dividiremos en 4:
 
 1- Funciones del mapa: tratan el movimiento del personaje (que serán 5, pero en el mapa se verá solamente uno) por el mapa y por puntos de acción, los efectos que tendrán en ellos el relieve, las trampas e incluso algunos enemigos y las colisiones.
+
 2- Funciones del combate: basado en los típicos sistemas por turnos de RPG, este tendrá las funcionalidades de: Ataque, Habilidades, Consumibles y Huir (esta última opción desactivada en ciertas ocasiones); la funcionalidad de este empezará cuando se haga colisión con un enemigo, donde se pasará a una pantalla especial para esta funcionalidad.
+
 3- Funciones de los modos de juego: en el modo campaña, se tendrán diálogos con una interfaz visual mostrando al personaje, su nombre y su diálogo (de sobrar tiempo, se diferenciarán los diálogos del personaje principal en el equipo elegido), habrán ciertos objetivos a cumplir y se añadirá alguna que otra cinemática (cutscene) para mejorar la experiencia. En el modo PvP, se elegirá un escenario de dos y luego a los cinco personajes de cada uno, para posteriormente ganar o acabando con todo el equipo del otro jugador o alcanzando un Núcleo de Era. En el modo Torneo, con unas combinaciones de hasta 26334 (C22 5) equipos posibles, se agarrarán dieciséis equipos que lucharán entre sí, obteniendo niveles y consumibles por el recorrido hasta ser finalistas (única forma de ganar en este modo).
+
 4- Funciones del menú: botón de iniciar el juego (posteriormente llevaría a otro menú con la selección del modo de juego y, posteriormente, de los personajes), botón para explicar los controles y botón de cerrar el juego.
 
 
@@ -110,7 +137,10 @@ El juego tiene muchas funcionalidades, que aquí dividiremos en 4:
 De momento, el sistema de carpetas del software sería:
 
 1- Src (incluyendo las carpetas de Clases y las carpetas de los Objetos predefinidos).
+
 2- Nbproject (carpetas generadas automáticamente).
+
 3- Test (carpetas generadas automáticamente).
+
 4- Assets (música, efectos de sonido, sprites).
 
