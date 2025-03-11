@@ -1,25 +1,25 @@
-# Documento de visión inicial (Readme).
+# Documento de visión inicial y de requisitos (Readme).
 
 
-## Equipo 1:
-## 1- Harry Pérez Castillo.
-## 2- Lázaro Luis Ayala Oquendo.
-## 3- Arturo Manuel Álvarez González.
-## 4- Xavier Alejandro Alfonso Borges.
-## 5- Eduardo Cortés Odio.
+### Equipo 1:
+ 1- Harry Pérez Castillo.
+ 2- Lázaro Luis Ayala Oquendo.
+ 3- Arturo Manuel Álvarez González.
+ 4- Xavier Alejandro Alfonso Borges.
+ 5- Eduardo Cortés Odio.
 
 ### Tema 2: 
-### Crónicas de Valthar: El torneo de las Eras.
+ Crónicas de Valthar: El torneo de las Eras.
 
 ---
 
-# En las siguientes líneas del documento de visión inicial del Trabajo de Curso para DPOO, se hablará de:
-## 1- Describir lo que se hará en cuanto a desarrollo.
-## 2- Tareas propuestas a cada miembro.
-## 3- Tecnologías usadas en el desarrollo.
-## 4- Librerías y su explicación.
-## 5- Función del juego.
-## 6- Descripción del sistema de carpetas del software.
+### En las siguientes líneas del documento de visión inicial del Trabajo de Curso para DPOO, se hablará de:
+ 1- Describir lo que se hará en cuanto a desarrollo.
+ 2- Tareas propuestas a cada miembro.
+ 3- Tecnologías usadas en el desarrollo.
+ 4- Librerías y su explicación.
+ 5- Función del juego.
+ 6- Descripción del sistema de carpetas del software.
 
 
 
@@ -64,7 +64,7 @@ Eduardo Cortés Odio: modo campaña y sus escenas (cutscenes).
 # R3/ 
 Las tecnologías que de momento se piensan usar son las siguientes:
 
-##IDEs: 
+## IDEs: 
 
 1- Intellij IDEA.
 
@@ -76,9 +76,13 @@ Las tecnologías que de momento se piensan usar son las siguientes:
 
 2- Página web que convierte de UXF (tipo de archivo que exporta el programa UMLet) a código de Java: https://charlycimino.github.io/uxf-to-java
 
+3- PlantUML (donde se hará el UML principal).
+
 Lenguaje de programación Java, a través del Kit de Desarrollo 23, el actualizado hasta la fecha.
 
 Tiled, un editor de mapas 2D tanto de hexágonos como de cuadrados.
+
+Scene Builder, para JavaFX.
 
 
 # R4/ 
@@ -110,4 +114,65 @@ De momento, el sistema de carpetas del software sería:
 3- Test (carpetas generadas automáticamente).
 
 4- Assets (música, efectos de sonido, sprites).
+
+
+# Documento de Requisitos:
+
+### -Título del proyecto:
+“Crónicas de Valthar: El torneo de las eras. ”
+
+### -Descripción del juego:
+1- Género del juego: roguelike RPG de estrategia por turnos, fantasía.
+2- Historia: En el mundo mágico de Valthar, un torneo legendario convoca a los guerreros más formidables de todas las eras para competir por el Cáliz de las Eras, un artefacto capaz de alterar el destino.
+3- Cómo se juega: se utiliza teclado o mouse para elegir las casillas en las que se moverá el personaje, también se usan para las opciones del combate por turnos. Sus reglas son no usar más de cierta cantidad de consumibles, dependiendo del modo, las reglas se ajustan a los objetivos (si un objetivo es no matar a alguien, pues sería una regla), etc.
+
+### -Requisitos (mínimos) del sistema:
+1- Java JDK 23.
+2- Sistema operativo: Windows, Linux o macOS.
+3- Memoria RAM: 1 o 2GB mínimo.
+4- CPU’s Intel, Radeon modernos.
+5- Tarjeta gráfica (opcional).
+
+
+### -Instalación:
+(Requerido tener Git):
+1- Clonar repositorio usando el comando git clone.
+2- Navegar al directorio del proyecto con el comando cd.
+3- Compilar el proyecto con bash javac *. java.
+4- Ejecutar el proyecto con bash java Main.
+
+### -Diseño del juego (POO):
+Clases principales:
+1- Entities: representa a cualquier entidad del juego, contiene atributos como vida, daño, velocidad, etc.
+2- GamePanel: marco del juego.
+3- AssetsManager: gestor de recursos del juego.
+4- Consumables: representa todos los consumibles del juego.
+5-  Characters: representa a todos los personajes del juego.
+Todas estas clases son públicas, pero sus variables están encapsuladas.
+Para evitar duplicar el código de los Characters y los Consumables, se hizo que estas heredaran de Entities. En el caso de Consumables, ellos heredan estos valores porque estos valores son los que aumentarán a los personajes en caso de consumirlos (la relación de Entities con Characters y Consumables es fuerte). Assets Manager 
+
+
+### -Diagrama de clases: 
+
+(De momento vacío, se entregará la próxima semana según el calendario dado)
+
+
+### -Funcionalidades implementadas:
+-Sistema de consumibles.
+-Combates por turnos.
+-Interacción con el mapa y los enemigos.
+-Modos de juego: Torneo, Campaña y PvP.
+
+### -Pruebas y validación:
+-Para verificar el juego, a nivel funcional lo ejecutamos y probamos las debilidades del código a través de ciertos forcejeos con la movilidad y los combates. 
+-Para comprobar la funcionalidad de las clases, estuvimos probando todas (o gran parte) las posibilidades que nos ofrecían  y en contextos distintos.
+
+### -Conclusiones: 
+
+(Se rellenará cuando terminemos el proyecto y se haya expuesto)
+
+### -Referencias: 
+
+(Se pondrán más adelante, ya que de momento solo hemos usado de referencias algunos vídeos de Youtube y poco más)
+
 
