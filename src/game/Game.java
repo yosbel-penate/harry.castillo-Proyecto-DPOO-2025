@@ -76,10 +76,38 @@ public class Game extends Application {
     }
 
     public void mapLimits(){
+        // Limites horizontales.
         if (posxodd < 64){
         posxodd = 64;
         }else if (posxodd > 704){
             posxodd = 704;
+        }
+
+        // Limites verticales.
+        for (int i = 1; i <= 11; i++){
+            int position = i *64;
+            if (i % 2 == 0){
+                if (posyodd < 64 && posxodd == position){
+                    posyodd = 64;
+                }
+                if (posyodd > 576 && posxodd == position){
+                    posyodd = 576;
+                }
+
+            }else{
+                if (posyodd < 128 && posxodd == position){
+                    posyodd = 128;
+                }
+                if (posyodd > 640 && posxodd == position){
+                    posyodd = 640;
+                }
+
+            }
+
+
+
+
+
         }
 
     }
