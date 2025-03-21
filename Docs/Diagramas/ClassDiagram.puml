@@ -25,11 +25,11 @@
  Event "1" --> "1" Effect : effect
 
 class Game {
-    -Board board
-    -TurnManager turnManager
-    -List<Character> characters
-    -GameState currentState
-    -GameUI gameUI
+    -board:Board
+    -turnManager:TurnManager
+    -character: List<Character>
+    -currentState:GameState
+    -gameUI :GameUI
     +Game()
     +startGame() : void
     +runGameLoop() : void
@@ -40,9 +40,9 @@ class Game {
 }
 
 class Board {
-    -int rows
-    -int cols
-    -HexTile[][] tiles
+    -rows:int
+    -cols:int
+    -titles: HexTile[][]
     +Board(rows: int, cols: int)
     -initializeTiles() : void
     +getTile(row: int, col: int) : HexTile
@@ -51,10 +51,11 @@ class Board {
 }
 
 class HexTile {
-    -int row
-    -int col
-    -TerrainType terrain
-    -Character occupant
+    -row:int
+    -col:int
+    -terrain:TerrainType
+    -occupant:Character
+    +HexTile()
     +HexTile(row: int, col: int, terrain: TerrainType)
     +getRow() : int
     +getCol() : int
@@ -65,8 +66,9 @@ class HexTile {
 }
 
 class Position {
-    -int row
-    -int col
+    -int: row
+    -int: col
+    +Position()
     +Position(row: int, col: int)
     +getRow() : int
     +getCol() : int
@@ -74,8 +76,9 @@ class Position {
 }
 
 class TurnManager {
-    -List<Character> turnOrder
-    -int currentTurnIndex
+    -turnOrder:List<Character>
+    -currentTurnIndex:void
+    +TurnManager()
     +TurnManager(turnOrder: List<Character>)
     +getCurrentCharacter() : Character
     +nextTurn() : void
@@ -83,17 +86,18 @@ class TurnManager {
 }
 
 abstract class Character {
-    -String name
-    -int maxHealth
-    -int currentHealth
-    -int attack
-    -int defense
-    -int movement
+    -name:String
+    -maxHealth:int
+    -currentHealth:int
+    -attack:int
+    -defense:int
+    -movement:int
     -Position position
-    -Role role
-    -List<Ability> abilities
-    -List<Item> inventory
-    -Weapon equippedWeapon
+    -role:String
+    -abilities: List<abilities>
+    -inventory: List<Item>
+    -equippedWeapon:Weapon
+    +Character()
     +Character(name: String, health: int, attack: int, defense: int, movement: int, position: Position, role: Role)
     +move(newPosition: Position) : void
     +attack(target: Character) : void
@@ -124,34 +128,34 @@ interface Action {
 }
 
 class MoveAction {
-    -Character character
-    -Position destination
+    -character:Character
+    -destination:Position
     +MoveAction(character: Character, destination: Position)
     +execute() : void
 }
 
 
 class AttackAction {
-    -Character attacker
-    -Character target
+    -attacker:Character
+    -target:Character
     +AttackAction(attacker: Character, target: Character)
     +execute() : void
 }
 
 class AbilityAction {
-    -Character user
-    -Ability ability
-    -Character target
+    -user:Character
+    -ability:Ability
+    -target:Character
     +AbilityAction(user: Character, ability: Ability, target: Character)
     +execute() : void
 }
 
 
 class Ability {
-    -String name
-    -String description
-    -int cooldown
-    -int currentCooldown
+    -name:String
+    -description:String
+    -cooldown:int
+    -currentCooldown:int
     +Ability(name: String, description: String, cooldown: int)
     +execute(user: Character, target: Character) : void
     +canUse() : boolean
@@ -161,12 +165,12 @@ class Ability {
 }
 
 interface Effect {
-    +apply(board: Board) : void
+    +apply(board: Board):void
 }
 
 class Event {
-    -String eventName
-    -int duration
+    -eventName:String
+    -duration:int
     -Effect effect
     +Event(eventName: String, duration: int, effect: Effect)
     +applyEvent(board: Board) : void
@@ -175,9 +179,9 @@ class Event {
 }
 
 abstract class Item {
-    -String id
-    -String name
-    -String description
+    -id:String
+    -name:String
+    -description:String
     +Item(id: String, name: String, description: String)
     +getId() : String
     +getName() : String
@@ -186,15 +190,15 @@ abstract class Item {
 }
 
 class Consumable {
-    -int healthRestored
+    -healthRestored:int
     +Consumable(id: String, name: String, description: String, healthRestored: int)
     +getHealthRestored() : int
     +use(user: Character) : void
 }
 
 class Weapon {
-    -int damage
-    -double attackSpeed
+    -damage:int
+    -attackSpeed:double
     -WeaponType type
     +Weapon(id: String, name: String, description: String, damage: int, attackSpeed: double, type: WeaponType)
     +getDamage() : int
@@ -204,19 +208,19 @@ class Weapon {
 }
 
 class GameUI {
-    -Game game
-    -BoardPane boardPane
+    -game:Game
+    -boardPane BoardPane
     +start(primaryStage: Stage) : void
     +updateUI() : void
     +main(args: String[]) : void
 }
 
 class BoardPane {
-    -Board board
-    -Canvas canvas
-    -int tileSize
+    -board:Board
+    -canvas:Canvas
+    -tileSize:int
     +BoardPane(board: Board)
-    +render() : void
+    +render():void
 }
 
 @enduml

@@ -1,0 +1,509 @@
+@startuml
+
+PlayerCharacters "1"<|--"1" Kael_Draven:is
+PlayerCharacters "1"<|--"1" Cintya_Eaglevision:is
+PlayerCharacters "1"<|--"1" Jax_Blacksword:is
+PlayerCharacters "1"<|--"1" Lina_Fireheart
+PlayerCharacters "1"<|--"1" Alessandra_The_Brilliant:is
+PlayerCharacters "1"<|--"1" Sirael_thes:is
+PlayerCharacters "1"<|--"1" Lyrasa_Velith:is
+PlayerCharacters "1"<|--"1" Xaviru_Palast:is
+PlayerCharacters "1"<|--"1" Heloro_Maeg:is
+PlayerCharacters "1"<|--"1" Lyffa_Shartis:is
+PlayerCharacters "1"<|--"1" Hobgrou:is
+PlayerCharacters "1"<|--"1" Groshta:is
+PlayerCharacters "1"<|--"1" Globius:is
+PlayerCharacters "1"<|--"1" Hobag:is
+PlayerCharacters "1"<|--"1" Higlob:is
+PlayerCharacters "1"<|--"1" Drekker_The_Blade:is
+PlayerCharacters "1"<|--"1" Grisha_The_Stalker:is
+PlayerCharacters "1"<|--"1" Zorak_The_Skinner:is
+PlayerCharacters "1"<|--"1" Goldan_The_Vile:is
+PlayerCharacters "1"<|--"1" Gortona_Sewwounds:is
+PlayerCharacters "1"<|--"1" Azeli:is
+PlayerCharacters "1"<|--"1" Shira_WhiteEdge:is
+
+class PlayerCharacters{
+-name:String
+-race:String
+-type:String
+-role:String
+-personality:String
+-health:int
+-attack:int
+-manna:int
+-defense:int
+-movement:int
+-position:Position
+-ability:SpecialAbilities
++PlayerCharacters()
++PlayerCharacters(name:String,race:String,type:String,role:String,personality:String,health:int,attack:int,manna:int,defense:int,movement:int,position:Position,ability:SpecialAbilities)
++useSpecialAbility(objetive:Character):void
++useConsumable(objetive:Character):void
++toAttack(objetive:Character):void
+}
+
+class Kael_Draven{
+-race:human
+-type:warrior
+-role:tank
+-personality:brave,loyal and impulsive
+-health:10
+-attack:3
+-defense:4
+-movement:2
+-SpecialAbilities:firm guard
+}
+class Cintya_Eaglevision{
+-race:human
+-type:archer
+-role:sniper
+-personality:stubborn,famous and sincere
+-health:10
+-attack:5
+-defense:2
+-movement:3
+-SpecialAbilities:immobilize
+}
+class Jax_Blacksword{
+-race:human
+-type:berserker
+-role:barbarian
+-personality:scoundrel and grumpy
+-health:8
+-attack:6
+-defense:2
+-movement:2
+-SpecialAbilities:heavy blow
+}
+class Lina_Fireheart{
+-race:human
+-type:magician
+-role:pyromancer
+-personality:energetic,fair and passionate
+-health:6
+-manna:10
+-attack:5
+-defense:1
+-movement:3
+-SpecialAbilities:hell
+}
+class Alessandra_The_Brilliant{
+-race:human
+-type:healer
+-role:priestess
+-personality:flirtatious,kind and outgoing
+-health:6
+-manna:15
+-attack:2
+-defense:1
+-movement:3
+-SpecialAbilities:healing light
+}
+class Sirael_thes{
+-race:elf
+-type:warrior
+-role:swordman
+-personality:serious,honorable and tireless
+-health:10
+-attack:5
+-defense:3
+-movement:4
+-SpecialAbilities:incapacitating edge
+}
+class Lyrasa_Velith{
+-race:elf
+-type:archer
+-role:skirmish
+-personality:silent, precise and distrustful
+-health:6
+-attack:5
+-defense:2
+-movement:3
+-SpecialAbilities:accurate shot
+}
+class Xaviru_Palast{
+-race:elf
+-type:berserker
+-role:containment
+-personality:resentful, serious and of few words
+-health:8
+-attack:6
+-defense:2
+-movement:3
+-SpecialAbilities:magic extension
+}
+class Heloro_Maeg{
+-race:elf
+-type:magician
+-role:hydromagus
+-personality:wise, concerned and fair
+-health:7
+-manna:10
+-attack:5
+-defense:2
+-movement:4
+-SpecialAbilities:polar aura
+}
+class Lyffa_Shartis{
+-race:elf
+-type:healer
+-role:apprentice
+-personality:princess,perverted and sadistic
+-health:6
+-manna:12
+-attack:5
+-defense:1
+-movement:3
+-SpecialAbilities:healing breeze
+}
+class Hobgrou{
+-race:goblin
+-type:warrior
+-role:spearman
+-personality:brave, tenacious and reserved
+-health:8
+-attack:3
+-defense:2
+-movement:3
+-SpecialAbilities:sharp tip
+}
+class Groshta{
+-race:goblin
+-type:archer
+-role:trapper
+-personality:scoundrel,cunning and gluttonous
+-health:7
+-attack:4
+-defense:1
+-movement:4
+-SpecialAbilities:grid
+}
+class Globius{
+-race:goblin
+-type:berserker
+-role:shadow
+-personality:prince,rude and irascible
+-health:7
+-attack:5
+-defense:1
+-movement:3
+-SpecialAbilities:melted into the shadows
+}
+class Hobag{
+-race:goblin
+-type:magician
+-role:drainer
+-personality:jealous,brave and unfriendly
+-health:7
+-manna:8
+-attack:3
+-defense:0
+-movement:3
+SpecialAbilities:draining magic
+}
+class Higlob{
+-race:goblin
+-type:healer
+-role:quack
+-personality:distracted,flattering and innocent
+-health:7
+-manna:15
+-attack:2
+-defense:1
+-movement:4
+-SpecialAbilities:nature's help
+}
+class Drekker_The_Blade{
+-race:orc
+-type:warrior
+-role:sword master
+-personality:experienced,strong and calm
+-health:10
+-attack:5
+-defense:2
+-movement:3
+-SpecialAbilities:hellish scream
+}
+class Grisha_The_Stalker{
+-race:orc
+-type:archer
+-role:huntress
+-personality:sadistic,ruthless and rude
+-health:7
+-attack:5
+-defense:2
+-movement:3
+-SpecialAbilities:aim
+}
+class Zorak_The_Skinner{
+-race:orc
+-type:berserker
+-role:all or nothing
+-personality:brutal,noisy and chaotic
+-health:8
+-attack:6
+-defense:2
+-movement:3
+-SpecialAbilities:wild anger
+}
+class Goldan_The_Vile{
+-race:orc
+-type:magician
+-role:witcher
+-personality:heartless, cruel and impulsive
+-health:7
+-manna:10
+-attack:5
+-defense:2
+-movement:2
+-SpecialAbilities:fel magic
+}
+class Gortona_Sewwounds{
+-race:orc
+-type:healer
+-role:healer
+-personality:wise, old and bitter
+-health:7
+-manna:15
+-attack:4
+-defense:4
+-movement:2
+-SpecialAbilities:vile cure
+}
+class Azeli{
+-race:humanoid phoenix
+-type:healer
+-role:mysticism
+-personality:brave,passionate and optimistic
+-health:7
+-manna:12
+-attack:4
+-defense:2
+-movement:4
+-SpecialAbilities:healing flame
+}
+class Shira_WhiteEdge{
+-race:humanoid cat
+-type:warrior
+-role:swordwoman
+-personality:suicidal, loud and combat-obsessed
+-health:8
+-attack:5
+-defense:2
+-movement:3
+-SpecialAbilities:camouflage
+}
+
+EnemiesCharacters "1"<|--"*" spectral_wolf:is
+EnemiesCharacters "1"<|--"*" stone_guardian:is
+EnemiesCharacters "1"<|--"*" void_howler:is
+EnemiesCharacters "1"<|--"1" Kilian_Gladus:is
+EnemiesCharacters "1"<|--"1" Legionary:is
+EnemiesCharacters "1"<|--"1" Kasano_Gladus:is
+EnemiesCharacters "1"<|--"1" Aderit_Chantris:is
+EnemiesCharacters "1"<|--"1" Elven_Sword:is
+EnemiesCharacters "1"<|--"1" Tiran_Morgoth:is
+
+
+
+class EnemiesCharacters{
+-name:String
+-race:String
+-type:String
+-role:String
+-personality:String
+-health:int
+-attack:int
+-manna:int
+-defense:int
+-movement:int
+-Position:position
+-SpecialAbilities: ability
++EnemiesCharacters()
++EnemiesCharacters(name:String,race:String,type:String,role:String,personality:String,health:int,attack:int,manna:int,defense:int,movement:int,position:Position,ability:SpecialAbilities)
++useSpecialAbility(objective:Character):void
++useConsumable(objective:Characters):void
++toAttack(objective:Character):void
+}
+
+class spectral_wolf{
+-race:ghost beast
+-health:5
+-attack:3
+-movement:4
+-SpecialAbilities:ethereal bite
+}
+class stone_guardian{
+-race:golem
+-health:15
+-attack:5
+-movement:0
+-SpecialAbilities:mace blow
+}
+class void_howler{
+-race:pulpoid
+-health:8
+-attack:4
+-movement:3
+-SpecialAbilities:energy beam
+}
+class Kilian_Gladus{
+-race:human
+-type:warrior
+-role:swordman
+-personality:brave, serious and strategic
+-health:10
+-attack:5
+-defense:3
+-movement:3
+-SpecialAbilities:phalanx leader
+}
+class Legionary{
+-race:human
+-type:warrior
+-role:tank
+-personality:quiet and observant
+-health:10
+-attack:5
+-defense:4
+-movement:2
+}
+class Kasano_Gladus{
+-race:human
+-type:magician
+-role:demon summoner
+-personality:strategic,serious and insensitive
+-health:10
+-manna:10
+-attack:5
+-defense:2
+-movement:2
+-SpecialAbilities:barrier infusion
+}
+class Aderit_Chantris{
+-race:elf
+-type:archer
+-role: arcane archer
+-personality:cruel and stubborn
+-health:8
+-manna:10
+-attack:4
+-defense:2
+-movement:3
+-SpecialAbilities:healing arrow
+}
+class Elven_Sword{
+-race:elf
+-type:berserker
+-role: assassin
+-personality:ruthless and bloody
+-health:8
+-attack:4
+-defense:3
+-movement:4
+-SpecialAbilities:double hit
+}
+class Tiran_Morgoth{
+-race:possessed
+-type:magician
+-role:witcher
+-personality:charismatic and sadistic
+-health:10
+-manna:12
+-attack:5
+-defense:3
+-movement:3
+-SpecialAbilities:hellish breath
+}
+
+Consumables "1"<|--"*"shard_of_Aether:is
+Consumables "1"<|--"*"vitality_potion:is
+Consumables "1"<|--"*"tournament_chest:is
+
+class Consumables{
+-name:String
+-effect:Effect
+-duration:TurnManager
+-fountain:EnemysCharacters
++Consumables()
++Consumables(name:String,effect:Effect,duration:TurnManager)
++applyConsumables(consumable:Consumables):void
+}
+class shard_of_Aether{
+-effect:attack+2
+-fountain:stone_guardian,void_howler
+}
+class vitality_potion{
+-effect:health+5
+-fountain:spectral_wolf
+}
+class tournament_chest{
+-effect:random(new weapon,new ability)
+-fountain:probability(enemies or dangers)
+}
+
+Land "1" <|-- "*" fountain:is
+Land "1" <|-- "*" forest:is
+Land "1" <|-- "*" river:is
+Land "1" <|-- "*" ruins:is
+
+class Land{
+-name:String
+-position:Position
+-effect:Effect
++Land()
++applyEffect(effect:Effect)
+}
+class forest{
+-position:random
+-effect:attack+5
+}
+class river{
+-position:random
+-effect:no move
+}
+class montains{
+-position:random
+-effect: defense+3
+}
+class ruins{
+-position:random
+-effect: manna+4
+}
+
+dangers "1" <|-- "*" ether_storm:is
+dangers "1" <|-- "*" shadow_pit:is
+
+class dangers {
+-name:String
+-position:Position
+-effect:Effect
+-range:Position
+-movement:int
+-duration:TurnManager
++dangers()
++applyDangersEffect(objective:Character)):void
+}
+class ether_storm{
+-position:random
+-range: 3 squares
+-effect:health-2
+-duration:3 turns
+-movement:1 square/turn
+}
+class shadow_pit{
+-position:random
+-range:1 square
+-effect:health-3,no move
+-duration:1 turn
+-movement:N/A
+}
+
+PlayerCharacters "1..*" *-- "1..*" dangers:damages
+PlayerCharacters "1..*" *-- "1..*" Land:upon
+PlayerCharacters "1..*" *-- "*" Consumables:use up
+EnemiesCharacters "1.*" *-- "1..*" dangers:damages
+EnemiesCharacters "1..*" *-- "1..*" Land:upon
+EnemiesCharacters "1..*" *-- "1" Consumables:grants
+@enduml
