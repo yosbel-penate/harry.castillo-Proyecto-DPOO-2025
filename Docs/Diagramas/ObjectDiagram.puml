@@ -1,46 +1,74 @@
 @startuml
 
-PlayerCharacters "1"<|--"1" Kael_Draven:is
-PlayerCharacters "1"<|--"1" Cintya_Eaglevision:is
-PlayerCharacters "1"<|--"1" Jax_Blacksword:is
-PlayerCharacters "1"<|--"1" Lina_Fireheart
-PlayerCharacters "1"<|--"1" Alessandra_The_Brilliant:is
-PlayerCharacters "1"<|--"1" Sirael_thes:is
-PlayerCharacters "1"<|--"1" Lyrasa_Velith:is
-PlayerCharacters "1"<|--"1" Xaviru_Palast:is
-PlayerCharacters "1"<|--"1" Heloro_Maeg:is
-PlayerCharacters "1"<|--"1" Lyffa_Shartis:is
-PlayerCharacters "1"<|--"1" Hobgrou:is
-PlayerCharacters "1"<|--"1" Groshta:is
-PlayerCharacters "1"<|--"1" Globius:is
-PlayerCharacters "1"<|--"1" Hobag:is
-PlayerCharacters "1"<|--"1" Higlob:is
-PlayerCharacters "1"<|--"1" Drekker_The_Blade:is
-PlayerCharacters "1"<|--"1" Grisha_The_Stalker:is
-PlayerCharacters "1"<|--"1" Zorak_The_Skinner:is
-PlayerCharacters "1"<|--"1" Goldan_The_Vile:is
-PlayerCharacters "1"<|--"1" Gortona_Sewwounds:is
-PlayerCharacters "1"<|--"1" Azeli:is
-PlayerCharacters "1"<|--"1" Shira_WhiteEdge:is
+Game "1" *-right- "1" Kael_Draven: haves
+Game "1" *-left- "1" Cintya_Eaglevision: haves
+Game "1" *-left- "1" Jax_Blacksword: haves
+Game "1" *-left- "1" Lina_Fireheart: haves
+Game "1" *-left- "1" Alessandra_The_Brilliant: haves
+Game "1" *-left- "1" Sirael_The_S: haves
+Game "1" *-up- "1" Lyrasa_Velith: haves
+Game "1" *-up- "1" Xaviru_Palast: haves
+Game "1" *-up- "1" Heloro_Maeg: haves
+Game "1" *-up- "1" Lyffa_Shartis: haves
+Game "1" *-up- "1" Hobgrou: haves
+Game "1" *-up- "1" Groshta: haves
+Game "1" *-right- "1" Globius: haves
+Game "1" *-right- "1" Hobag: haves
+Game "1" *-right- "1" Higlob: haves
+Game "1" *-right- "1" Drekker_The_Blade: haves
+Game "1" *-right- "1" Grisha_The_Stalker: haves
+Game "1" *-right- "1" Zorak_The_Skinner: haves
+Game "1" *-left-- "1" Goldan_The_Vile: haves
+Game "1" *-left-- "1" Gortona_Sewwounds: haves
+Game "1" *-left-- "1" Azeli: haves
+Game "1" *-left-- "1" Shira_WhiteEdge: haves
 
-class PlayerCharacters{
--name:String
--race:String
--type:String
--role:String
--personality:String
--health:int
--attack:int
--manna:int
--defense:int
--movement:int
--position:Position
--ability:SpecialAbilities
-+PlayerCharacters()
-+PlayerCharacters(name:String,race:String,type:String,role:String,personality:String,health:int,attack:int,manna:int,defense:int,movement:int,position:Position,ability:SpecialAbilities)
-+useSpecialAbility(objetive:Character):void
-+useConsumable(objetive:Character):void
-+toAttack(objetive:Character):void
+
+Game "1" *-down-- "1" Kilian_Gladus: haves
+Game "1" *-down-- "1" Kasano_Gladus: haves
+Game "1" *-down-- "1" Aderit_Chantris: haves
+Game "1" *-down-- "1" Legionary: haves
+Game "1" *-down-- "1" Elven_Sword: haves
+Game "1" *-down-- "1" Tiran_Morgoth: haves
+
+
+Game "1" *-down- "1...*" spectral_wolf: haves
+Game "1" *-down- "1...*" stone_guardian: haves
+Game "1" *-down- "1...*" void_howler: haves
+
+
+Game "1" *--down-- "0...*" shard_of_Aether: haves
+Game "1" *--down-- "0...*" vitality_potion: haves
+Game "1" *--down-- "0...*" tournament_chest: haves
+
+Game "1" *-down-- "1" forest: haves
+Game "1" *-down-- "1" river: haves
+Game "1" *-down-- "1" mountains: haves
+Game "1" *-down-- "1" ruins: haves
+
+Game "1" *-- "0...*" ether_storm: haves
+Game "1" *-- "0...*" shadow_pit: haves
+
+
+
+
+
+Game *-- Kael_Draven
+Game *-- Kael_Draven
+
+
+class Game {
+
+    + start_game(): void
+    + end_game(): void
+    + next_turn(): void
+    + check_victory_conditions(): boolean
+    + check_defeat_conditions(): boolean
+    + spawn_enemies(): void
+    + spawn_items(): void
+    + trigger_event(): void
+    + spawn_bosses(): void
+
 }
 
 class Kael_Draven{
@@ -100,7 +128,7 @@ class Alessandra_The_Brilliant{
 -movement:3
 -SpecialAbilities:healing light
 }
-class Sirael_thes{
+class Sirael_The_S{
 -race:elf
 -type:warrior
 -role:swordman
@@ -295,37 +323,6 @@ class Shira_WhiteEdge{
 -SpecialAbilities:camouflage
 }
 
-EnemiesCharacters "1"<|--"*" spectral_wolf:is
-EnemiesCharacters "1"<|--"*" stone_guardian:is
-EnemiesCharacters "1"<|--"*" void_howler:is
-EnemiesCharacters "1"<|--"1" Kilian_Gladus:is
-EnemiesCharacters "1"<|--"1" Legionary:is
-EnemiesCharacters "1"<|--"1" Kasano_Gladus:is
-EnemiesCharacters "1"<|--"1" Aderit_Chantris:is
-EnemiesCharacters "1"<|--"1" Elven_Sword:is
-EnemiesCharacters "1"<|--"1" Tiran_Morgoth:is
-
-
-
-class EnemiesCharacters{
--name:String
--race:String
--type:String
--role:String
--personality:String
--health:int
--attack:int
--manna:int
--defense:int
--movement:int
--Position:position
--SpecialAbilities: ability
-+EnemiesCharacters()
-+EnemiesCharacters(name:String,race:String,type:String,role:String,personality:String,health:int,attack:int,manna:int,defense:int,movement:int,position:Position,ability:SpecialAbilities)
-+useSpecialAbility(objective:Character):void
-+useConsumable(objective:Characters):void
-+toAttack(objective:Character):void
-}
 
 class spectral_wolf{
 -race:ghost beast
@@ -417,19 +414,7 @@ class Tiran_Morgoth{
 -SpecialAbilities:hellish breath
 }
 
-Consumables "1"<|--"*"shard_of_Aether:is
-Consumables "1"<|--"*"vitality_potion:is
-Consumables "1"<|--"*"tournament_chest:is
 
-class Consumables{
--name:String
--effect:Effect
--duration:TurnManager
--fountain:EnemysCharacters
-+Consumables()
-+Consumables(name:String,effect:Effect,duration:TurnManager)
-+applyConsumables(consumable:Consumables):void
-}
 class shard_of_Aether{
 -effect:attack+2
 -fountain:stone_guardian,void_howler
@@ -443,18 +428,7 @@ class tournament_chest{
 -fountain:probability(enemies or dangers)
 }
 
-Land "1" <|-- "*" fountain:is
-Land "1" <|-- "*" forest:is
-Land "1" <|-- "*" river:is
-Land "1" <|-- "*" ruins:is
 
-class Land{
--name:String
--position:Position
--effect:Effect
-+Land()
-+applyEffect(effect:Effect)
-}
 class forest{
 -position:random
 -effect:attack+5
@@ -463,7 +437,7 @@ class river{
 -position:random
 -effect:no move
 }
-class montains{
+class mountains{
 -position:random
 -effect: defense+3
 }
@@ -472,19 +446,6 @@ class ruins{
 -effect: manna+4
 }
 
-dangers "1" <|-- "*" ether_storm:is
-dangers "1" <|-- "*" shadow_pit:is
-
-class dangers {
--name:String
--position:Position
--effect:Effect
--range:Position
--movement:int
--duration:TurnManager
-+dangers()
-+applyDangersEffect(objective:Character)):void
-}
 class ether_storm{
 -position:random
 -range: 3 squares
@@ -500,10 +461,4 @@ class shadow_pit{
 -movement:N/A
 }
 
-PlayerCharacters "1..*" *-- "1..*" dangers:damages
-PlayerCharacters "1..*" *-- "1..*" Land:upon
-PlayerCharacters "1..*" *-- "*" Consumables:use up
-EnemiesCharacters "1.*" *-- "1..*" dangers:damages
-EnemiesCharacters "1..*" *-- "1..*" Land:upon
-EnemiesCharacters "1..*" *-- "1" Consumables:grants
 @enduml
