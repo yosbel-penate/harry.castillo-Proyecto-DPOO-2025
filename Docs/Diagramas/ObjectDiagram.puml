@@ -1,61 +1,59 @@
 @startuml
 
-Game "1" *-right- "1" Kael_Draven: haves
-Game "1" *-left- "1" Cintya_Eaglevision: haves
-Game "1" *-left- "1" Jax_Blacksword: haves
-Game "1" *-left- "1" Lina_Fireheart: haves
-Game "1" *-left- "1" Alessandra_The_Brilliant: haves
-Game "1" *-left- "1" Sirael_The_S: haves
-Game "1" *-up- "1" Lyrasa_Velith: haves
-Game "1" *-up- "1" Xaviru_Palast: haves
-Game "1" *-up- "1" Heloro_Maeg: haves
-Game "1" *-up- "1" Lyffa_Shartis: haves
-Game "1" *-up- "1" Hobgrou: haves
-Game "1" *-up- "1" Groshta: haves
-Game "1" *-right- "1" Globius: haves
-Game "1" *-right- "1" Hobag: haves
-Game "1" *-right- "1" Higlob: haves
-Game "1" *-right- "1" Drekker_The_Blade: haves
-Game "1" *-right- "1" Grisha_The_Stalker: haves
-Game "1" *-right- "1" Zorak_The_Skinner: haves
-Game "1" *-left-- "1" Goldan_The_Vile: haves
-Game "1" *-left-- "1" Gortona_Sewwounds: haves
-Game "1" *-left-- "1" Azeli: haves
-Game "1" *-left-- "1" Shira_WhiteEdge: haves
+PlayableCharacters "1" *-left- "1" Kael_Draven: contains
+PlayableCharacters "1" *-left- "1" Cintya_Eaglevision: contains
+PlayableCharacters "1" *-left- "1" Jax_Blacksword: contains
+PlayableCharacters "1" *-left- "1" Lina_Fireheart: contains
+PlayableCharacters "1" *-left- "1" Alessandra_The_Brilliant: contains
+PlayableCharacters "1" *-up- "1" Sirael_The_S: contains
+PlayableCharacters "1" *-up- "1" Lyrasa_Velith: contains
+PlayableCharacters "1" *-up- "1" Xaviru_Palast: contains
+PlayableCharacters "1" *-up- "1" Heloro_Maeg: contains
+PlayableCharacters "1" *-up- "1" Lyffa_Shartis: contains
+PlayableCharacters "1" *-right- "1" Hobgrou: contains
+PlayableCharacters "1" *-right- "1" Groshta: contains
+PlayableCharacters "1" *-right- "1" Globius: contains
+PlayableCharacters "1" *-right- "1" Hobag: contains
+PlayableCharacters "1" *-right- "1" Higlob: contains
+PlayableCharacters "1" *-down- "1" Drekker_The_Blade: contains
+PlayableCharacters "1" *-down- "1" Grisha_The_Stalker: contains
+PlayableCharacters "1" *-down- "1" Zorak_The_Skinner: contains
+PlayableCharacters "1" *-down- "1" Goldan_The_Vile: contains
+PlayableCharacters "1" *-down- "1" Gortona_Sewwounds: contains
+PlayableCharacters "1" *-down- "1" Azeli: contains
+PlayableCharacters "1" *-down- "1" Shira_WhiteEdge: contains
 
 
-Game "1" *-down-- "1" Kilian_Gladus: haves
-Game "1" *-down-- "1" Kasano_Gladus: haves
-Game "1" *-down-- "1" Aderit_Chantris: haves
-Game "1" *-down-- "1" Legionary: haves
-Game "1" *-down-- "1" Elven_Sword: haves
-Game "1" *-down-- "1" Tiran_Morgoth: haves
+PlayableEnemy "1" *-down-- "1" Kilian_Gladus: contains
+PlayableEnemy "1" *-down-- "1" Kasano_Gladus: contains
+PlayableEnemy "1" *-down-- "1" Aderit_Chantris: contains
+PlayableEnemy "1" *-down-- "1" Legionary: contains
+PlayableEnemy "1" *-down-- "1" Elven_Sword: contains
+PlayableEnemy "1" *-down-- "1" Tiran_Morgoth: contains
 
 
-Game "1" *-down- "1...*" spectral_wolf: haves
-Game "1" *-down- "1...*" stone_guardian: haves
-Game "1" *-down- "1...*" void_howler: haves
+PlayableEnemy "1" *-down-- "1...*" spectral_wolf: contains
+PlayableEnemy "1" *-down-- "1...*" stone_guardian: contains
+PlayableEnemy "1" *-down-- "1...*" void_howler: contains
 
 
-Game "1" *--down-- "0...*" shard_of_Aether: haves
-Game "1" *--down-- "0...*" vitality_potion: haves
-Game "1" *--down-- "0...*" tournament_chest: haves
+Consumables "1" *-down- "0...*" shard_of_Aether: contains
+Consumables "1" *-down- "0...*" vitality_potion: contains
+Consumables "1" *-down- "0...*" tournament_chest: contains
 
-Game "1" *-down-- "1" forest: haves
-Game "1" *-down-- "1" river: haves
-Game "1" *-down-- "1" mountains: haves
-Game "1" *-down-- "1" ruins: haves
+Lands "1" *-down- "1" forest: contains
+Lands "1" *-down- "1" river: contains
+Lands "1" *-down- "1" mountains: contains
+Lands "1" *-down- "1" ruins: contains
 
-Game "1" *-- "0...*" ether_storm: haves
-Game "1" *-- "0...*" shadow_pit: haves
+Dangers "1" *-- "0...*" ether_storm: contains
+Dangers "1" *-- "0...*" shadow_pit: contains
 
-
-
-
-
-Game *-- Kael_Draven
-Game *-- Kael_Draven
-
+Game "1" *-- "1" PlayableCharacters: contains
+Game "1" *-- "1" PlayableEnemy: contains
+Game "1" *-- "1" Consumables: contains
+Game "1" *-- "1" Lands: contains
+Game "1" *-- "1" Dangers: contains
 
 class Game {
 
@@ -70,6 +68,64 @@ class Game {
     + spawn_bosses(): void
 
 }
+class PlayableCharacters {
+    -name:String
+    -maxHealth:int
+    -currentHealth:int
+    -attack:int
+    -defense:int
+    -movement:int
+    -Position position
+    -role:String
+    -abilities: List<abilities>
+    -inventory: List<Item>
+    -equippedWeapon:Weapon
+    +Character()
+    +Character(name: String, health: int, attack: int, defense: int, movement: int, position: Position, role: Role)
+    +move(newPosition: Position) : void
+    +attack(target: Character) : void
+    +receiveDamage(damage: int) : void
+    +useAbility(ability: Ability, target: Character) : void
+    +addItem(item: Item) : void
+    +equipWeapon(weapon: Weapon) : void
+    +isAlive() : boolean
+    +performAction(action: Action) : void
+    }
+
+    class Consumables {
+        +effect: int
+        fountain: List<PlayableEnemy>
+    }
+
+    class PlayableEnemy{
+    -race: String
+    -type: String
+    -role: String
+    -personality: String
+    -health: int
+    -manna: int
+    -attack: int
+    -defense: int
+    -movement: int
+    +SpecialAbilities: String
+
+
+    }
+
+
+class Lands{
+    -position: int
+    -effect: int
+}
+
+class Dangers{
+    -position: int
+    -range: int
+    -effect: int
+    -duration: int
+    -movement: int
+}
+
 
 class Kael_Draven{
 -race:human
@@ -448,14 +504,14 @@ class ruins{
 
 class ether_storm{
 -position:random
--range: 3 squares
+-range: 3 hexagons
 -effect:health-2
 -duration:3 turns
--movement:1 square/turn
+-movement:1 hex/turn
 }
 class shadow_pit{
 -position:random
--range:1 square
+-range:1 hex
 -effect:health-3,no move
 -duration:1 turn
 -movement:N/A
