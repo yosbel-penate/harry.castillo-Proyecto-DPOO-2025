@@ -52,4 +52,68 @@
     +setValueEffect(valueEffect:int):void
     +applyEffect(character:Character):void
  }
+
+ TerrainType<|-down- Forest
+  TerrainType<|-down- River
+  TerrainType<|-down- Mountains
+  TerrainType<|-down- Ruins
+  TerrainType"1" o-- "1"Effect:has
+  TerrainType"1" --* "1"Position:has
+
+  class TerrainType{
+      -position:Position
+      -effect: Effect
+      +terrainType()
+      +terrainType(position:Position, effect:Effect)
+      +applyEffectTerrainType(character:Character, effect:Effect):void
+  }
+  class Forest{
+  }
+  class River{
+  }
+  class Mountains{
+  }
+  class Ruins{
+  }
+
+  Board"1" -- "0..."Dangers:has
+  Board"1" --"1..." TerrainType:has
+
+
+  Dangers <|-- ether_storm
+  Dangers <|-- shadow_pit
+
+  class Dangers{
+  -position:Position
+  -range: Position
+  -effect:Effect
+  -duration: TurnManager
+  -movement:int
+  }
+  class ether_storm{
+  }
+  class shadow_pit{
+  }
+
+
+  class Position {
+      -int: row
+      -int: col
+      +Position()
+      +Position(row: int, col: int)
+      +getRow() : int
+      +getCol() : int
+      +distanceTo(other: Position) : int
+  }
+
+  class TurnManager {
+      -turnOrder:List<Character>
+      -currentTurnIndex:void
+      +TurnManager()
+      +TurnManager(turnOrder: List<Character>)
+      +getCurrentCharacter() : Character
+      +nextTurn() : void
+      +resetTurn() : void
+  }
+
 @enduml
