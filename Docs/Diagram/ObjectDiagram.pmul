@@ -1,0 +1,54 @@
+@startuml
+  Game "1" *-- "1" Board : contains
+  Game "1" -- "1..." Character : manages
+  Game "1" *-- "1" TurnManager : uses
+  Character <|-- PlayersCharacter
+  Character <|-- EnemiesCharacter
+  Character "1" -- "0..." Consumable : has
+  Character"1" *-- "1"Position:on
+  TurnManager"1" --* "1"PlayersCharacter: has
+  TurnManager"1" --* "1" EnemiesCharacter: has
+  TurnManager"1" --* "1" SpecialEnemiesCharacter: gas
+
+
+
+ class Game {
+     -board:Board
+     -turnManager:TurnManager
+     -character: List<Character>
+     +Game()
+     +startGame() : void
+     +runGameLoop() : void
+     +update() : void
+     +getBoard() : Board
+     +getCharacters() : List<Character>
+ }
+
+ class Board {
+     -board:Board
+     -tileSize:int
+     -rows:int
+     -cols:int
+     -titles: HexTile[][]
+     -terrain:TerrainType
+     -occupant:Character
+     +Board(rows: int, cols: int)
+     +initializeTiles() : void
+     +boardPane(board: Board)
+     +render():void
+     +getRow() : int
+     +getCol() : int
+     +getTerrain() : TerrainType
+     +isOccupied() : boolean
+     +getOccupant() : Character
+     +setOccupant(occupant: Character) : void
+ }
+
+ class Effect{
+    -valueEffect: int
+    +Effect()
+    +Effect(valueEffect:int)
+    +getValueEffect():int
+    +setValueEffect(valueEffect:int):void
+    +applyEffect(character:Character):void
+ }
