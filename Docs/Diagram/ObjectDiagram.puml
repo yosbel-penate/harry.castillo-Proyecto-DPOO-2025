@@ -162,5 +162,60 @@
  + healingBreeze(): void
  + freezingBreeze(): void
  }
+class Hobgrou{
+ + sharpTip(): void
+ }
+ class Groshta{
+ + greed():void
+ + steelHand(): void
+ }
+ class Globius{
+ + meltedInShadows(): void
+ }
+ class Hobag{
+ + drainMagic(): void
+ }
+ class Higlob{
+ + natureHelp(): void
+ }
+ class Drekker_The_Blade{
+ + hellishScream(): void
+ }
+ class Grisha_The_Stalker{
+ + aim(): void
+ + bulletInForehead():void
+ }
+ class Zorak_The_Skinner{
+ + wildAnger(): void
+ }
+ class Goldan_The_Vile{
+ + noMagicAllowed(): void
+ }
+ class Gortona_Sewwounds{
+ + vileCure(): void
+ }
+ class Azeli{
+ + healingFlame(): void
+ + bastardFlame(): void
+ }
+ class Shira_WhiteEdge{
+ + camouflage(): void
+ + hideAndSeek(): void
+ }
 
+ EnemiesCharacter <|-down- spectral_wolf
+ EnemiesCharacter <|-down- stone_guardian
+ EnemiesCharacter <|-down- void_howler
+
+ class EnemiesCharacter {
+     +EnemiesCharacter()
+     +EnemiesCharacter(name: String, health: int, attack: int, defense: int, movement: int, position: Position, role: Role)
+ }
+ class spectral_wolf{
+ }
+ class stone_guardian{
+ }
+
+ class void_howler{
+ }
 @enduml
