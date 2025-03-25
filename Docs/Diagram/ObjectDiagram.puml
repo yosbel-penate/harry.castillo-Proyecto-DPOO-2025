@@ -115,5 +115,52 @@
       +nextTurn() : void
       +resetTurn() : void
   }
+  class PlayersCharacter {
+     -personality:String
+     -defense:int
+     -role:String
+     -type:String
+     -inventory: List<Consumable>
+     +PlayersCharacter()
+     +PlayersCharacter(name: String, currentHealth: int, attack: int, defense: int, movement: int, position: Position, role: String)
+     +MoveAction(character: PlayersCharacter, destination: Position): void
+     +execute() : void
+
+ }
+ class Kael_Draven{
+
+ + firmGuard(): void
+ + dashMovement(): void
+ }
+
+ class Cintya_Eaglevision{
+ + inmobilizeEnemies(): void
+ }
+ class Jax_Blacksword{
+ + heavyBlow(): void
+ + hardHits(): void
+ }
+ class Lina_Fireheart{
+ + hellInEarth(): void
+ }
+ class Alessandra_The_Brilliant{
+ + healingLight(): void
+ }
+ class Sirael_The_Serious_One{
+ + incapacitatingEdge(): void
+ }
+ class Lyrasa_Velith{
+ + accurateShot(): void
+ }
+ class Xaviru_Palast{
+ + magicExtension(): void
+ }
+ class Heloro_Maeg{
+ + polarAura(): void
+ }
+ class Lyffa_Shartis{
+ + healingBreeze(): void
+ + freezingBreeze(): void
+ }
 
 @enduml
