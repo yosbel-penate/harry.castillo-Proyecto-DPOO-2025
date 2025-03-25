@@ -52,3 +52,4 @@
     +setValueEffect(valueEffect:int):void
     +applyEffect(character:Character):void
  }
+@enduml
