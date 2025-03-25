@@ -8,7 +8,7 @@
   Character"1" *-- "1"Position:on
   TurnManager"1" --* "1"PlayersCharacter: has
   TurnManager"1" --* "1" EnemiesCharacter: has
-  TurnManager"1" --* "1" SpecialEnemiesCharacter: gas
+  TurnManager"1" --* "1" SpecialEnemiesCharacter: has
 
 
 
