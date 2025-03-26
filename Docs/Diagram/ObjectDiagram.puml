@@ -218,4 +218,60 @@ class Hobgrou{
 
  class void_howler{
  }
+SpecialEnemiesCharacter <|-down- Kilian_Gladus
+ SpecialEnemiesCharacter <|-down- Legionary
+ SpecialEnemiesCharacter <|-down- Kasano_Gladus
+ SpecialEnemiesCharacter <|-down- Aderit_Chantris
+ SpecialEnemiesCharacter <|-down- Elven_Sword
+ SpecialEnemiesCharacter <|-down- Tiran_Morgoth
+
+ class SpecialEnemiesCharacter{
+      +SpecialEnemiesCharacter()
+      +SpecialEnemiesCharacter(name: String, health: int, attack: int, defense: int, movement: int, position: Position, role: Role)
+
+ }
+
+ class Kilian_Gladus{
+ + phalanxLeader():void
+ }
+ class Legionary{
+ + leaderProtection():void
+ }
+ class Kasano_Gladus{
+ + barrierInfusion():void
+ }
+ class Aderit_Chantris{
+ + healingArrow():void
+ }
+ class Elven_Sword{
+ + doubleWhammy():void
+ }
+ class Tiran_Morgoth{
+ + hellishBreath():void
+ }
+
+ Consumable"1" *-- "1"Effect:has
+ Consumable <|-down- shard_of_Aether
+ Consumable <|-down- vitality_potion
+ Consumable <|-down- tournament_chest
+
+ class Consumable {
+     -name:String
+     -descriptions:String
+     -effect: Effect
+     -fountain: List<EnemiesCharacter>
+     +Consumable()
+     +Consumable(name: String, description: String, effect: Effect, fountain: List<EnemiesCharacter>)
+     +getName() : String
+     +getDescription() : String
+     +getFountain(): List<EnemiesCharacter>
+     +use(user: PlayersCharacter) : void
+
+ }
+ class shard_of_Aether{
+ }
+ class vitality_potion{
+ }
+ class tournament_chest{
+ }
 @enduml
