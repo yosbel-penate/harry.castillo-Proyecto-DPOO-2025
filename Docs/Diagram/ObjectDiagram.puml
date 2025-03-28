@@ -115,6 +115,56 @@
       +nextTurn() : void
       +resetTurn() : void
   }
+
+  PlayersCharacter <|-up- Kael_Draven
+  PlayersCharacter <|-up- Cintya_Eaglevision
+  PlayersCharacter <|-up- Jax_Blacksword
+  PlayersCharacter <|-up- Lina_Fireheart
+  PlayersCharacter <|-up- Alessandra_The_Brilliant
+  PlayersCharacter <|-up- Sirael_The_Serious_One
+  PlayersCharacter <|-down- Lyrasa_Velith
+  PlayersCharacter <|-down- Xaviru_Palast
+  PlayersCharacter <|-down- Heloro_Maeg
+  PlayersCharacter <|-down- Lyffa_Shartis
+  PlayersCharacter <|-down- Azeli
+  PlayersCharacter <|-down- Shira_WhiteEdge
+  PlayersCharacter <|-left- Hobgrou
+  PlayersCharacter <|-left- Groshta
+  PlayersCharacter <|-left- Globius
+  PlayersCharacter <|-left- Hobag
+  PlayersCharacter <|-left- Higlob
+  PlayersCharacter <|-right- Drekker_The_Blade
+  PlayersCharacter <|-right- Grisha_The_Stalker
+  PlayersCharacter <|-right- Zorak_The_Skinner
+  PlayersCharacter <|-right- Goldan_The_Vile
+  PlayersCharacter <|-right- Gortona_Sewwounds
+  PlayersCharacter <|-- SpecialEnemiesCharacter
+  PlayersCharacter"1" o-up- "0...*"Consumable:has
+
+  abstract class Character {
+       -name:String
+       -race: String
+       -maxHealth:int
+       -currentHealth:int
+       -attack:int
+       -movement:int
+       -Position: position
+       -destination:Position
+       +Character()
+       +Character(name: String, currentHealth: int, attack: int, defense: int, movement: int, position: Position, role: Role)
+       +move(newPosition: Position) : void
+       +attack(target: Character) : void
+       +receiveDamage(damage: int) : void
+       +addConsumable(consumable: Consumable) : void
+       +isAlive() : boolean
+       +getCurrentHealth() : int
+       +getMaxHealth() : int
+       +setCurrentHealth(currentHealth: int) : void
+       +getName() : String
+       +useSpecialAbility():void
+
+   }
+
   class PlayersCharacter {
      -personality:String
      -defense:int
