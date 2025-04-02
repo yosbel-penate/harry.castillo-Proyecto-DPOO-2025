@@ -1,0 +1,8 @@
+abstract class Chatacter {
+private string type;
+}
+
+
+
+
+
