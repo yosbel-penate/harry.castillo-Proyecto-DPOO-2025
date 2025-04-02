@@ -5,6 +5,7 @@ abstract class Chatacter {
     private int health;
     private int attack;
     private int defense;
+    private int movenment;
 }
 
 
