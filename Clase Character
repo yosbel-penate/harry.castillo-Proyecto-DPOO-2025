@@ -2,6 +2,7 @@ abstract class Chatacter {
     private string race;
     private string type;
     private string personality;
+    private int health;
 }
 
 
