@@ -1,0 +1,38 @@
+import java.util.List;
+
+public class Game {
+    private Board board;  
+    private TurnManager turnManager; 
+    private List<Character> characters;  
+
+    public Game(Board board, TurnManager turnManager, List<Character> characters) {
+        this.board = board;
+        this.turnManager = turnManager;
+        this.characters = characters;
+    }
+
+   
+    public void startGame() {
+        
+    }
+
+    
+    public void runGameLoop() {
+        
+    }
+
+    
+    public void update() {
+        
+    }
+
+    
+    public Board getBoard() {
+        return board;
+    }
+
+    
+    public List<Character> getCharacters() {
+        return characters;
+    }
+}
