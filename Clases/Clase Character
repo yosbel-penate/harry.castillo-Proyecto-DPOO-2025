@@ -28,6 +28,10 @@ abstract class Chatacter {
 }
     private void setCurrentHealth(){
 }
+    private string getName(){
+}
+    private void useEspecialAbility(){
+}
 }
 
 
