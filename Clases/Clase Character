@@ -1,12 +1,21 @@
 abstract class Chatacter {
-    private string race;
-    private string type;
-    private string personality;
-    private int health;
+    private string name;
+    private string race;
+    private int maxHealth;
+    private int currentHealth;
     private int attack;
-    private int defense;
-    private int movenment;
+    private int movement;
+    private Position position;
+    private Position destination;
+
+    public Character(){
 }
+    public Character(name:string, race:string, maxHealth:int, currentHealth:int, attack:int, movement:int, position:Position, destination:Position){ 
+}
+    private void move(newPosition:Position){
+}
+}
+
 
 
 
