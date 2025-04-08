@@ -20,6 +20,14 @@ abstract class Chatacter {
 }
     private void addConsumable(consumable:Consumable){
 }
+    private boolean isAlive(){
+}
+    private int getCurrentHealth(){
+}
+    private int getMaxHealth(){
+}
+    private void setCurrentHealth(){
+}
 }
 
 
