@@ -14,6 +14,12 @@ abstract class Chatacter {
 }
     private void move(newPosition:Position){
 }
+    private void attack(target:Character){
+}
+    private void recieveDamage(damage:int){
+}
+    private void addConsumable(consumable:Consumable){
+}
 }
 
 
