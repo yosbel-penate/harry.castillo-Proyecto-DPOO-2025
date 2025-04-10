@@ -34,3 +34,27 @@ public static Stage window;
 
     }
 }
+@Override
+    public void start(Stage window) throws Exception {
+        game.window = window;
+        /* Game.window es la variable publica estatica que usaran
+        todas las clases para instanciar la ventana que necesiten.
+         */
+
+        windowDesign();
+        window.setScene(mainScene);
+        window.setTitle("Cronicas de Valthar: El torneo de las eras");
+        window.show();
+        // Ventana principal.
+    }
+    private void windowDesign() {
+        Button play = new Button("Jugar.");
+        Button options = new Button("Opciones. ");
+        Button quit = new Button("Salir. ");
+        Label titulo = new Label("Cronicas de Valthar: El torneo de las eras.");
+        // Botones y la marca del titulo.
+
+        VBox mainMenu = new VBox(20);
+        mainMenu.getChildren().addAll(titulo, play, options, quit);
+        mainScene = new Scene(mainMenu, 832, 850);
+        // Añadiendo todos estos botones al menu.
