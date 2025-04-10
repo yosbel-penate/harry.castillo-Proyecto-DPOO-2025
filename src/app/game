@@ -75,6 +75,21 @@ play.setOnAction(e -> gameModes());
 
         Campaign campaign = new Campaign(graphics, gameScene);
         game.campaign = campaign;
+        /* Objeto campaña para instanciar el modo campaña. Cuando aprenda
+                    a programar mejor las clases, no hare uso de un objeto. Tambien
+                    se iguala el objeto publico estatico para poder usar la instancia
+                    en todas las clases.
+                 */
+                VBox gameModeMenu = new VBox(30);
+                gameModeMenu.getChildren().addAll(campaig, pvp, tournament);
+                gameModeScene = new Scene(gameModeMenu, 832, 850);
+                // Se añaden los botones: primero a su contenedor y luego a la pantalla.
+
+                window.setScene(gameModeScene);
+                // Se activa la escena donde se muestran todos los objetos.
+
+                campaig.setOnAction(e -> campaign.initialize());
+                // Cada boton lleva al modo de juego correspondiente.
 
 }
 }
