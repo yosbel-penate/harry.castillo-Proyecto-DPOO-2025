@@ -58,5 +58,23 @@ public static Stage window;
         mainMenu.getChildren().addAll(titulo, play, options, quit);
         mainScene = new Scene(mainMenu, 832, 850);
         // Añadiendo todos estos botones al menu.
+play.setOnAction(e -> gameModes());
+        // El boton lleva a los modos de juego.
+
+        quit.setOnAction(e -> window.close());
+
+
+    }
+
+
+    public void gameModes() {
+        Button campaig = new Button("Campaña.");
+        Button pvp = new Button("PvP.");
+        Button tournament = new Button("Torneo.");
+        // Botones para inicializar modos de juego.
+
+        Campaign campaign = new Campaign(graphics, gameScene);
+        game.campaign = campaign;
+
 }
 }
