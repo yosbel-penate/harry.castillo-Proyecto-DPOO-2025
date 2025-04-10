@@ -14,4 +14,23 @@ import javafx.stage.Stage;
 
 public class game extends Application {
 
+public static Stage window;
+    public static Scene gameScene;
+    public static boolean gameOver;
+    private static GraphicsContext graphics;
+    private Scene mainScene;
+    private Scene gameModeScene;
+    private Canvas canvas;
+    // Escena, graficos, raiz y lienzo activados para su uso en toda la aplicacion.
+
+
+    private boolean campaignActivated = false;
+    // Booleano.
+
+    public static Campaign campaign = new Campaign(graphics, gameScene);
+
+    public static void main(String[] args) {
+        launch(args);
+
+    }
 }
