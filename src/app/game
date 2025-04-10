@@ -33,7 +33,7 @@ public static Stage window;
         launch(args);
 
     }
-}
+
 @Override
     public void start(Stage window) throws Exception {
         game.window = window;
@@ -58,3 +58,5 @@ public static Stage window;
         mainMenu.getChildren().addAll(titulo, play, options, quit);
         mainScene = new Scene(mainMenu, 832, 850);
         // Añadiendo todos estos botones al menu.
+}
+}
