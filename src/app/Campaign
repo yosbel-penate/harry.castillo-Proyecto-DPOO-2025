@@ -97,4 +97,58 @@ public void initialize() {
                             player.setY(player.getY()+64);
 
                         break;
+                    case "Q":
+                            if (player.getY() == 32) {
+
+                                break;
+                            }
+                            if (player.getX() == 64) {
+
+                                break;
+                            }
+
+                            player.setX(player.getX()-48);
+                            player.setY(player.getY()-32);
+
+                        break;
+                    case "E":
+
+                            if (player.getY() == 32) {
+                                break;
+                            }
+                            if (player.getX() == 544) {
+
+                                break;
+                            }
+
+                            player.setX(player.getX()+48);
+                            player.setY(player.getY()-32);
+
+
+                    break;
+                    }
+            }
+        });
+    }
+
+
+    private void gameLoop(GraphicsContext graphics, PlayerCharacter player) {
+        long initialTime = System.nanoTime();
+        AnimationTimer animationTimer = new AnimationTimer() {
+
+            //Este metodo es el que maneja los frames por segundo, que son 60.
+            @Override
+            public void handle(long actualTime) {
+                long time = (actualTime - initialTime) / 1000000000;
+                if (time == 60){
+                    time = 0;
+                }
+                /* Aqui se calcula el tiempo, que luego se usara
+                para que parpadee el rango.
+                */
+                draw(graphics, player);
+            }
+        };
+        animationTimer.start();
+}
 }
