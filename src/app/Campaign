@@ -64,5 +64,37 @@ public void initialize() {
 
 
                             break;
+                    case "D":
+                            if (player.getY() == 640) {
+                                break;
+                            }
+                            if (player.getX() == 544) {
+                                break;
+                            }
+                            player.setX(player.getX()+48);
+                            player.setY(player.getY()+32);
 
+                        break;
+
+                    case "W":
+                            if (player.getY() == 32) {
+                                break;
+                            } else if (player.getY() == 64) {
+                                break;
+                            }
+
+                            player.setY(player.getY()-64);
+                        break;
+
+                    case "S":
+
+                            if (player.getY() == 640) {
+                                break;
+                            }
+                            if (player.getY() == 608) {
+                                break;
+                            }
+                            player.setY(player.getY()+64);
+
+                        break;
 }
