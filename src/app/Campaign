@@ -150,5 +150,28 @@ public void initialize() {
             }
         };
         animationTimer.start();
-}
+    }
+
+    private void draw(GraphicsContext graphics, PlayerCharacter player) {
+            //Salvenos Dios por toda esta cantidad de codigo.
+
+            for (int i = 1; i <= 11; i++) {
+                Image hex = new Image("normalTerrain.png");
+                if (i % 2 == 0) {
+                    for (int pos = 112; pos <= 496; pos+= 96) {
+                        for (int j = 32; j < 640; j += 64) {
+                            graphics.drawImage(hex, pos, j);
+                        }
+                    }
+                } else {
+                    for (int pos = 64; pos <= 544; pos+=96) {
+                        for (int j = 64; j < 704; j += 64) {
+                            graphics.drawImage(hex, pos, j);
+                        }
+                    }
+                }
+            }
+            //Dibujo de las columnas de hexagonos.
+         player.draw(graphics);
+    }
 }
