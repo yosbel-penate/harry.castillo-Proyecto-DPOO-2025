@@ -1,0 +1,33 @@
+package app;
+
+import domain.PlayerCharacter;
+// Clases locales que usa Campaign.
+
+import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
+// Java FX.
+
+import static app.game.window;
+// Variables estaticas importadas.
+
+public class Campaign {
+    public static Scene campaignGameScene;
+    private static GraphicsContext graphics;
+    private Group root;
+    private Canvas canvas;
+    // Variables privadas.
+
+
+    public Campaign(GraphicsContext graphics, Scene gameScene) {
+        Campaign.graphics = graphics;
+        this.campaignGameScene = gameScene;
+    }
+
+
+}
