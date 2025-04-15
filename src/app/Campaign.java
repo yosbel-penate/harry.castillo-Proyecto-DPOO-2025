@@ -36,7 +36,7 @@ public void initialize() {
         root.getChildren().add(canvas);
         graphics = canvas.getGraphicsContext2D();
         window.setScene(campaignGameScene);
-        PlayerCharacter player = new PlayerCharacter(64, 64, "monigote.png");
+        PlayerCharacter player = new PlayerCharacter(64, 64, Paths.get("src/DAO/images/inGameplayCharacters/monigote.png").toUri().toString());
         playerMovement(campaignGameScene, player);
         gameLoop(graphics, player);
 
@@ -156,7 +156,7 @@ public void initialize() {
             //Salvenos Dios por toda esta cantidad de codigo.
 
             for (int i = 1; i <= 11; i++) {
-                Image hex = new Image("normalTerrain.png");
+                Image hex = new Image(Paths.get("src/DAO/images/terrain/normalTerrain.png").toUri().toString());
                 if (i % 2 == 0) {
                     for (int pos = 112; pos <= 496; pos+= 96) {
                         for (int j = 32; j < 640; j += 64) {
