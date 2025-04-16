@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 // Java FX.
 
+import java.nio.file.Paths;
+
 import static app.game.window;
 // Variables estaticas importadas.
 
