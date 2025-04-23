@@ -1,11 +1,15 @@
 package app;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 // Cosas de JavaFX.
@@ -48,15 +52,42 @@ public static Stage window;
         // Ventana principal.
     }
     private void windowDesign() {
-        Button play = new Button("Jugar.");
-        Button options = new Button("Opciones. ");
-        Button quit = new Button("Salir. ");
-        Label titulo = new Label("Cronicas de Valthar: El torneo de las eras.");
+        Image fondoPrincipal= new Image(getClass().getResource("/DAO/images/mainwallpaper/fondoPrincipal.png").toExternalForm());
+        ImageView vista = new ImageView(fondoPrincipal);
+        Button play = new Button("Jugar");
+        play.getStyleClass().add("menu-button");
+        Button options = new Button("Opciones");
+        options.getStyleClass().add("menu-button");
+        Button quit = new Button("Salir");
+        quit.getStyleClass().add("menu-button");
         // Botones y la marca del titulo.
 
         VBox mainMenu = new VBox(20);
-        mainMenu.getChildren().addAll(titulo, play, options, quit);
-        mainScene = new Scene(mainMenu, 832, 850);
+        mainMenu.getChildren().addAll(play, options, quit);
+        mainMenu.setAlignment(Pos.CENTER);
+
+        vista.setPreserveRatio(false);
+        vista.setFitWidth(850);
+        vista.setFitHeight(832);
+
+        StackPane root=new StackPane();
+        root.getChildren().addAll(vista,mainMenu);
+
+        mainScene=new Scene(root,832,850);
+        vista.fitWidthProperty().bind(mainScene.widthProperty());
+        vista.fitHeightProperty().bind(mainScene.heightProperty());
+
+        play.translateXProperty().bind(mainScene.widthProperty().multiply(-0.30)); options.translateXProperty()
+                .bind(mainScene.widthProperty().multiply(-0.30)); quit.translateXProperty()
+                .bind(mainScene.widthProperty().multiply(-0.30));
+
+
+        play.setTranslateY(-40);
+        options.setTranslateY(-40);
+        quit.setTranslateY(-40);
+
+        //Añadiendo hoja de estilos de css para los botones
+        mainScene.getStylesheets().add(getClass().getResource("/DAO/css/buttons.css").toExternalForm());
         // Añadiendo todos estos botones al menu.
 play.setOnAction(e -> gameModes());
         // El boton lleva a los modos de juego.

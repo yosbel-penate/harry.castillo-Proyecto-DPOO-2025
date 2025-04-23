@@ -1,0 +1,20 @@
+.menu-button {
+    -fx-background-color: rgba(160, 82, 45, 0.6);
+    -fx-text-fill: yellow;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, black, 3, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-alignment: center;
+}
+
+
+.menu-button:hover {
+    -fx-rotate: -5;
+    -fx-background-color: rgba(160, 82, 45, 0.8);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
