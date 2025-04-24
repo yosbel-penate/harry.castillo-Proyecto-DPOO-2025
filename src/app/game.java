@@ -60,28 +60,37 @@ public static Stage window;
         options.getStyleClass().add("menu-button");
         Button quit = new Button("Salir");
         quit.getStyleClass().add("menu-button");
-        // Botones y la marca del titulo.
+        // Botones y la marca del titulo. Los botones estan estilizados con CSS
 
         VBox mainMenu = new VBox(20);
         mainMenu.getChildren().addAll(play, options, quit);
         mainMenu.setAlignment(Pos.CENTER);
-
+        // Esto hace que la imagen se deforme proporcionalmente al cambio que se haga de tamaño en la pantalla
         vista.setPreserveRatio(false);
         vista.setFitWidth(850);
         vista.setFitHeight(832);
 
+        /*
+        Creando un contenedor que va a colocar elementos sobre elementos en el orden en que se pongan
+         */
         StackPane root=new StackPane();
         root.getChildren().addAll(vista,mainMenu);
 
+        /*
+        Carga la escena con el fondo de pantalla del juego y los botones y hace que se ajusten al tamaño de la escena
+         */
         mainScene=new Scene(root,832,850);
         vista.fitWidthProperty().bind(mainScene.widthProperty());
         vista.fitHeightProperty().bind(mainScene.heightProperty());
 
+        /*Esto es para trasladar los botones hacia la izquierda y que se ajusten proporcionales
+         al tamaño del menu*/
         play.translateXProperty().bind(mainScene.widthProperty().multiply(-0.30)); options.translateXProperty()
                 .bind(mainScene.widthProperty().multiply(-0.30)); quit.translateXProperty()
                 .bind(mainScene.widthProperty().multiply(-0.30));
 
 
+        //Esto traslada los botones hacia arriba
         play.setTranslateY(-40);
         options.setTranslateY(-40);
         quit.setTranslateY(-40);
