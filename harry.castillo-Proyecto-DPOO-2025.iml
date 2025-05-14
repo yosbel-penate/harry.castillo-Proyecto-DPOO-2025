@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/inGameplayCharacters" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/terrain" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/css" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
