@@ -1,0 +1,63 @@
+.menu-button{
+    -fx-background-color: rgba(160, 82, 45, 0.6);
+    -fx-text-fill: yellow;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 12 10 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, black, 3, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-alignment: center;
+}
+
+.menu-button: hover{
+    -fx-rotate: -5;
+    -fx-background-color: rgba(160, 82, 45, 0.8);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+
+.slider-label {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-background-color: #a97451;
+    -fx-padding: 3px 8px;
+    -fx-background-radius: 6;
+    -fx-alignment: center;
+}
+
+
+.slider {
+    -fx-padding: 6px;
+}
+
+.slider .track {
+    -fx-background-color: #a97451;
+    -fx-background-radius: 4;
+    -fx-pref-height: 4;
+}
+
+
+.slider .fill {
+    -fx-background-color: white;
+    -fx-background-radius: 4;
+}
+
+.slider .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-pref-width: 14;
+    -fx-pref-height: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 1);
+    -fx-transition: all 0.3s ease;
+}
+
+.slider .thumb:pressed {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    -fx-background-color: #fff8b0;
+}
+
