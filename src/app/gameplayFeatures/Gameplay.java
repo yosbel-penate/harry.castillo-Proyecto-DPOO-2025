@@ -1,6 +1,8 @@
 package app.gameplayFeatures;
 
+import app.main.Game;
 import app.main.Roaster.Roaster;
+import app.menus.PauseMenu;
 import domain.consumables.Inventory;
 import domain.entities.EnemyCharacter;
 import domain.entities.PlayerCharacter;
@@ -310,6 +312,9 @@ public class Gameplay {
                     break;
                 case "T":
                     activateRange = !activateRange;
+                    break;
+                case "P":
+                        PauseMenu.managePauseMenu();
                     break;
 
             }

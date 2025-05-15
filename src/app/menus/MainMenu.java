@@ -35,7 +35,6 @@ public class MainMenu {
        mainMenu.setAlignment(Pos.CENTER_RIGHT);
        mainMenu.setPadding(new Insets(0,40,0,0));
 
-     Game.isPausable=false;
      PauseMenu.hide();
 
 

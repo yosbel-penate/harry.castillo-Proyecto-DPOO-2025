@@ -5,9 +5,12 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 // Cosas de JavaFX.
 
 
@@ -15,7 +18,6 @@ public class Game extends Application {
     public static Stage window;
     public static AudioClip audio;
     private static Scene mainScene;
-    public static boolean isPausable=false;
     private static StackPane stackPane=new StackPane();
     private HBox mainContainer;
     private VBox leftContainer;
@@ -40,12 +42,8 @@ public class Game extends Application {
         Initializer.InitAllMethods();
 
         mainScene.setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case P -> {
-                    if (Game.isPausable) {
-                        PauseMenu.managePauseMenu();
-                    }
-                }
+            if (Objects.requireNonNull(e.getCode()) == KeyCode.P) {
+                PauseMenu.managePauseMenu();
             }
         });
 

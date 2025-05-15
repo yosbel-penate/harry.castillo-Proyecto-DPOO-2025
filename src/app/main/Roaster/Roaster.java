@@ -88,9 +88,8 @@ public class Roaster {
         root.getChildren().addAll(health, mana, attack, race, type, behavior, movement,PauseMenu.getPauseMenu());
 
 
-        Game.isPausable=true;
         roasterScene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-            if (e.getCode() == javafx.scene.input.KeyCode.P && Game.isPausable) {
+            if (e.getCode() == javafx.scene.input.KeyCode.P) {
                 PauseMenu.managePauseMenu();
             }
         });
@@ -840,4 +839,6 @@ public class Roaster {
     public static void setPlayer(PlayerCharacter[] player) {
         Roaster.player = player;
     }
+
+
 }
