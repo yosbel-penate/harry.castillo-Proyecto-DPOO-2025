@@ -437,6 +437,9 @@ public class Roaster {
                                                     break;
                                             }
                                             break;
+                                        default:
+                                            selectedCharacters--;
+                                            break;
                                     }
                                     break;
                                 case 152:
@@ -509,11 +512,14 @@ public class Roaster {
                                             }
                                             break;
 
-
                                         default:
                                             selectedCharacters--;
                                             break;
                                     }
+                                    break;
+                                default:
+                                    selectedCharacters--;
+                                    break;
                             }
 
                     }
