@@ -32,6 +32,12 @@ public class OptionsMenu {
 
         hideMenu();
 
+        controls.setOnAction(_ -> {
+            AudioPlayer.playButtonSound();
+            hideMenu();
+            ControlsInstructions.showMenu();
+        });
+
         video.setOnAction(_ -> {
             AudioPlayer.playButtonSound();
             hideMenu();

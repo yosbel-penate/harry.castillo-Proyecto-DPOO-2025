@@ -86,11 +86,21 @@ public class Roaster {
 
 
         root.getChildren().addAll(health, mana, attack, race, type, behavior, movement,PauseMenu.getPauseMenu());
+        root.setEffect(PauseMenu.getBrightness());
+
+
 
 
         roasterScene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-            if (e.getCode() == javafx.scene.input.KeyCode.P) {
+            Game.isPausable=true;
+            if (e.getCode() == javafx.scene.input.KeyCode.P&&Game.isPausable) {
+                AudioPlayer.playButtonSound();
                 PauseMenu.managePauseMenu();
+            }
+        });
+        roasterScene.addEventFilter(KeyEvent.ANY,event -> {
+            if (PauseMenu.pauseMenuIsVisible()){
+                event.consume();
             }
         });
 

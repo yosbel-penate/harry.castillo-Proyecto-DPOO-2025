@@ -60,5 +60,14 @@
     -fx-scale-y: 1.2;
     -fx-background-color: #fff8b0;
 }
+.control-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , black , 2 , 0.5 , 1 , 1 );
+    -fx-background-color: rgba(50, 50, 50, 0.6);
+    -fx-padding: 6 12 6 12;
+    -fx-background-radius:8;
+}
 
 

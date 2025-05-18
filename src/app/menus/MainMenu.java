@@ -43,12 +43,14 @@ public class MainMenu {
       OptionsMenu.hideMenu();
       GameModeMenu.showMenu();
       SlidersSoundsMenu.hideSlider();
+      ControlsInstructions.hideMenu();
      });
      options.setOnAction(_ -> {
       AudioPlayer.playButtonSound();
       GameModeMenu.hideMenu();
       OptionsMenu.showMenu();
       SlidersSoundsMenu.hideSlider();
+      ControlsInstructions.hideMenu();
      });
      exit.setOnAction(_ -> {
       AudioPlayer.playButtonSound();

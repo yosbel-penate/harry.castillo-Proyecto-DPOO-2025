@@ -15,6 +15,7 @@ import java.util.Objects;
 
 
 public class Game extends Application {
+    public static boolean isPausable=false;
     public static Stage window;
     public static AudioClip audio;
     private static Scene mainScene;
@@ -42,7 +43,7 @@ public class Game extends Application {
         Initializer.InitAllMethods();
 
         mainScene.setOnKeyPressed(e -> {
-            if (Objects.requireNonNull(e.getCode()) == KeyCode.P) {
+            if (Objects.requireNonNull(e.getCode()) == KeyCode.P&&isPausable==true) {
                 PauseMenu.managePauseMenu();
             }
         });
@@ -58,7 +59,7 @@ public class Game extends Application {
         rightContainer.setPrefWidth(300);
         rightContainer.setAlignment(Pos.CENTER_RIGHT);
         rightContainer.getChildren().addAll(OptionsMenu.getOptionsMenu(),GameModeMenu.getGameModeMenu(),
-                SlidersSoundsMenu.getSliders(), SlidersBrightnessMenu.getBrightnessVbox());
+                SlidersSoundsMenu.getSliders(), SlidersBrightnessMenu.getBrightnessVbox(),ControlsInstructions.getControlsVBox());
 
 
 

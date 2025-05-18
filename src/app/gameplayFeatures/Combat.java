@@ -79,6 +79,7 @@ public class Combat {
         setupButtons();
 
         root.getChildren().addAll(canvas, playerLife, playerAttack, enemyLife, enemyAttackL, attack, runAway, passTurn, useConsumable, message, playerTurnLabel,PauseMenu.getPauseMenu());
+        root.setEffect(PauseMenu.getBrightness());
         graphics = canvas.getGraphicsContext2D();
 
         setupKeyHandling();
@@ -140,6 +141,7 @@ public class Combat {
     }
 
     private static void setupKeyHandling() {
+        Game.isPausable=true;
         combatScene.setOnKeyPressed(event -> {
             String code = event.getCode().toString();
             switch (code) {

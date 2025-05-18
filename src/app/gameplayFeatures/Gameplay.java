@@ -67,10 +67,13 @@ public class Gameplay {
         player[0].setEnemy(enemy);
         root = new Group();
         gameplayScene = new Scene(root, 1000, 850);
+        gameplayScene.getStylesheets().add(Gameplay.class.getResource("/buttons.css").toExternalForm());
         canvas = new Canvas(1000, 850);
         root.getChildren().add(canvas);
         graphics = canvas.getGraphicsContext2D();
         window.setScene(gameplayScene);
+        root.getChildren().add(PauseMenu.getPauseMenu());
+        root.setEffect(PauseMenu.getBrightness());
     }
 
 
@@ -169,6 +172,7 @@ public class Gameplay {
         */
 
         gameplayScene.setOnKeyPressed(event -> {
+            Game.isPausable=true;
             switch (event.getCode().toString()) {
                 case "A":
                     // Tecla A mueve el jugador hacia la izquierda-abajo (X-48, Y+32)
@@ -315,6 +319,7 @@ public class Gameplay {
                     break;
                 case "P":
                         PauseMenu.managePauseMenu();
+                        gameplayTimer.stop();
                     break;
 
             }

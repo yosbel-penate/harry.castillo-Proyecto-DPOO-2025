@@ -6,6 +6,7 @@ import javafx.scene.layout.StackPane;
 public class Initializer {
 
     public static void InitAllMethods(){
+        ControlsInstructions.initControlsInstructions();
         OptionsMenu.initOptionsMenu();
         PauseMenu.initPauseMenu();
         AudioPlayer.initMediaPlayer();
