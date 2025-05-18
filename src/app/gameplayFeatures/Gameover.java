@@ -2,12 +2,16 @@ package app.gameplayFeatures;
 
 import app.main.AudioPlayer;
 import domain.entities.PlayerCharacter;
-import javafx.animation.AnimationTimer;
+import javafx.animation.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import static app.main.Game.window;
 
@@ -16,6 +20,9 @@ public class Gameover {
     private static Group gameOverRoot;
     private static Scene gameOverScene;
     private static Canvas canvas;
+    private static ImageView gameOver;
+    private static Label restartLabel = new Label("Toque R para reinciar");
+
 
     public static void gameOver(Scene sceneToGameOver, AnimationTimer animationTimerToStop) {
         sceneToGameOver.setRoot(new Group());
@@ -30,25 +37,70 @@ public class Gameover {
 
     private static void gameOverScreenConfig(){
         gameOverRoot = new Group();
-        gameOverScene = new Scene(gameOverRoot, 1000, 850);
-        canvas = new Canvas(1000, 850);
+        gameOverScene = new Scene(gameOverRoot, 1000, 800);
+        gameOverScene.getStylesheets().add(Gameover.class.getResource("/buttons.css").toExternalForm());
+        canvas = new Canvas(1000, 800);
+        gameOver=new ImageView(Gameover.class.getResource("/GameOverImage.png").toExternalForm());
+        gameOver.setPreserveRatio(false);
+        gameOver.fitWidthProperty().bind(gameOverScene.widthProperty());
+        gameOver.fitHeightProperty().bind(gameOverScene.heightProperty());
+
+        restartLabel.getStyleClass().add("game-over-label");
+        restartLabel.setVisible(false);
+
+        AudioPlayer.playGameOver();
+
+
+
+
+
+
+
     }
 
     private static void labelConfigurations(){
-        Font gameOverFont = new Font(40);
-        Label gameOverLabel = new Label("Game over.");
-        Label restartLabel = new Label("Reinicie la partida con R.");
 
-        gameOverLabel.setFont(gameOverFont);
+
+        Font gameOverFont = new Font(40);
+
+
+
+
+        FadeTransition fade=new FadeTransition(Duration.seconds(2),gameOver);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+
+
+        FadeTransition labelFade=new FadeTransition(Duration.seconds(2),restartLabel);
+        labelFade.setFromValue(0);
+        labelFade.setToValue(1);
+        labelFade.setDelay(Duration.seconds(2));
+
+        Timeline pulse = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(restartLabel.opacityProperty(), 1.0)),
+                new KeyFrame(Duration.seconds(1), new KeyValue(restartLabel.opacityProperty(), 0.6)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(restartLabel.opacityProperty(), 1.0))
+        );
+        pulse.setCycleCount(Timeline.INDEFINITE);
+        pulse.setAutoReverse(false);
+
+        fade.setOnFinished(e -> restartLabel.setVisible(true));
+        labelFade.setOnFinished(e ->pulse.play());
+        fade.play();
+        labelFade.play();
+
+
+
+
+
         restartLabel.setFont(gameOverFont);
 
         player = Gameplay.getPlayer();
-        gameOverLabel.setTranslateX(250);
-        gameOverLabel.setTranslateY(150);
-        restartLabel.setTranslateX(250);
-        restartLabel.setTranslateY(200);
 
-        gameOverRoot.getChildren().addAll(canvas, gameOverLabel, restartLabel);
+        restartLabel.setTranslateX(300);
+        restartLabel.setTranslateY(550);
+
+        gameOverRoot.getChildren().addAll( canvas,gameOver, restartLabel);
     }
 
     private static void setupRestartListener(Scene gameOverScene) {

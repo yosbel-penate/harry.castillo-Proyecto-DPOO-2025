@@ -20,7 +20,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/roasterImages/selectionHexagons" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/roasterImages/someNumbers" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/terrains" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/mainWallpaper" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/gameOver" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

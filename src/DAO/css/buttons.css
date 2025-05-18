@@ -70,4 +70,12 @@
     -fx-background-radius:8;
 }
 
+.game-over-label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 36px;
+    -fx-text-fill: #FBE8D3;
+    -fx-effect: dropshadow(gaussian, #000000, 4, 0.5, 2, 2);
+    -fx-padding: 10;
+    -fx-background-color:transparent;
+}
 

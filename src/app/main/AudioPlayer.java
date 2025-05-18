@@ -20,6 +20,7 @@ public class AudioPlayer {
     public static void initMediaPlayer() {
         sounds.put("mainMenu", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/mainMenu.mp3").toUri().toString())));
         sounds.put("combatMusic", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/combatMusic.mp3").toUri().toString())));
+        sounds.put("gameOver",new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/GameOver.mp3").toUri().toString())));
 
         for (MediaPlayer player : sounds.values()) {
             player.setVolume(MusicVolumen);
@@ -87,6 +88,16 @@ public class AudioPlayer {
             player.play();
             activeSounds.put("combatMusic", player);
         }
+    }
+
+    public static void playGameOver(){
+        MediaPlayer player= sounds.get("gameOver");
+        if (player != null) {
+            player.setVolume(MusicVolumen);
+            player.play();
+            activeSounds.put("gameOver", player);
+        }
+
     }
 
     public static void stopIfPlaying(String soundKey) {
