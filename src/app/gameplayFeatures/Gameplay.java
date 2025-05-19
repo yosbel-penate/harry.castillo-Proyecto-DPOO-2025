@@ -171,8 +171,7 @@ public class Gameplay {
         y determinara si se mueve o no se mueve.
         */
 
-        gameplayScene.setOnKeyPressed(event -> {
-            Game.isPausable=true;
+        gameplayScene.setOnKeyReleased(event -> {
             switch (event.getCode().toString()) {
                 case "A":
                     // Tecla A mueve el jugador hacia la izquierda-abajo (X-48, Y+32)
@@ -319,7 +318,6 @@ public class Gameplay {
                     break;
                 case "P":
                         PauseMenu.managePauseMenu();
-                        gameplayTimer.stop();
                     break;
 
             }
