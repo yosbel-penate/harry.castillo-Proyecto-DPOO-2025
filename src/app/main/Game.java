@@ -37,7 +37,7 @@ public class Game extends Application {
         /* Game.window es la variable publica estatica que usaran
         todas las clases para instanciar la ventana que necesiten.
          */
-        mainScene=new Scene(stackPane,1000,850);
+        mainScene=new Scene(stackPane,1000,750);
         mainScene.getStylesheets().add(getClass().getResource("/buttons.css").toExternalForm());
 
         Initializer.InitAllMethods();
