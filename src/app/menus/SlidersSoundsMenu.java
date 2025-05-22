@@ -51,6 +51,9 @@ public class SlidersSoundsMenu {
         allSlider.getChildren().addAll(MasterSound,MasterVolumen,MusicSound,MusicVolumen,EffectSound,EffectVolumen,back);
         allSlider.setAlignment(Pos.CENTER);
         allSlider.setPadding(new Insets(0,0,30,100));
+        allSlider.setTranslateX(130);
+        allSlider.setTranslateY(-20);
+
 
         MasterVolumen.valueProperty().addListener((observable, oldValue, newValue) -> {
             double newVolumen= newValue.doubleValue();

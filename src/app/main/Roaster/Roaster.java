@@ -780,7 +780,7 @@ public class Roaster {
                     message = new Label("¿Esta seguro de haber elegido todos los personajes en el orden correcto?");
                     message.setFont(font);
                     message.setTranslateX(32);
-                    message.setTranslateY(670);
+                    message.setTranslateY(655);
                     message.setTextFill(Color.BLACK);
 
 
@@ -788,12 +788,12 @@ public class Roaster {
                     no = new Button ("No.");
                     yes.setFont(font);
                     yes.setTranslateX(32);
-                    yes.setTranslateY(730);
+                    yes.setTranslateY(700);
                     yes.setTextFill(Color.BLACK);
                     yes.setFocusTraversable(false);
                     no.setFont(font);
                     no.setTranslateX(92);
-                    no.setTranslateY(730);
+                    no.setTranslateY(700);
                     no.setTextFill(Color.BLACK);
                     no.setFocusTraversable(false);
 

@@ -26,7 +26,8 @@ public class OptionsMenu {
         optionsMenu=new VBox(10);
         optionsMenu.getChildren().addAll(controls,video,audio,back);
         optionsMenu.setAlignment(Pos.CENTER_RIGHT);
-        optionsMenu.setPadding(new Insets(0,0,0,10));
+        optionsMenu.setPadding(new Insets(0,0,0,20));
+        optionsMenu.setTranslateX(60);
 
 
 

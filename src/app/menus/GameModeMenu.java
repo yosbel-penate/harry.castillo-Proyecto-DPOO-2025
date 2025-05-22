@@ -24,7 +24,8 @@ public class GameModeMenu {
         gameModeMenu=new VBox(10);
         gameModeMenu.getChildren().addAll(campaign,pvp,tournament,back);
         gameModeMenu.setAlignment(Pos.CENTER_RIGHT);
-        gameModeMenu.setPadding(new Insets(0,0,0,10));
+        gameModeMenu.setPadding(new Insets(0,0,0,20));
+        gameModeMenu.setTranslateX(60);
 
         hideMenu();
 
