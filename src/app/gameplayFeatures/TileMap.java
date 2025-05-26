@@ -1,6 +1,7 @@
 package app.gameplayFeatures;
 
 import app.gameplayFeatures.maps.Maps;
+import app.main.AudioPlayer;
 import domain.entities.PlayerCharacter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -102,7 +103,7 @@ public class TileMap {
                 }
             }
             contadorColumna++;
-        }
+            AudioPlayer.playTileMap();}
     }
 
     private static void checkTerrains(int actualTerrain, int upperActualTerrain, int x, int y, int col, int fil) {
@@ -136,7 +137,7 @@ public class TileMap {
 
       }
     public static void setPlayer(PlayerCharacter[] player){
-        TileMap.player = player;
+        TileMap.player = player;}
     }
-}
+
 

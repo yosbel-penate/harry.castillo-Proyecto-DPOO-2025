@@ -65,7 +65,9 @@ public class Combat {
         player = Gameplay.getPlayer();
         enemy = Gameplay.getEnemy();
         inventory = Gameplay.getInventory();
+        AudioPlayer.stopIfPlaying("TileMap");
         AudioPlayer.playCombatMusic();
+
     }
 
     private static void setupWindow() {
@@ -387,6 +389,7 @@ public class Combat {
             Button potionButton = new Button("Usar poción de vitalidad.");
             potionButton.setTranslateX(250);
             potionButton.setTranslateY(550);
+            potionButton.setFocusTraversable(false);
 
             potionButton.setOnAction(e -> usePotion());
 
