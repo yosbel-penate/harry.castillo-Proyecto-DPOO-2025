@@ -188,7 +188,8 @@ public class Roaster {
                                                     player[selectedCharacters].setX(64);
                                                     player[selectedCharacters].setY(64);
                                                     player[selectedCharacters].setHealth(7);
-                                                    player[selectedCharacters].setAttack(2);
+                                                    player[selectedCharacters].setAttack(99);
+                                                    player[selectedCharacters].setHavesMana(false);
                                                     break;
                                                 case 1:
                                                     if (!(player[0].getImageName() == "goblin.png")) {

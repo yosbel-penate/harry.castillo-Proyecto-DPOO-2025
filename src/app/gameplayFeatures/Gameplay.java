@@ -356,13 +356,17 @@ public class Gameplay {
         // Imagen del jugador.
 
         if (Combat.isDropConsumable()) {
-            if (drawConsumable) {
-                graphics.drawImage(new Image(inventory.getFirst().getImage()), inventory.getFirst().getX(), inventory.getFirst().getY());
-            }
+            for (int i = 0; i < inventory.size(); i++){
+                if (!(inventory.get(i).getImage() == null)){
+                if (drawConsumable) {
+                    graphics.drawImage(new Image(inventory.get(i).getImage()), inventory.get(i).getX(), inventory.get(i).getY());
+                }
+            }}
+
         }
         // Consumibles en el mapa.
 
-        if(!drawConsumable && inventory.getFirst().getQuantity() > 0) {
+        if(inventory.getFirst().getQuantity() > 0) {
             graphics.drawImage(new Image(inventory.getFirst().getImage()), 705, 602);
         }
         // Consumibles en el inventario.

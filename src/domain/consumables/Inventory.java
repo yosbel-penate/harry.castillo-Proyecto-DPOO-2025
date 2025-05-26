@@ -7,9 +7,12 @@ import java.util.ArrayList;
 public class Inventory {
     private static boolean alreadyCreated = false;
     public static ArrayList<Consumables> createInventory(){
-        VitalityPotion potion = new VitalityPotion();
+        VitalityPotion vitalityPotionpotion = new VitalityPotion();
+        ManaPotion manaPotion=new ManaPotion();
         ArrayList<Consumables> inventory = new ArrayList<>(){};
-        inventory.add(potion);
+        inventory.add(vitalityPotionpotion);
+        inventory.add(manaPotion);
+
         alreadyCreated = true;
         return inventory;
     }

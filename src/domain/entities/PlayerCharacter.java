@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 
 public class PlayerCharacter{
+    private static boolean havesMana;
     private int x;
     private int y;
     private int attack;
@@ -144,6 +145,7 @@ public class PlayerCharacter{
     public void collideWithConsumable(ArrayList<Consumables> inventory){
         enemy = Gameplay.getEnemy();
         if (!enemy[0].isAlive()){
+
             if (inventory.size() == 1){
                 if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
                     inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 3);
@@ -157,14 +159,35 @@ public class PlayerCharacter{
                         enemy[i].setAlive(true);
                     }
                 }
-                }else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
-
-                }else if (inventory.get(2).getX() == x && inventory.get(2).getY() == y){
-
-                }else if (inventory.get(3).getX() == x && inventory.get(3).getY() == y){
-
+            }
+        if (inventory.size() == 2){
+            System.out.println("Mamaguevo, digo glu glu glu");
+            if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
+                inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 3);
+                Gameplay.setGrabConsumable(true);
+                Gameplay.setDrawConsumable(false);
+                x = 64;
+                y = 64;
+                enemy[0].setX(544);
+                enemy[0].setY(64);
+                for (int i = 0; i < enemy.length; i++){
+                    enemy[i].setAlive(true);
                 }
             }
+        else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
+            System.out.println("Tetetwtewtwetwete");
+            inventory.get(1).setQuantity(inventory.get(1).getQuantity() + 3);
+            Gameplay.setGrabConsumable(true);
+            Gameplay.setDrawConsumable(false);
+            x = 64;
+            y = 64;
+            enemy[0].setX(544);
+            enemy[0].setY(64);
+            for (int i = 0; i < enemy.length; i++){
+                enemy[i].setAlive(true);
+            }
+        }
+        } }
     }
 
     public static boolean isCollideEnemy() {
@@ -230,6 +253,13 @@ public class PlayerCharacter{
         this.health = health;
     }
 
+    public  boolean isHavesMana() {
+        return havesMana;
+    }
+
+    public  void setHavesMana(boolean havesMana) {
+        PlayerCharacter.havesMana = havesMana;
+    }
 
 
 }
