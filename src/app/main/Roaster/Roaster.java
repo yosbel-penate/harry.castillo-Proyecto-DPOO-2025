@@ -544,7 +544,6 @@ public class Roaster {
         animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                graphics.drawImage(new Image("background1.png"), 0, 0);
                 graphics.drawImage(new Image("roaster1.png"), 8, 8);
                 graphics.drawImage(new Image("roaster2.png"), 702, 8);
                 graphics.setFill(Color.BLACK);

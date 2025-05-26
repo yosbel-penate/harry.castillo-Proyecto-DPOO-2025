@@ -29,6 +29,8 @@ public class SlidersBrightnessMenu {
         brightnessVbox.getChildren().addAll(brightnessLabel,brightnessSlider,back);
         brightnessVbox.setAlignment(Pos.CENTER);
         brightnessVbox.setPadding(new Insets(0,0,30,100));
+        brightnessVbox.setTranslateX(130);
+        brightnessVbox.setTranslateY(-20);
 
         ColorAdjust brightness=new ColorAdjust();
         Game.getMainScene().getRoot().setEffect(brightness);

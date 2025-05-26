@@ -33,6 +33,9 @@ public class ControlsInstructions {
         controlsVBox.getChildren().addAll(controlsLabel,back);
         controlsVBox.setAlignment(Pos.CENTER_RIGHT);
         controlsVBox.setPadding(new Insets(0,0,0,10));
+        controlsVBox.setTranslateX(170);
+        back.setTranslateX(-80);
+        controlsVBox.setTranslateY(-50);
 
         hideMenu();
 
