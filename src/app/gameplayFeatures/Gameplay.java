@@ -17,7 +17,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import static app.fastFeatures.PublicVariables.*;
 
@@ -291,13 +293,23 @@ public class Gameplay {
 
 
 
+    private static final Set<String> activeKeys = new HashSet<>();
+
     private static void playerMovement() {
-        /* Por cada tecla presionada, el codigo evaluara
-        los puntos de accion y la posicion del jugador
-        y determinara si se mueve o no se mueve.
-        */
+    /* Por cada tecla presionada, el código evaluará
+       los puntos de acción y la posición del jugador
+       y determinará si se mueve o no se mueve. */
+
+        gameplayScene.setOnKeyPressed(event -> activeKeys.add(event.getCode().toString()));
 
         gameplayScene.setOnKeyReleased(event -> {
+            activeKeys.remove(event.getCode().toString());
+
+            if (activeKeys.size() > 0) return; // Si hay más de una tecla activa, no mover al jugador
+
+
+
+
             switch (event.getCode().toString()) {
                 case "A":
                     // Tecla A mueve el jugador hacia la izquierda-abajo (X-48, Y+32)
@@ -319,6 +331,7 @@ public class Gameplay {
                             }
                             player[0].setX(player[0].getX() + left);
                             player[0].setY(player[0].getY() + diagonalDown);
+
 
                         }
                     break;
