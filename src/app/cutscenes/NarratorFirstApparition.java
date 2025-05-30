@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 
-import static app.main.Game.window;
+import static app.fastFeatures.PublicVariables.window;
 
 public class NarratorFirstApparition {
     private static GraphicsContext graphics;

@@ -1,19 +1,17 @@
 package app.gameplayFeatures;
 
-import app.main.AudioPlayer;
-import domain.entities.PlayerCharacter;
+import app.fastFeatures.AudioPlayer;
+import domain.generalClasses.PlayerCharacter;
 import javafx.animation.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
-import static app.main.Game.window;
+import static app.fastFeatures.PublicVariables.window;
 
 public class Gameover {
     private static PlayerCharacter[] player;
@@ -40,7 +38,7 @@ public class Gameover {
         gameOverScene = new Scene(gameOverRoot, 1000, 800);
         gameOverScene.getStylesheets().add(Gameover.class.getResource("/buttons.css").toExternalForm());
         canvas = new Canvas(1000, 800);
-        gameOver=new ImageView(Gameover.class.getResource("/GameOverImage.png").toExternalForm());
+        gameOver=new ImageView(Gameover.class.getResource("/gameOverImage.png").toExternalForm());
         gameOver.setPreserveRatio(false);
         gameOver.fitWidthProperty().bind(gameOverScene.widthProperty());
         gameOver.fitHeightProperty().bind(gameOverScene.heightProperty());

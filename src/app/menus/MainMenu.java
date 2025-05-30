@@ -1,21 +1,12 @@
 package app.menus;
 
-import app.main.AudioPlayer;
-import app.main.Game;
-import javafx.application.Platform;
+import app.fastFeatures.AudioPlayer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.MediaPlayer;
 
-import static app.main.Game.window;
+import static app.fastFeatures.PublicVariables.window;
 
 public class MainMenu {
  private static Button play = new Button("Play");
@@ -40,6 +31,7 @@ public class MainMenu {
 
      play.setOnAction(_ -> {
       AudioPlayer.playButtonSound();
+      SlidersBrightnessMenu.hideSlider();
       OptionsMenu.hideMenu();
       GameModeMenu.showMenu();
       SlidersSoundsMenu.hideSlider();
@@ -49,6 +41,7 @@ public class MainMenu {
       AudioPlayer.playButtonSound();
       GameModeMenu.hideMenu();
       OptionsMenu.showMenu();
+      SlidersBrightnessMenu.hideSlider();
       SlidersSoundsMenu.hideSlider();
       ControlsInstructions.hideMenu();
      });

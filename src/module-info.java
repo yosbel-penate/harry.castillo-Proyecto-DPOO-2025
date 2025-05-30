@@ -6,7 +6,7 @@ module Game {
     requires java.desktop;
 
     opens app.gameModes;
-    opens app.main;
     opens app.gameplayFeatures;
-    opens app.main.Roaster;
+    opens app.fastFeatures;
+    opens app;
 }

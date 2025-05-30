@@ -1,57 +1,71 @@
 package app.gameplayFeatures;
 
-import app.gameplayFeatures.maps.Maps;
-import app.main.AudioPlayer;
-import domain.entities.PlayerCharacter;
+import app.Maps;
+import app.fastFeatures.AudioPlayer;
+import domain.generalClasses.PlayerCharacter;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 public class TileMap {
-    private static Label privateLabel;
+    private static final int initialColPos = 64;
+    private static final int finalColPos = 544;
+    private static final int initialEvenRowPos = 64;
+    private static final int finalEvenRowPos = 640;
+    private static final int initialOddRowPos = 32;
+    private static final int finalOddRowPos = 672;
+    private static final int nextCol = 48;
+    private static final int nextRow = 64;
+    private static final int initialPos = 64;
+    private static final int realocate = 20;
+    private static final int realocateCol = 8;
+    private static final int realocateRow = 8;
+
+
     private static GraphicsContext graphics = Gameplay.getGraphics();
     private static PlayerCharacter[] player;
     private static boolean returnToNormal = false;
     private static int[][] matrix;
     private static int[][] upperThingsMatrix;
     private static String[] images = {
-            "borderlessgraso.png",
-            "borderGrasso1.png",
-            "borderGrasso2.png",
-            "borderSando1.png",
-            "borderSando2.png",
-            "sando.png",
+            "borderlessGrass.png",
+            "borderGrass1.png",
+            "borderGrass2.png",
+            "borderSand1.png",
+            "borderSand2.png",
+            "sand.png",
             "borderWater1.png",
             "borderWater2.png",
             "water.png"};
     private static String[] upperThingsImages = {
             "nothing.png",
-            "ruinsa.png",
+            "ruins.png",
             "tree.png",
             "mountains.png"};
+
+    
 
 
     public static void drawTutorialMap(GraphicsContext graphics) {
         matrix = Maps.getTutorialMap();
         int contadorFila = 0;
 
-        for (int pos = 64; pos <= 544; pos += 48) {
+        for (int col = initialColPos; col <= finalColPos; col += nextCol) {
+            int terrain;
             int contadorColumna = 0;
             if (contadorFila % 2 == 0) {
-                for (int j = 64; j < 704; j += 64) {
-                    int n = matrix[contadorFila][contadorColumna];
-                    graphics.drawImage(new Image(images[n]), pos, j);
+                for (int row = initialEvenRowPos; row <= finalEvenRowPos; row += nextRow) {
+                    terrain = matrix[contadorFila][contadorColumna];
+                    graphics.drawImage(new Image(images[terrain]), col, row);
                     contadorColumna++;
                 }
             } else {
-                for (int j = 32; j <= 608; j += 64) {
-                    int n = matrix[contadorFila][contadorColumna];
-                    graphics.drawImage(new Image(images[n]), pos, j);
+                for (int row = initialOddRowPos; row <= finalOddRowPos; row += nextRow) {
+                    terrain = matrix[contadorFila][contadorColumna];
+                    graphics.drawImage(new Image(images[terrain]), col, row);
                     contadorColumna++;
                 }
             }
             contadorFila++;
-
         }
 
     }
@@ -60,49 +74,50 @@ public class TileMap {
     public static void drawCampaignMap(GraphicsContext graphics) {
         matrix = Maps.getFirstMap();
         upperThingsMatrix = Maps.getFirstMapUpperThingsMatrix();
-        int contadorColumna = 0;
+        int colCounter = 0;
 
-        for (int pos = 64; pos <= 544; pos += 48) {
-            int contadorFila = 0;
-            if (contadorColumna % 2 == 0) {
-                for (int j = 64; j <= 640; j += 64) {
-                    int n = matrix[contadorColumna][contadorFila];
-                    int a = upperThingsMatrix[contadorColumna][contadorFila];
-                    graphics.drawImage(new Image(images[n]), pos, j);
-                    checkTerrains(n, a, pos, j, contadorColumna, contadorFila);
-                    if (a == 3) {
-                        j = j - 20;
+        for (int col = initialPos; col <= finalColPos; col += nextCol) {
+            int terrain;
+            int upper;
+            int rowCounter = 0;
+            if (colCounter % 2 == 0) {
+                for (int evenRow = initialEvenRowPos; evenRow <= finalEvenRowPos; evenRow += nextRow) {
+                    terrain = matrix[colCounter][rowCounter];
+                    upper = upperThingsMatrix[colCounter][rowCounter];
+                    graphics.drawImage(new Image(images[terrain]), col, evenRow);
+                    checkTerrains(terrain, upper, col, evenRow, colCounter, rowCounter);
+                    if (upper == 3) {
+                        evenRow = evenRow - realocate;
                         returnToNormal = true;
                     }
                     if (returnToNormal) {
-                        j = j + 20;
+                        evenRow = evenRow + realocate;
                         returnToNormal = false;
                     }
-                    graphics.drawImage(new Image(upperThingsImages[a]), pos + 8, j + 8);
-                    contadorFila++;
-
+                    graphics.drawImage(new Image(upperThingsImages[upper]), col + realocateCol, evenRow + realocateRow);
+                    rowCounter++;
                 }
                 // Impar.
                 // Par.
             } else {
-                for (int j = 32; j <= 608; j += 64) {
-                    int n = matrix[contadorColumna][contadorFila];
-                    int a = upperThingsMatrix[contadorColumna][contadorFila];
-                    graphics.drawImage(new Image(images[n]), pos, j);
-                    checkTerrains(n, a, pos, j, contadorColumna, contadorFila);
-                    if (a == 3) {
-                        j = j + 20;
+                for (int oddRow = initialOddRowPos; oddRow < finalOddRowPos; oddRow += nextRow) {
+                    terrain = matrix[colCounter][rowCounter];
+                    upper = upperThingsMatrix[colCounter][rowCounter];
+                    graphics.drawImage(new Image(images[terrain]), col, oddRow);
+                    checkTerrains(terrain, upper, col, oddRow, colCounter, rowCounter);
+                    if (upper == 3) {
+                        oddRow = oddRow + realocate;
                         returnToNormal = true;
                     }
                     if (returnToNormal) {
-                        j = j - 20;
+                        oddRow = oddRow - realocate;
                         returnToNormal = false;
                     }
-                    graphics.drawImage(new Image(upperThingsImages[a]), pos + 8, j + 8);
-                    contadorFila++;
+                    graphics.drawImage(new Image(upperThingsImages[upper]), col + realocateCol, oddRow + realocateRow);
+                    rowCounter++;
                 }
             }
-            contadorColumna++;
+            colCounter++;
             AudioPlayer.playTileMap();}
     }
 

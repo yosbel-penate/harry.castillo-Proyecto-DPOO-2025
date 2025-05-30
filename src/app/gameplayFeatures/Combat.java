@@ -1,12 +1,12 @@
 package app.gameplayFeatures;
 
-import app.main.AudioPlayer;
-import app.main.Game;
+import app.fastFeatures.AudioPlayer;
+
 import app.menus.PauseMenu;
 import domain.consumables.ManaPotion;
 import domain.consumables.VitalityPotion;
-import domain.entities.EnemyCharacter;
-import domain.entities.PlayerCharacter;
+import domain.generalClasses.EnemyCharacter;
+import domain.generalClasses.PlayerCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -21,8 +21,10 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static app.fastFeatures.ButtonManager.*;
 import static app.gameplayFeatures.Gameplay.*;
-import static app.main.Game.*;
+import static app.fastFeatures.LabelManager.createLabel;
+import static app.fastFeatures.PublicVariables.*;
 
 public class Combat {
     private static PlayerCharacter[] player;
@@ -30,14 +32,15 @@ public class Combat {
     private static int selectedCharacter = 0;
     private static int selectedEnemy = 0;
     private static int playerTurn = 5;
+    private static int enemiesXPosition = 792;
     private static GraphicsContext graphics;
 
 
     private static AnimationTimer animationForCombat;
     private static Scene combatScene;
     private static Group root;
+    private static Canvas canvas;
     private static ArrayList<Consumables> inventory;
-    private static String keyPressed;
     private static boolean selectEnemyToAttack = false;
     private static boolean attackToSelectedEnemy = false;
     private static Label message;
@@ -46,6 +49,7 @@ public class Combat {
     private static Label playerTurnLabel;
     private static Label enemyLife;
     private static Label enemyAttackL;
+    private static Font statsFont;
 
     private static Button attack;
     private static Button runAway;
@@ -56,10 +60,16 @@ public class Combat {
     private static boolean noRandomPosition;
     private static boolean dropConsumable;
 
-    public static void initializeCombat() {
+    public static void setupCombat() {
         setupConfigurations();
         setupWindow();
+        setupCombatAnimation();
+        setupKeyHandling();
+        setupLabels();
+        setupButtons();
+        setupRoot();
         }
+
 
     private static void setupConfigurations() {
         Gameplay.stopGameplayTimer();
@@ -68,33 +78,25 @@ public class Combat {
         inventory = Gameplay.getInventory();
         AudioPlayer.stopIfPlaying("TileMap");
         AudioPlayer.playCombatMusic();
-
     }
 
     private static void setupWindow() {
         root = new Group();
-        combatScene = new Scene(root, 1000, 850);
+        combatScene = new Scene(root, screenWidth, screenHeight);
         combatScene.getStylesheets().add(Combat.class.getResource("/buttons.css").toExternalForm());
-        Canvas canvas = new Canvas(1000, 850);
-
-
-        setupLabels();
-        setupButtons();
-
-        root.getChildren().addAll(canvas, playerLife, playerAttack, enemyLife, enemyAttackL, attack, runAway, passTurn, useConsumable, message, playerTurnLabel,PauseMenu.getPauseMenu());
-        root.setEffect(PauseMenu.getBrightness());
+        canvas = new Canvas(screenWidth, screenHeight);
         graphics = canvas.getGraphicsContext2D();
-
-        setupKeyHandling();
-
         window.setScene(combatScene);
 
+    }
+
+    private static void setupCombatAnimation() {
         animationForCombat = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 checkLifeStatus();
                 updateState();
-                drawScene();
+                draw();
                 drawPortraits();
 
                 if (playerTurn == 0) {
@@ -103,117 +105,6 @@ public class Combat {
             }
         };
         animationForCombat.start();
-    }
-
-    private static void setupLabels() {
-        Font statsFont = new Font("Arial", 20);
-
-        playerLife = createLabel(150, 450, "HP: " + player[0].getHealth(), Color.WHITE, statsFont);
-        playerAttack = createLabel(150, 480, "Attack points: " + player[0].getAttack(), Color.WHITE, statsFont);
-        playerTurnLabel = createLabel(20, 780, "Acciones por turno: " + playerTurn, Color.WHITE, statsFont);
-
-        enemyLife = createLabel(735, 450, "HP: " + enemy[0].getHealth(), Color.WHITE, statsFont);
-        enemyAttackL = createLabel(735, 480, "Attack points: " + enemy[0].getAttack(), Color.WHITE, statsFont);
-
-        message = createLabel(20, 750, "¡Te has encontrado a un loboepinga!", Color.WHITE, statsFont);
-    }
-
-    private static Label createLabel(double x, double y, String text, Color color, Font font) {
-        Label label = new Label(text);
-        label.setTranslateX(x);
-        label.setTranslateY(y);
-        label.setTextFill(color);
-        label.setFont(font);
-        return label;
-    }
-
-    private static void setupButtons() {
-        attack = createButton("Atacar.", 150, 550, e -> playerAttack());
-        passTurn = createButton("Pasar turno.", 150, 600, e -> playerPassTurn());
-        useConsumable = createButton("Usar item.", 150, 650, e -> playerUseConsumable());
-        runAway = createButton("Huir.", 150, 700, e -> playerRunAway());
-    }
-
-    private static Button createButton(String text, double x, double y, javafx.event.EventHandler<javafx.event.ActionEvent> action) {
-        Button btn = new Button(text);
-        btn.setTranslateX(x);
-        btn.setTranslateY(y);
-        btn.setFocusTraversable(false);
-        btn.setOnAction(action);
-        return btn;
-    }
-
-    private static void setupKeyHandling() {
-        Game.isPausable=true;
-        combatScene.setOnKeyPressed(event -> {
-            String code = event.getCode().toString();
-            switch (code) {
-                case "W":
-                    keyPressed = "W";
-                    if (!selectEnemyToAttack) {
-                        if (selectedCharacter < player.length - 1) {
-                            selectedCharacter++;
-                        }
-                    } else {
-                        if (selectedEnemy < enemy.length - 1) {
-                            selectedEnemy++;
-                        }
-                    }
-                    break;
-                case "S":
-                    keyPressed = "S";
-                    if (!selectEnemyToAttack) {
-                        if (selectedCharacter > 0) {
-                            selectedCharacter--;
-                        }
-                    } else {
-                        if (selectedEnemy > 0) {
-                            selectedEnemy--;
-                        }
-                    }
-                    break;
-                case "SPACE":
-                    if (selectEnemyToAttack) {
-                        attackToSelectedEnemy = true;
-                        keyPressed = "SPACE";
-                    }
-                    break;
-                case "P":
-                        PauseMenu.managePauseMenu();
-                    break;
-            }
-        });
-    }
-
-    private static void drawPortraits() {
-        graphics.drawImage(new Image(player[selectedCharacter].getClosestImageName()), 0, 440);
-        graphics.drawImage(new Image(enemy[selectedEnemy].getClosestImageName()), 880, 440);
-    }
-
-    private static void drawScene() {
-        graphics.drawImage(new Image("combatBackground.png"), 0, 0);
-        graphics.drawImage(new Image("combatSquare.png"), 0, 440);
-
-        int positionY = 325;
-        for (PlayerCharacter pc : player) {
-            if (pc.getHealth() > 0) {
-                graphics.drawImage(new Image(pc.getImageName()), 104, positionY);
-            }
-            positionY -= 50;
-        }
-
-        positionY = 325;
-        for (EnemyCharacter en : enemy) {
-            if (en.getHealth() > 0) {
-                graphics.drawImage(new Image(en.getImageName()), 792, positionY);
-            }
-            positionY -= 50;
-        }
-
-        if (selectEnemyToAttack) {
-            int selectorY = 325 - (selectedEnemy * 50);
-            graphics.drawImage(new Image("selectEnemy.png"), 792, selectorY);
-        }
     }
 
     private static void checkLifeStatus() {
@@ -227,71 +118,12 @@ public class Combat {
             AudioPlayer.stopIfPlaying("combatMusic");
             Gameover.gameOver(combatScene, animationForCombat);
         }
-        updateEnemiesAliveStatus();
-
+        updateEnemyState();
         if (areAllEnemiesDead()) {
             resetEnemiesAfterBattle();
+            dropConsumable();
+            changeToGameplay();
         }
-    }
-
-    private static void updateEnemiesAliveStatus() {
-        for (EnemyCharacter en : enemy) {
-            if (en.getHealth() <= 0) {
-                en.setAlive(false);
-            }
-        }
-    }
-
-
-    private static void resetEnemiesAfterBattle() {
-        AudioPlayer.stopIfPlaying("combatMusic");
-        selectedEnemy = 0;
-        for (EnemyCharacter en : enemy) {
-            en.setHealth(10);
-        }
-        noRandomPosition = true;
-        dropConsumable = true;
-        if (dropConsumable) {
-            boolean life = false;
-            if (life){
-                Consumables consumable = inventory.getFirst();
-                consumable.setX(enemy[0].getX());
-                consumable.setY(enemy[0].getY());
-                consumable.setImage("vitality_potion.png");
-                Gameplay.setAddConsumable(true);
-                Gameplay.setDrawConsumable(true);
-            }else{
-                Consumables consumable = inventory.get(1);
-                consumable.setX(enemy[0].getX());
-                consumable.setY(enemy[0].getY());
-                consumable.setImage("mana_potion.png");
-                Gameplay.setAddConsumable(true);
-                Gameplay.setDrawConsumable(true);
-            }
-
-        }
-        combatScene.setRoot(new Group());
-        animationForCombat.stop();
-        Gameplay.startGameplayTimer();
-        window.setScene(Gameplay.getGameplayScene());
-    }
-
-    private static boolean areAllPlayersDead() {
-        for (PlayerCharacter p : player) {
-            if (p.getHealth() > 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static boolean areAllEnemiesDead() {
-        for (EnemyCharacter en : enemy) {
-            if (en.isAlive()) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private static void switchToAlivePlayer() {
@@ -312,59 +144,231 @@ public class Combat {
         }
     }
 
+    private static boolean areAllPlayersDead() {
+        for (PlayerCharacter p : player) {
+            if (p.getHealth() > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean areAllEnemiesDead() {
+        for (EnemyCharacter en : enemy) {
+            if (en.isAlive()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    private static void updateEnemyState() {
+        for (EnemyCharacter en : enemy) {
+            if (en.getHealth() <= 0) {
+                en.setAlive(false);
+            }
+        }
+    }
+
+    private static void resetEnemiesAfterBattle() {
+        AudioPlayer.stopIfPlaying("combatMusic");
+        selectedEnemy = 0;
+        for (EnemyCharacter en : enemy) {
+            en.setHealth(10);
+        }
+    }
+
+    private static void dropConsumable() {
+        dropConsumable = new Random().nextBoolean();
+        if (dropConsumable) {
+            boolean life = new Random().nextBoolean();
+            if (life) {
+                inventory.getFirst().setX(enemy[0].getX());
+                inventory.getFirst().setY(enemy[0].getY());
+                inventory.getFirst().setImage("vitality_potion.png");
+                Gameplay.setAddConsumable(true);
+                Gameplay.setDrawConsumable(true);
+            } else {
+                inventory.get(1).setX(enemy[0].getX());
+                inventory.get(1).setY(enemy[0].getY());
+                inventory.get(1).setImage("mana_potion.png");
+                Gameplay.setAddConsumable(true);
+                Gameplay.setDrawConsumable(true);
+            }
+
+        }
+    }
+
+    private static void changeToGameplay() {
+        noRandomPosition = true;
+        combatScene.setRoot(new Group());
+        animationForCombat.stop();
+        Gameplay.startGameplayTimer();
+        window.setScene(Gameplay.getGameplayScene());
+    }
+
     private static void updateState() {
         if (Gameplay.isGrabConsumable() && !inventory.isEmpty() && inventory.getFirst().getQuantity() > 0) {
             Gameplay.setGrabConsumable(false);
         }
-
         playerLife.setText("HP: " + player[selectedCharacter].getHealth());
         playerAttack.setText("Attack points: " + player[selectedCharacter].getAttack());
         playerTurnLabel.setText("Acciones por turno: " + playerTurn);
         enemyLife.setText("HP: " + enemy[selectedEnemy].getHealth());
         enemyAttackL.setText("Attack points: " + enemy[selectedEnemy].getAttack());
 
-        if (attackToSelectedEnemy && "SPACE".equals(keyPressed)) {
+        if (attackToSelectedEnemy) {
             enemy[selectedEnemy].setHealth(enemy[selectedEnemy].getHealth() - player[selectedCharacter].getAttack());
             message.setText("¡Ay, Dios! ¡" + player[selectedCharacter].getCharacterName() +
-                    " ha atacado al loboepinga número " + selectedEnemy + "!");
+                    " ha atacado al lobo número " + selectedEnemy + "!");
             selectEnemyToAttack = false;
             attackToSelectedEnemy = false;
-            attack.setDisable(false);
-            runAway.setDisable(false);
-            useConsumable.setDisable(false);
-            passTurn.setDisable(false);
-            keyPressed = "";
+            buttonEnabler(attack, runAway, useConsumable, passTurn);
         }
+    }
+
+    private static void draw() {
+        drawAssets();
+        drawPlayer();
+        drawEnemy();
+        drawSelector();
+    }
+
+    private static void drawAssets() {
+        graphics.drawImage(new Image("combatBackground.png"), 0, 0);
+        graphics.drawImage(new Image("combatSquare.png"), 0, 440);
+
+    }
+
+    private static void drawPlayer(){
+        int positionY = 325;
+        for (PlayerCharacter pc : player) {
+            if (pc.getHealth() > 0) {
+                graphics.drawImage(new Image(pc.getImageName()), 104, positionY);
+            }
+            positionY -= 50;
+        }
+    }
+
+    private static void drawEnemy(){
+        int enemiesYPosition = 325;
+        for (EnemyCharacter en : enemy) {
+            if (en.getHealth() > 0) {
+                graphics.drawImage(new Image(en.getImageName()), enemiesXPosition, enemiesYPosition);
+            }
+            enemiesYPosition -= 50;
+        }
+
+    }
+
+    private static void drawSelector() {
+        if (selectEnemyToAttack) {
+            int enemiesYPosition = 325 - (selectedEnemy * 50);
+            graphics.drawImage(new Image("selectEnemy.png"), enemiesXPosition, enemiesYPosition);
+        }
+    }
+
+    private static void drawPortraits() {
+        graphics.drawImage(new Image(player[selectedCharacter].getClosestImageName()), 0, 440);
+        graphics.drawImage(new Image(enemy[selectedEnemy].getClosestImageName()), 880, 440);
+    }
+
+    private static void enemyTurn() {
+        enemyAttack();
+        playerTurn = 5;
+    }
+
+    private static void enemyAttack() {
+        for (int i = 0; i < enemy.length; i++) {
+            boolean attackSuccess = new Random().nextBoolean();
+            int targetPlayerIndex = selectAlivePlayerForAttack(new Random().nextInt(player.length));
+            if (enemy[i].isAlive()) {
+                System.out.println("Me he activao con el lobo: "+i);
+                if (attackSuccess) {
+                    player[targetPlayerIndex].setHealth(player[targetPlayerIndex].getHealth() - enemy[i].getAttack());
+                    message.setText("¡El lobo número " + i + " ha atacado a " + player[targetPlayerIndex].getCharacterName() +
+                            " y le ha hecho " + enemy[i].getAttack() + " de daño!");
+                } else {
+                    message.setText("¡El lobo número " + i + " intentó atacar a " + player[targetPlayerIndex].getCharacterName() +
+                            ", pero se resbaló y no pudo!");
+                }
+            }
+        }
+    }
+
+    private static void setupKeyHandling() {
+        combatScene.setOnKeyPressed(event -> {
+            String code = event.getCode().toString();
+            switch (code) {
+                case "W":
+                    if (!selectEnemyToAttack) {
+                        if (selectedCharacter < player.length - 1) {
+                            selectedCharacter++;
+                        }
+                    } else {
+                        if (selectedEnemy < enemy.length - 1) {
+                            selectedEnemy++;
+                        }
+                    }
+                    break;
+                case "S":
+                    if (!selectEnemyToAttack) {
+                        if (selectedCharacter > 0) {
+                            selectedCharacter--;
+                        }
+                    } else {
+                        if (selectedEnemy > 0) {
+                            selectedEnemy--;
+                        }
+                    }
+                    break;
+                case "SPACE":
+                    if (selectEnemyToAttack) {
+                        attackToSelectedEnemy = true;
+                    }
+                    break;
+                case "P":
+                    PauseMenu.managePauseMenu();
+                    break;
+            }
+        });
+    }
+
+    private static void setupLabels() {
+        statsFont = new Font("Arial", 20);
+
+        playerLife = createLabel(150, 450, "HP: " + player[0].getHealth(), Color.WHITE, statsFont);
+        playerAttack = createLabel(150, 480, "Attack points: " + player[0].getAttack(), Color.WHITE, statsFont);
+        playerTurnLabel = createLabel(20, 780, "Acciones por turno: " + playerTurn, Color.WHITE, statsFont);
+
+        enemyLife = createLabel(735, 450, "HP: " + enemy[0].getHealth(), Color.WHITE, statsFont);
+        enemyAttackL = createLabel(735, 480, "Attack points: " + enemy[0].getAttack(), Color.WHITE, statsFont);
+
+        message = createLabel(20, 750, "¡Te has encontrado a un lobo!", Color.WHITE, statsFont);
+    }
+
+    private static void setupButtons() {
+        attack = createButton("Atacar.", 150, 550, e -> playerAttack(), statsFont);
+        passTurn = createButton("Pasar turno.", 150, 600, e -> playerPassTurn(), statsFont);
+        useConsumable = createButton("Usar item.", 150, 650, e -> playerUseConsumable(), statsFont);
+        runAway = createButton("Huir.", 150, 700, e -> playerRunAway(), statsFont);
+    }
+
+    private static void setupRoot() {
+        root.getChildren().addAll(canvas, playerLife, playerAttack, enemyLife, enemyAttackL, attack, runAway, passTurn, useConsumable, message, playerTurnLabel, PauseMenu.getPauseMenu());
+        root.setEffect(PauseMenu.getBrightness());
     }
 
     private static void playerAttack() {
         boolean attackSuccess = new Random().nextBoolean();
         if (attackSuccess) {
             selectEnemyToAttack = true;
-            attack.setDisable(true);
-            runAway.setDisable(true);
-            useConsumable.setDisable(true);
-            passTurn.setDisable(true);
+            buttonDisabler(attack, runAway,useConsumable,passTurn);
         } else {
             message.setText("¡" + player[selectedCharacter].getCharacterName() + " ha fallado el ataque!");
         }
         playerTurn--;
-    }
-
-    private static void enemyAttack() {
-        Random rand = new Random();
-        for (int i = 0; i < enemy.length; i++) {
-            boolean attackSuccess = rand.nextBoolean();
-            int targetPlayerIndex = selectAlivePlayerForAttack(rand.nextInt(player.length));
-            if (attackSuccess) {
-                player[targetPlayerIndex].setHealth(player[targetPlayerIndex].getHealth() - enemy[i].getAttack());
-                message.setText("¡El loboepinga número " + i + " ha atacado a " + player[targetPlayerIndex].getCharacterName() +
-                        " y le ha hecho " + enemy[i].getAttack() + " de daño!");
-            } else {
-                message.setText("¡El loboepinga número " + i + " intentó atacar a " + player[targetPlayerIndex].getCharacterName() +
-                        ", pero se resbaló y no pudo!");
-            }
-        }
     }
 
     private static int selectAlivePlayerForAttack(int startIndex) {
@@ -379,18 +383,13 @@ public class Combat {
         return startIndex;// retroceso, aunque todos podrían estar muertos
     }
 
-    private static void enemyTurn() {
-        enemyAttack();
-        playerTurn = 5;
-    }
-
     private static void playerPassTurn() {
         boolean enemyWillAttack = new Random().nextBoolean();
         playerTurn = 0;
         if (enemyWillAttack) {
             enemyAttack();
         } else {
-            message.setText("¡Pasaste el turno, pero el loboepinga no te dañó porque se tropezó!");
+            message.setText("¡Pasaste el turno, pero el lobo no te dañó porque se tropezó!");
         }
     }
 
@@ -430,8 +429,8 @@ public class Combat {
             } else {
                 message.setText("¿Crees que vas a usar una poción de vitalidad que no tienes?");
             }
-        }else{
-            message.setText("Su personaje no tiene mana que restaurar, troncoecomepinga.");
+        } else {
+            message.setText("Su personaje no tiene mana que restaurar.");
         }
 
     }
@@ -467,9 +466,9 @@ public class Combat {
             playerTurn--;
             if (enemyCounterAttack) {
                 enemyAttack();
-                message.setText("¡El loboepinga no te dejó huir y te hizo daño!");
+                message.setText("¡El lobo no te dejó huir y te hizo daño!");
             } else {
-                message.setText("¡No escapaste pero el loboepinga falló el ataque!");
+                message.setText("¡No escapaste pero el lobo falló el ataque!");
             }
         }
     }

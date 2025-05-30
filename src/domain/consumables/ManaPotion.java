@@ -1,9 +1,8 @@
 package domain.consumables;
 
-import DAO.interfaces.consumables;
-import app.gameplayFeatures.Consumables;
+import app.interfaces.Consumables;
 
-public class ManaPotion extends Consumables implements consumables {
+public class ManaPotion extends app.gameplayFeatures.Consumables implements Consumables {
     private String id="02";
     private int manaAdded=3;
 

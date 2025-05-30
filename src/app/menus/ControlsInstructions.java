@@ -1,6 +1,6 @@
 package app.menus;
 
-import app.main.AudioPlayer;
+import app.fastFeatures.AudioPlayer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

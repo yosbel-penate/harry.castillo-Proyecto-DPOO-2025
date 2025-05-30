@@ -1,14 +1,12 @@
 package app.menus;
 
-import app.main.AudioPlayer;
-import app.main.Game;
-import app.main.Roaster.Roaster;
+import app.fastFeatures.AudioPlayer;
+import app.fastFeatures.PublicVariables;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class PauseMenu {
@@ -127,7 +125,7 @@ public class PauseMenu {
 
         exitGame.setOnAction(_ ->{
             AudioPlayer.playButtonSound();
-            Game.window.close();
+            PublicVariables.window.close();
         });
 
         back.setOnAction(_ ->{

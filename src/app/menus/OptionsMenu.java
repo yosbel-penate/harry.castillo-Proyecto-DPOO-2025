@@ -1,12 +1,9 @@
 package app.menus;
 
-import app.main.AudioPlayer;
-import app.main.Game;
-import javafx.application.Platform;
+import app.fastFeatures.AudioPlayer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class OptionsMenu {
