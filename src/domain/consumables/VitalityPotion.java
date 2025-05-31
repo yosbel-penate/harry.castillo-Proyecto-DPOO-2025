@@ -1,8 +1,8 @@
 package domain.consumables;
 
-import app.interfaces.Consumables;
+import app.interfaces.consumables;
 
-public class VitalityPotion extends app.gameplayFeatures.Consumables implements Consumables {
+public class VitalityPotion extends app.gameplayFeatures.Consumables implements consumables {
     private String id = "01";
     private int healthAdded = 3;
 

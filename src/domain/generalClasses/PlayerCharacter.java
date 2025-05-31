@@ -136,9 +136,10 @@ public class PlayerCharacter{
         if (!enemy[0].isAlive()){
         if (inventory.size() == 2){
             if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
-                inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 3);
+                inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 1);
                 Gameplay.setGrabConsumable(true);
                 Gameplay.setDrawConsumable(false);
+                inventory.getFirst().setDrawAtMap(false);
                 x = playerInitialPositionX;
                 y = playerInitialPositionY;
                 enemy[0].setX(enemyInitialPositionX);
@@ -148,10 +149,10 @@ public class PlayerCharacter{
                 }
             }
         else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
-            System.out.println("Tetetwtewtwetwete");
-            inventory.get(1).setQuantity(inventory.get(1).getQuantity() + 3);
+            inventory.get(1).setQuantity(inventory.get(1).getQuantity() + 1);
             Gameplay.setGrabConsumable(true);
             Gameplay.setDrawConsumable(false);
+            inventory.get(1).setDrawAtMap(false);
             x = playerInitialPositionX;
             y = playerInitialPositionY;
             enemy[0].setX(enemyInitialPositionX);

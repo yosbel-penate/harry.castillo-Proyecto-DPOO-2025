@@ -16,6 +16,7 @@ public class LabelManager {
         return label;
     }
 
+
     public static void labelDisabler(Label lbl) {
         lbl.setDisable(true);
 

@@ -1,10 +1,13 @@
 package app.gameplayFeatures;
 
+import domain.generalClasses.Inventory;
+
 public class Consumables {
     private int x;
     private int y;
     private String image;
     private int quantity;
+    private boolean drawAtMap;
 
     public String getImage() {
         return image;
@@ -35,6 +38,14 @@ public class Consumables {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public boolean isDrawAtMap() {
+        return drawAtMap;
+    }
+
+    public void setDrawAtMap(boolean drawAtMap) {
+        this.drawAtMap = drawAtMap;
     }
 
 
