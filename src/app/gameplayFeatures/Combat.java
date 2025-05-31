@@ -1,4 +1,4 @@
-﻿package app.gameplayFeatures;
+package app.gameplayFeatures;
 
 import app.fastFeatures.AudioPlayer;
 
