@@ -6,8 +6,8 @@ public class Xaviru extends PlayerCharacter {
     private int health = 15;
     private int attack = 10;
     private boolean havesMana = false;
-    private String characterName = "Xaviru";
-    private String imageName = "Xaviru.png";
+    private String characterName = "xaviru";
+    private String imageName = "xaviru.png";
     private String closestImageName = "closerXaviru.png";
 
     public String getClosestImageName() {
