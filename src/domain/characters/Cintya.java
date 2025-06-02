@@ -6,8 +6,8 @@ public class Cintya extends PlayerCharacter {
     private int health = 8;
     private int attack = 5;
     private boolean havesMana = false;
-    private String characterName = "Cintya";
-    private String imageName = "Cintya.png";
+    private String characterName = "cintya";
+    private String imageName = "cintya.png";
     private String closestImageName = "closerCintya.png";
 
     public String getClosestImageName() {
