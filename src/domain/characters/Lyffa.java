@@ -5,10 +5,10 @@ import domain.generalClasses.PlayerCharacter;
 public class Lyffa extends PlayerCharacter {
     private int health = 6;
     private int attack = 5;
-    private boolean havesMana = True;
+    private boolean havesMana = true;
     private int mana = 12;
-    private String characterName = "Lyffa";
-    private String imageName = "Lyffa.png";
+    private String characterName = "lyffa";
+    private String imageName = "lyffa.png";
     private String closestImageName = "closerLyffa.png";
 
     public String getClosestImageName() {
