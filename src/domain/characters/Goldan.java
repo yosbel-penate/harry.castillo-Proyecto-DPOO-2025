@@ -5,7 +5,7 @@ import domain.generalClasses.PlayerCharacter;
 public class Goldan extends PlayerCharacter {
     private int health = 7;
     private int attack = 5;
-    private boolean havesMana = True;
+    private boolean havesMana = true;
     private int mana = 10;
     private String characterName = "goldan";
     private String imageName = "goldan.png";
