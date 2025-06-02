@@ -6,8 +6,8 @@ public class Shira extends PlayerCharacter {
     private int health = 15;
     private int attack = 7;
     private boolean havesMana = false;
-    private String characterName = "Shira";
-    private String imageName = "Shira.png";
+    private String characterName = "shira";
+    private String imageName = "shira.png";
     private String closestImageName = "closerShira.png";
 
     public String getClosestImageName() {
