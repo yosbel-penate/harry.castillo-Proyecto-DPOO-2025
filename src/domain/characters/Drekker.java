@@ -6,8 +6,8 @@ public class Drekker extends PlayerCharacter {
     private int health = 10;
     private int attack = 5;
     private boolean havesMana = false;
-    private String characterName = "Drekker";
-    private String imageName = "Drekker.png";
+    private String characterName = "drekker";
+    private String imageName = "drekker.png";
     private String closestImageName = "closerDrekker.png";
 
     public String getClosestImageName() {
