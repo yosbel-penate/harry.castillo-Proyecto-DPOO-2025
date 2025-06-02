@@ -6,8 +6,8 @@ public class Sirael extends PlayerCharacter {
     private int health = 20;
     private int attack = 7;
     private boolean havesMana = false;
-    private String characterName = "Sirael";
-    private String imageName = "Sirael.png";
+    private String characterName = "sirael";
+    private String imageName = "sirael.png";
     private String closestImageName = "closerSirael.png";
 
     public String getClosestImageName() {
