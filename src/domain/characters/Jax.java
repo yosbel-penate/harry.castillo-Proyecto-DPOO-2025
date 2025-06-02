@@ -6,8 +6,8 @@ public class Jax extends PlayerCharacter {
     private int health = 8;
     private int attack = 6;
     private boolean havesMana = false;
-    private String characterName = "Jax";
-    private String imageName = "Jax.png";
+    private String characterName = "jax";
+    private String imageName = "jax.png";
     private String closestImageName = "closerJax.png";
 
     public String getClosestImageName() {
