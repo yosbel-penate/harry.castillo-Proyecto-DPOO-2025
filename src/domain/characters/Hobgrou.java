@@ -6,8 +6,8 @@ public class Hobgrou extends PlayerCharacter {
     private int health = 8;
     private int attack = 3;
     private boolean havesMana = false;
-    private String characterName = "Hobgrou";
-    private String imageName = "Hobgrou.png";
+    private String characterName = "hobgrou";
+    private String imageName = "hobgrou.png";
     private String closestImageName = "closerHobgrou.png";
 
     public String getClosestImageName() {
