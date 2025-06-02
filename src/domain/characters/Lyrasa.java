@@ -6,8 +6,8 @@ public class Lyrasa extends PlayerCharacter {
     private int health = 6;
     private int attack = 5;
     private boolean havesMana = false;
-    private String characterName = "Lyrasa";
-    private String imageName = "Lyrasa.png";
+    private String characterName = "lyrasa";
+    private String imageName = "lyrasa.png";
     private String closestImageName = "closerLyrasa.png";
 
     public String getClosestImageName() {
