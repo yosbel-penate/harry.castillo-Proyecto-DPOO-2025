@@ -7,8 +7,8 @@ public class Goldan extends PlayerCharacter {
     private int attack = 5;
     private boolean havesMana = True;
     private int mana = 10;
-    private String characterName = "Goldan";
-    private String imageName = "Goldan.png";
+    private String characterName = "goldan";
+    private String imageName = "goldan.png";
     private String closestImageName = "closerGoldan.png";
 
     public String getClosestImageName() {
