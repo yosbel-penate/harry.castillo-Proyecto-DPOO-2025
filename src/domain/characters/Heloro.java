@@ -5,10 +5,10 @@ import domain.generalClasses.PlayerCharacter;
 public class Heloro extends PlayerCharacter {
     private int health = 12;
     private int attack = 8;
-    private boolean havesMana = True;
+    private boolean havesMana = true;
     private int mana = 20;
-    private String characterName = "Heloro";
-    private String imageName = "Heloro.png";
+    private String characterName = "heloro";
+    private String imageName = "heloro.png";
     private String closestImageName = "closerHeloro.png";
 
     public String getClosestImageName() {
