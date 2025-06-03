@@ -121,6 +121,58 @@ public class TileMap {
             AudioPlayer.playTileMap();}
     }
 
+    public static void drawPvPMap(GraphicsContext graphics) {
+        matrix = Maps.getPvpMap();
+        upperThingsMatrix = Maps.getPvpMapUpperThingsMatrix();
+        int colCounter = 0;
+
+        for (int col = initialPos; col <= finalColPos; col += nextCol) {
+            int terrain;
+            int upper;
+            int rowCounter = 0;
+            if (colCounter % 2 == 0) {
+                for (int evenRow = initialEvenRowPos; evenRow <= finalEvenRowPos; evenRow += nextRow) {
+                    terrain = matrix[colCounter][rowCounter];
+                    upper = upperThingsMatrix[colCounter][rowCounter];
+                    graphics.drawImage(new Image(images[terrain]), col, evenRow);
+                    checkTerrains(terrain, upper, col, evenRow, colCounter, rowCounter);
+                    if (upper == 3) {
+                        evenRow = evenRow - realocate;
+                        returnToNormal = true;
+                    }
+                    if (returnToNormal) {
+                        evenRow = evenRow + realocate;
+                        returnToNormal = false;
+                    }
+                    graphics.drawImage(new Image(upperThingsImages[upper]), col + realocateCol, evenRow + realocateRow);
+                    rowCounter++;
+                }
+                // Impar.
+                // Par.
+            } else {
+                for (int oddRow = initialOddRowPos; oddRow < finalOddRowPos; oddRow += nextRow) {
+                    terrain = matrix[colCounter][rowCounter];
+                    upper = upperThingsMatrix[colCounter][rowCounter];
+                    graphics.drawImage(new Image(images[terrain]), col, oddRow);
+                    checkTerrains(terrain, upper, col, oddRow, colCounter, rowCounter);
+                    if (upper == 3) {
+                        oddRow = oddRow + realocate;
+                        returnToNormal = true;
+                    }
+                    if (returnToNormal) {
+                        oddRow = oddRow - realocate;
+                        returnToNormal = false;
+                    }
+                    graphics.drawImage(new Image(upperThingsImages[upper]), col + realocateCol, oddRow + realocateRow);
+                    rowCounter++;
+                }
+            }
+            colCounter++;
+            AudioPlayer.playTileMap();}
+    }
+
+
+
     private static void checkTerrains(int actualTerrain, int upperActualTerrain, int x, int y, int col, int fil) {
         if (actualTerrain >= 0 && actualTerrain <=2 && player[0].getX() == x && player[0].getY() == y){
             graphics.drawImage(new Image(images[0]), 705, 350);

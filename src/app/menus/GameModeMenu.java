@@ -2,10 +2,13 @@ package app.menus;
 
 import app.fastFeatures.AudioPlayer;
 import app.Roaster;
+import app.gameModes.PvP;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+
+import static app.fastFeatures.PublicVariables.campaing;
 
 public class GameModeMenu {
     private  static Button campaign=new Button("Campaign");
@@ -30,6 +33,13 @@ public class GameModeMenu {
             AudioPlayer.playButtonSound();
             AudioPlayer.stopMainMenu();
             Roaster.setup();
+            campaing= true;
+        });
+        pvp.setOnAction(_ -> {
+            AudioPlayer.playButtonSound();
+            AudioPlayer.stopMainMenu();
+            Roaster.setup();
+            campaing= false;
         });
         back.setOnAction(_ ->{
             AudioPlayer.playButtonSound();

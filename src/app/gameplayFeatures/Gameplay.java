@@ -210,7 +210,12 @@ public class Gameplay {
     }
 
     private static void drawCampaignMap() {
-        TileMap.drawCampaignMap(graphics);
+
+        if(campaing){
+            TileMap.drawCampaignMap(graphics);
+        } else {
+            TileMap.drawPvPMap(graphics);
+        }
     }
 
     private static void drawRange() {

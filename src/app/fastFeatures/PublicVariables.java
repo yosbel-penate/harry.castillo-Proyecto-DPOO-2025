@@ -3,6 +3,11 @@ package app.fastFeatures;
 import javafx.stage.Stage;
 
 public class PublicVariables {
+    // Campaing or Pvp
+
+    public static boolean campaing;
+
+
     // Resolucion de Gameplay.
     public static final int screenWidth = 1000;
     public static final int screenHeight = 850;
