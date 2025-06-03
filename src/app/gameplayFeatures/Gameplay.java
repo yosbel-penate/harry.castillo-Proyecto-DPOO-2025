@@ -52,7 +52,7 @@ public class Gameplay {
     private static Label emptyInventoryLabel;
     private static Label potionQuantity;
     private static Label manaQuantity;
-
+    private static Label[] characterData=new Label[5];
 
     /*  Los itemNumber son para la cantidad de
         items en el Inventario. En el ItemNumber1
@@ -155,6 +155,12 @@ public class Gameplay {
         potionQuantity.setVisible(false);
         manaQuantity= LabelManager.createLabel(785,660,"x"+inventory.get(1).getQuantity(),Color.WHITE,font);
         manaQuantity.setVisible(false);
+        int y = 80;
+        for (int i=0;i<5;i++){
+            characterData[i]=LabelManager.createLabel(705,y,player[i].getCharacterName()+": "+player[i].getHealth(),Color.WHITE,font);
+            root.getChildren().add(characterData[i]);
+            y+=20;
+        }
         root.getChildren().addAll(actionPointLabel, inventoryLabel, emptyInventoryLabel,potionQuantity,manaQuantity);
     }
 
@@ -256,11 +262,30 @@ public class Gameplay {
 
 
     private static void actualizeState() {
+        actualizeCharacterData();
+        checkIfCharacterIsAlive();
         checkIfEnemyIsAlive();
         checkIfPlayerCollideWithConsumable();
         checkIfDrawInventory();
         checkIfPlayerCollideWithEnemy();
+
     }
+
+    private static void checkIfCharacterIsAlive() {
+        for (int i=0;i<5;i++){
+            if(player[i].getHealth() < 1){
+                characterData[i].setVisible(false);
+
+            }
+        }
+    }
+
+    private static void actualizeCharacterData() {
+        for (int i=0;i<5;i++){
+            characterData[i].setText(player[i].getCharacterName()+": "+player[i].getHealth());
+        }
+    }
+
     private static void checkIfEnemyIsAlive() {
         if (enemy[0].isAlive()) {
             enemy[0].collideRange();
