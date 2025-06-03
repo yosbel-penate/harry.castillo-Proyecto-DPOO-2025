@@ -6,7 +6,7 @@ public class Shira extends PlayerCharacter {
     private int health = 15;
     private int attack = 7;
     private boolean havesMana = false;
-    private String characterName = "shira";
+    private String characterName = "Shira";
     private String imageName = "shira.png";
     private String closestImageName = "closerShira.png";
 
@@ -32,5 +32,10 @@ public class Shira extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

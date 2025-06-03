@@ -6,7 +6,7 @@ public class Cintya extends PlayerCharacter {
     private int health = 8;
     private int attack = 5;
     private boolean havesMana = false;
-    private String characterName = "cintya";
+    private String characterName = "Cintya";
     private String imageName = "cintya.png";
     private String closestImageName = "closerCintya.png";
 
@@ -32,5 +32,10 @@ public class Cintya extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

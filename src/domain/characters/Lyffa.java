@@ -7,7 +7,7 @@ public class Lyffa extends PlayerCharacter {
     private int attack = 5;
     private boolean havesMana = true;
     private int mana = 12;
-    private String characterName = "lyffa";
+    private String characterName = "Lyffa";
     private String imageName = "lyffa.png";
     private String closestImageName = "closerLyffa.png";
 
@@ -37,5 +37,10 @@ public class Lyffa extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

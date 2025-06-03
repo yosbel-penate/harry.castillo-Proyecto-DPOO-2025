@@ -7,7 +7,7 @@ public class Gortana extends PlayerCharacter {
     private int attack = 4;
     private boolean havesMana = true;
     private int mana = 15;
-    private String characterName = "gortana";
+    private String characterName = "Gortana";
     private String imageName = "gortana.png";
     private String closestImageName = "closerGortana.png";
 
@@ -37,5 +37,10 @@ public class Gortana extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

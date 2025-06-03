@@ -6,7 +6,7 @@ public class Lyrasa extends PlayerCharacter {
     private int health = 6;
     private int attack = 5;
     private boolean havesMana = false;
-    private String characterName = "lyrasa";
+    private String characterName = "Lyrasa";
     private String imageName = "lyrasa.png";
     private String closestImageName = "closerLyrasa.png";
 
@@ -32,5 +32,10 @@ public class Lyrasa extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

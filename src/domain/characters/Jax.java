@@ -6,7 +6,7 @@ public class Jax extends PlayerCharacter {
     private int health = 8;
     private int attack = 6;
     private boolean havesMana = false;
-    private String characterName = "jax";
+    private String characterName = "Jax";
     private String imageName = "jax.png";
     private String closestImageName = "closerJax.png";
 
@@ -32,5 +32,10 @@ public class Jax extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

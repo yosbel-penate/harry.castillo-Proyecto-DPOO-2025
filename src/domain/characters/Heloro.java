@@ -7,7 +7,7 @@ public class Heloro extends PlayerCharacter {
     private int attack = 8;
     private boolean havesMana = true;
     private int mana = 20;
-    private String characterName = "heloro";
+    private String characterName = "Heloro";
     private String imageName = "heloro.png";
     private String closestImageName = "closerHeloro.png";
 
@@ -37,5 +37,10 @@ public class Heloro extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

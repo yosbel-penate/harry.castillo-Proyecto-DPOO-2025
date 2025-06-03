@@ -19,11 +19,10 @@ public class Gameover {
     private static Scene gameOverScene;
     private static Canvas canvas;
     private static ImageView gameOver;
-    private static Label restartLabel = new Label("Toque R para reinciar");
+    private static Label restartLabel = new Label("Toque F para reiniciar");
 
 
     public static void gameOver(Scene sceneToGameOver, AnimationTimer animationTimerToStop) {
-        sceneToGameOver.setRoot(new Group());
         animationTimerToStop.stop();
 
         gameOverScreenConfig();
@@ -38,7 +37,7 @@ public class Gameover {
         gameOverScene = new Scene(gameOverRoot, 1000, 800);
         gameOverScene.getStylesheets().add(Gameover.class.getResource("/buttons.css").toExternalForm());
         canvas = new Canvas(1000, 800);
-        gameOver=new ImageView(Gameover.class.getResource("/gameOverImage.png").toExternalForm());
+        gameOver=new ImageView("gameOverImage.png");
         gameOver.setPreserveRatio(false);
         gameOver.fitWidthProperty().bind(gameOverScene.widthProperty());
         gameOver.fitHeightProperty().bind(gameOverScene.heightProperty());
@@ -47,13 +46,6 @@ public class Gameover {
         restartLabel.setVisible(false);
 
         AudioPlayer.playGameOver();
-
-
-
-
-
-
-
     }
 
     private static void labelConfigurations(){
@@ -87,10 +79,6 @@ public class Gameover {
         fade.play();
         labelFade.play();
 
-
-
-
-
         restartLabel.setFont(gameOverFont);
 
         player = Gameplay.getPlayer();
@@ -103,13 +91,15 @@ public class Gameover {
 
     private static void setupRestartListener(Scene gameOverScene) {
         gameOverScene.setOnKeyPressed(event -> {
-            if ("R".equals(event.getCode().toString())) {
-                Combat.setNoRandomPosition(false);
-                window.setScene(Gameplay.getGameplayScene());
-                Gameplay.startGameplayTimer();
+            if ("F".equals(event.getCode().toString())) {
                 for (PlayerCharacter p : player) {
                     p.setHealth(5);
                 }
+                gameOverScene.setRoot(new Group());
+                Combat.setNoRandomPosition(false);
+                window.setScene(Gameplay.getGameplayScene());
+                Gameplay.startGameplayTimer();
+
             }
         });
     }
