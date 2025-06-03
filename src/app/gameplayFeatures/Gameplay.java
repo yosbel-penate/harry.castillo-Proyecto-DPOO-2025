@@ -157,7 +157,7 @@ public class Gameplay {
         manaQuantity.setVisible(false);
         int y = 80;
         for (int i=0;i<5;i++){
-            characterData[i]=LabelManager.createLabel(705,y,player[i].getCharacterName()+": "+player[i].getHealth(),Color.WHITE,font);
+            characterData[i]=LabelManager.createLabel(705,y,player[i].getCharacterName()+": HP: "+player[i].getHealth()+" AP: "+ player[i].getAttack(),Color.WHITE,font);
             root.getChildren().add(characterData[i]);
             y+=20;
         }
@@ -287,7 +287,7 @@ public class Gameplay {
 
     private static void actualizeCharacterData() {
         for (int i=0;i<5;i++){
-            characterData[i].setText(player[i].getCharacterName()+": "+player[i].getHealth());
+            characterData[i].setText(player[i].getCharacterName()+": "+player[i].getHealth()+" AP: "+ player[i].getAttack());
         }
     }
 
