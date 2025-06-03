@@ -1,6 +1,6 @@
 package app.interfaces;
 
-public interface Consumables {
+public interface consumables {
 
     public abstract int getPointsAdded ();
 

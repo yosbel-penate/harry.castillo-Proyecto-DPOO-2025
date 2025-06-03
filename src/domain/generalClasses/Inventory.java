@@ -7,6 +7,7 @@ import domain.consumables.VitalityPotion;
 import java.util.ArrayList;
 
 public class Inventory {
+    private static boolean drawAtMap;
     private static boolean alreadyCreated = false;
     public static ArrayList<Consumables> createInventory(){
         VitalityPotion vitalityPotionpotion = new VitalityPotion();
@@ -17,6 +18,14 @@ public class Inventory {
 
         alreadyCreated = true;
         return inventory;
+    }
+
+    public static boolean isDrawAtMap() {
+        return drawAtMap;
+    }
+
+    public static void setDrawAtMap(boolean drawAtMap) {
+        Inventory.drawAtMap = drawAtMap;
     }
 
 

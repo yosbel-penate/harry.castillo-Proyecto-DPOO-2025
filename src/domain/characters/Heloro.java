@@ -2,19 +2,14 @@ package domain.characters;
 
 import domain.generalClasses.PlayerCharacter;
 
-public class Draven extends PlayerCharacter {
-
-
-    private int health=10;
-    private int attack = 3;
-    private boolean havesMana = false;
-    private String characterName = "Draven";
-    private String imageName = "draven.png";
-    private String closestImageName = "closerDraven.png";
-
-
-
-
+public class Heloro extends PlayerCharacter {
+    private int health = 12;
+    private int attack = 8;
+    private boolean havesMana = true;
+    private int mana = 20;
+    private String characterName = "heloro";
+    private String imageName = "heloro.png";
+    private String closestImageName = "closerHeloro.png";
 
     public String getClosestImageName() {
         return closestImageName;
@@ -30,6 +25,10 @@ public class Draven extends PlayerCharacter {
 
     public boolean isHavesMana() {
         return havesMana;
+    }
+    
+    public int getMana() {
+        return mana;
     }
 
     public int getAttack() {

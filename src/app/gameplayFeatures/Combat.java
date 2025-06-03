@@ -180,21 +180,22 @@ public class Combat {
     }
 
     private static void dropConsumable() {
-        dropConsumable = new Random().nextBoolean();
+        dropConsumable = true;
         if (dropConsumable) {
             boolean life = new Random().nextBoolean();
             if (life) {
+                System.out.println("Me activo");
                 inventory.getFirst().setX(enemy[0].getX());
                 inventory.getFirst().setY(enemy[0].getY());
                 inventory.getFirst().setImage("vitality_potion.png");
+                inventory.getFirst().setDrawAtMap(true);
                 Gameplay.setAddConsumable(true);
-                Gameplay.setDrawConsumable(true);
             } else {
                 inventory.get(1).setX(enemy[0].getX());
                 inventory.get(1).setY(enemy[0].getY());
                 inventory.get(1).setImage("mana_potion.png");
+                inventory.get(1).setDrawAtMap(true);
                 Gameplay.setAddConsumable(true);
-                Gameplay.setDrawConsumable(true);
             }
 
         }
@@ -205,6 +206,7 @@ public class Combat {
         combatScene.setRoot(new Group());
         animationForCombat.stop();
         Gameplay.startGameplayTimer();
+        Gameplay.actualizeConsumablesAtInventary();
         window.setScene(Gameplay.getGameplayScene());
     }
 
@@ -397,21 +399,13 @@ public class Combat {
         if (inventory.isEmpty()) {
             message.setText("¡No tienes consumibles! ¿¡Para qué tocas el botón?");
         } else {
-            Button vitalityPotionButton = new Button("Usar poción de vitalidad.");
-            vitalityPotionButton.setTranslateX(250);
-            vitalityPotionButton.setTranslateY(550);
+            Button vitalityPotionButton = createButton("Usar poción de vitalidad.", 330, 550, e -> useVitalityPotion(), statsFont);
             vitalityPotionButton.setFocusTraversable(false);
 
-            vitalityPotionButton.setOnAction(e -> useVitalityPotion());
-
-            Button manaPotionButton = new Button("Usar poción de mana.");
-            manaPotionButton.setTranslateX(250);
-            manaPotionButton.setTranslateY(650);
+            Button manaPotionButton = createButton("Usar poción de mana.",330,600, e -> useManaPotion(), statsFont);
             manaPotionButton.setFocusTraversable(false);
 
-            manaPotionButton.setOnAction(e -> useManaPotion());
 
-            message.setText("¡Guau, tienes " + inventory.getFirst().getQuantity() + " pociones de vitalidad!");
             root.getChildren().addAll(vitalityPotionButton, manaPotionButton);
         }
     }
@@ -423,7 +417,7 @@ public class Combat {
                 ManaPotion potion = new ManaPotion();
                 player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() + potion.getPointsAdded());
                 message.setText("¡Has usado una poción de vitalidad! ¡Te curas " + potion.getPointsAdded() + " de vida!");
-                potionConsumable.setQuantity(potionConsumable.getQuantity() - 1);
+                potion.setQuantity(potionConsumable.getQuantity() - 1);
                 playerLife.setText("HP: " + player[selectedCharacter].getHealth());
                 playerTurn--;
             } else {
@@ -472,6 +466,8 @@ public class Combat {
             }
         }
     }
+
+
 
 
     public static boolean isNoRandomPosition() {

@@ -2,19 +2,13 @@ package domain.characters;
 
 import domain.generalClasses.PlayerCharacter;
 
-public class Draven extends PlayerCharacter {
-
-
-    private int health=10;
+public class Hobgrou extends PlayerCharacter {
+    private int health = 8;
     private int attack = 3;
     private boolean havesMana = false;
-    private String characterName = "Draven";
-    private String imageName = "draven.png";
-    private String closestImageName = "closerDraven.png";
-
-
-
-
+    private String characterName = "hobgrou";
+    private String imageName = "hobgrou.png";
+    private String closestImageName = "closerHobgrou.png";
 
     public String getClosestImageName() {
         return closestImageName;
