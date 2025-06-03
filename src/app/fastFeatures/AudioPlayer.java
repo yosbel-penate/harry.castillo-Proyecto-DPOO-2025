@@ -19,8 +19,9 @@ public class AudioPlayer {
     public static void initMediaPlayer() {
         sounds.put("mainMenu", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/mainMenu.mp3").toUri().toString())));
         sounds.put("combatMusic", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/combatMusic.mp3").toUri().toString())));
-        sounds.put("gameOver",new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/gameOver.mp3").toUri().toString())));
-        sounds.put("TileMap",new MediaPlayer(new Media(Paths.get( "src/DAO/audios/music/tileMap.mp3").toUri().toString())));
+        sounds.put("gameOver", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/gameOver.mp3").toUri().toString())));
+        sounds.put("TileMap", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/tileMap.mp3").toUri().toString())));
+        sounds.put("PvpMap", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/PvpMap.mp3").toUri().toString())));
 
         for (MediaPlayer player : sounds.values()) {
             player.setVolume(MusicVolumen);
@@ -90,8 +91,8 @@ public class AudioPlayer {
         }
     }
 
-    public static void playGameOver(){
-        MediaPlayer player= sounds.get("gameOver");
+    public static void playGameOver() {
+        MediaPlayer player = sounds.get("gameOver");
         if (player != null) {
             player.setVolume(MusicVolumen);
             player.play();
@@ -122,17 +123,18 @@ public class AudioPlayer {
 
     public static void setVolumenForMusic(double newVolumen) {
         MusicVolumen = newVolumen;
-        for (MediaPlayer player: activeSounds.values()){
+        for (MediaPlayer player : activeSounds.values()) {
             player.setVolume(MusicVolumen);
         }
     }
 
-    public static void setVolumenForEffect(double newVolumen){
+    public static void setVolumenForEffect(double newVolumen) {
         ClipsVolumen = newVolumen;
-        for (AudioClip clip: activeClips.values()){
+        for (AudioClip clip : activeClips.values()) {
             clip.setVolume(ClipsVolumen);
         }
     }
+
     public static void playTileMap() {
         MediaPlayer player = sounds.get("TileMap");
         if (player != null) {
@@ -140,5 +142,18 @@ public class AudioPlayer {
             player.play();
             activeSounds.put("TileMap", player);
         }
+
+
     }
+       public static void playPvpMap(){
+        MediaPlayer player = sounds.get("PvpMap");
+        if(player != null) {
+            player.setVolume(MusicVolumen);
+            player.play();
+            activeSounds.put("PvpMap", player);
+
+        }
 }
+}
+
+

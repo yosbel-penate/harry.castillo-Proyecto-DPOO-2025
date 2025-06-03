@@ -77,6 +77,7 @@ public class Combat {
         enemy = Gameplay.getEnemy();
         inventory = Gameplay.getInventory();
         AudioPlayer.stopIfPlaying("TileMap");
+        AudioPlayer.stopIfPlaying("PvpMap");
         AudioPlayer.playCombatMusic();
     }
 

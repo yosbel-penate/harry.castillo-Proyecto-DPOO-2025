@@ -171,7 +171,7 @@ public class TileMap {
                 }
             }
             colCounter++;
-            AudioPlayer.playTileMap();}
+            AudioPlayer.playPvpMap();}
     }
 
 
