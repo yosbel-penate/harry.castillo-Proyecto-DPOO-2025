@@ -10,6 +10,7 @@ import static app.fastFeatures.PublicVariables.*;
 import static app.fastFeatures.PublicVariables.diagonalDown;
 
 
+
 public class Ether_Storm {
      public static int[] xPosition = new int[3];
      public static int[] yPosition = new int[3];;
@@ -117,18 +118,12 @@ public class Ether_Storm {
              }
         }
      }
-     public static void damageStorm(PlayerCharacter[] player,int x,int y, int causeDamage){
-
-
+     public static void damageStorm(PlayerCharacter[] player){
                     for (int j=0;j<5;j++){
                          player[j].setHealth(player[j].getHealth()-2);
                     }
-
-
-
-
-
      }
+
 
 
      public static int getCauseDamage(){
@@ -140,6 +135,7 @@ public class Ether_Storm {
      public static boolean getIsConditionReady(){
           return isConditionReady;
      }
+
 
 
 

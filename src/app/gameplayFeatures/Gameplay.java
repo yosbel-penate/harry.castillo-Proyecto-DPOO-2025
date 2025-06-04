@@ -284,17 +284,18 @@ public class Gameplay {
         checkIfDrawInventory();
         checkIfPlayerCollideWithEnemy();
 
+
         applyStormDamageOnce();
 
 
     }
 
     private static void applyStormDamageOnce(){
+
         boolean condition=isPlayerInsideStorm();
 
-        condition=Ether_Storm.getIsConditionReady();
         if (condition && !methodDone ){
-            Ether_Storm.damageStorm(player,player[0].getX(),player[0].getY(),Ether_Storm.getCauseDamage());
+            Ether_Storm.damageStorm(player);
             methodDone=true;
         }
         if (!condition){
@@ -311,6 +312,9 @@ public class Gameplay {
         }
         return false;
     }
+
+
+
 
     private static void checkIfYouLoose() {
         if(areAllCharactersDead()){
