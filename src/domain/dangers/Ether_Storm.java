@@ -71,7 +71,7 @@ public class Ether_Storm {
                        if (yPosition[i] == upLimitOdd) {
                             break;
                        }
-                       if (xPosition[i] == upLimitEven) {
+                       if (yPosition[i] == upLimitEven) {
                             break;
                        }
                        yPosition[i]+=up;
@@ -100,7 +100,7 @@ public class Ether_Storm {
                        if (yPosition[i] == downLimitOdd) {
                             break;
                        }
-                       if (xPosition[i] == downLimitEven) {
+                       if (yPosition[i] == downLimitEven) {
                             break;
                        }
                        yPosition[i] += down;

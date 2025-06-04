@@ -209,7 +209,7 @@ public class Gameplay {
 
     private static void drawBackground() {
 
-        graphics.drawImage(new Image("background.png"), 1, 0);
+        graphics.drawImage(new Image("background.png"), 0, 0);
         // Fondo.
 
     }
@@ -251,8 +251,6 @@ public class Gameplay {
     private static void drawConsumableAtMap() {
         if (Combat.isDropConsumable()) {
             for (int i = 0; i < inventory.size(); i++){
-                System.out.println("Inventario: "+i);
-                System.out.println("DrawMap: "+inventory.get(i).isDrawAtMap());
                 if ((inventory.get(i).isDrawAtMap())){
                     graphics.drawImage(new Image(inventory.get(i).getImage()), inventory.get(i).getX(), inventory.get(i).getY());
                 }}
