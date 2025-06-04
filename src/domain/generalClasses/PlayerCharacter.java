@@ -12,8 +12,14 @@ import static app.fastFeatures.PublicVariables.*;
 // Temporizador del rango.
 
 
-public class PlayerCharacter {
+public class PlayerCharacter{
+
+
     private static boolean havesMana;
+
+
+
+    private int mana;
     private int x;
     private int y;
     private int attack;
@@ -23,6 +29,22 @@ public class PlayerCharacter {
     private String closestImageName;
     private EnemyCharacter enemy[];
     private static boolean collideEnemy;
+
+    public PlayerCharacter(){}
+    public PlayerCharacter(int health) {
+        this.health=health;
+    }
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+    public static void setHavesMana(boolean havesMana) {
+        PlayerCharacter.havesMana = havesMana;
+    }
+
 
 
     public void range(GraphicsContext graphics, long time) {
@@ -130,46 +152,38 @@ public class PlayerCharacter {
         }
     }
 
-    public void collideWithConsumable(ArrayList<Consumables> inventory) {
+    public void collideWithConsumable(ArrayList<Consumables> inventory){
 
         enemy = Gameplay.getEnemy();
-        for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).isDrawAtMap()) {
-                switch (i) {
-                    case 0:
-                        if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
-                            inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 1);
-                            Gameplay.setGrabConsumable(true);
-                            Gameplay.setDrawConsumable(false);
-                            inventory.getFirst().setDrawAtMap(false);
-                            x = playerInitialPositionX;
-                            y = playerInitialPositionY;
-                            enemy[0].setX(enemyInitialPositionX);
-                            enemy[0].setY(enemyInitialPositionY);
-                            for (EnemyCharacter enemyCharacter : enemy) {
-                                enemyCharacter.setAlive(true);
-                            }
-                        }
-                        break;
-                    case 1:
-                        if (inventory.get(1).getX() == x && inventory.get(1).getY() == y) {
-                            inventory.get(1).setQuantity(inventory.get(1).getQuantity() + 1);
-                            Gameplay.setGrabConsumable(true);
-                            Gameplay.setDrawConsumable(false);
-                            inventory.get(1).setDrawAtMap(false);
-                            x = playerInitialPositionX;
-                            y = playerInitialPositionY;
-                            enemy[0].setX(enemyInitialPositionX);
-                            enemy[0].setY(enemyInitialPositionY);
-                            for (EnemyCharacter enemyCharacter : enemy) {
-                                enemyCharacter.setAlive(true);
-                            }
-                            break;
-
-                        }
+        if (!enemy[0].isAlive()){
+        if (inventory.size() == 2){
+            if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
+                inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 1);
+                Gameplay.setGrabConsumable(true);
+                Gameplay.setDrawConsumable(false);
+                inventory.getFirst().setDrawAtMap(false);
+                x = playerInitialPositionX;
+                y = playerInitialPositionY;
+                enemy[0].setX(enemyInitialPositionX);
+                enemy[0].setY(enemyInitialPositionY);
+                for (EnemyCharacter enemyCharacter : enemy) {
+                    enemyCharacter.setAlive(true);
                 }
             }
+        else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
+            inventory.get(1).setQuantity(inventory.get(1).getQuantity() + 1);
+            Gameplay.setGrabConsumable(true);
+            Gameplay.setDrawConsumable(false);
+            inventory.get(1).setDrawAtMap(false);
+            x = playerInitialPositionX;
+            y = playerInitialPositionY;
+            enemy[0].setX(enemyInitialPositionX);
+            enemy[0].setY(enemyInitialPositionY);
+                for (EnemyCharacter enemyCharacter : enemy) {
+                    enemyCharacter.setAlive(true);
+                }
         }
+        } }
     }
 
     public static boolean isCollideEnemy() {
@@ -180,22 +194,12 @@ public class PlayerCharacter {
         PlayerCharacter.collideEnemy = collideEnemy;
     }
 
-    public int getAttack() {
-        return attack;
-    }
+    public int getAttack() {return attack;}
 
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
+    public void setAttack(int attack) {this.attack = attack;}
 
 
-    public void setEnemy(EnemyCharacter[] enemy) {
-        this.enemy = enemy;
-    }
-
-    public PlayerCharacter() {
-
-    }
+    public void setEnemy(EnemyCharacter[] enemy) {this.enemy = enemy;}
 
     public String getCharacterName() {
         return characterName;
@@ -205,29 +209,17 @@ public class PlayerCharacter {
         this.characterName = characterName;
     }
 
-    public int getX() {
-        return x;
-    }
+    public int getX() {return x;}
 
-    public void setX(int x) {
-        this.x = x;
-    }
+    public void setX(int x) {this.x = x;}
 
-    public int getY() {
-        return y;
-    }
+    public int getY() {return y;}
 
-    public void setY(int y) {
-        this.y = y;
-    }
+    public void setY(int y) {this.y = y;}
 
-    public String getImageName() {
-        return imageName;
-    }
+    public String getImageName() {return imageName;}
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
+    public void setImageName(String imageName) {this.imageName = imageName;}
 
 
     public String getClosestImageName() {
@@ -246,7 +238,7 @@ public class PlayerCharacter {
         this.health = health;
     }
 
-    public boolean isHavesMana() {
+    public  boolean isHavesMana() {
         return havesMana;
     }
 

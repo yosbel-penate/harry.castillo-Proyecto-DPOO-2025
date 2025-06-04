@@ -5,7 +5,7 @@ import app.gameModes.Campaign;
 import app.fastFeatures.AudioPlayer;
 import app.fastFeatures.PublicVariables;
 import app.menus.PauseMenu;
-import domain.characters.*;
+import domain.characters.Draven;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -57,6 +57,7 @@ public class Roaster {
     private static Button no;
 
 
+
     // Siguiente columna o fila.
 
     private static final int next = 120;
@@ -64,10 +65,11 @@ public class Roaster {
     // Filas del Roaster.
 
     private static final int first = 32;
-    private static final int second = 152;
-    private static final int third = 272;
-    private static final int fourth = 392;
-    private static final int fifth = 512;
+    private  static final int second = 152;
+    private  static final int third = 272;
+    private  static final int fourth = 392;
+    private  static final int fifth = 512;
+
 
 
     public static void setup() {
@@ -168,6 +170,7 @@ public class Roaster {
                         case "SPACE":
                             AudioPlayer.playSelectedCharacter();
                             selectCharacter();
+
                     }
                 }
             }
@@ -214,80 +217,79 @@ public class Roaster {
     private static void settingLabels() {
 
         labelInvisibilizer(health, mana, attack, race, type, behavior, movement);
-        labelSetFont(health, attack, race, type, behavior, movement, font);
+        labelSetFont(health, attack, race,type, behavior, movement, font);
         labelSetColor(health, attack, race, type, behavior, movement, Color.WHITE);
-        labelLocator(
-                health, 720, 240,
-                mana, 780, 240,
-                attack, 720, 290,
-                race, 720, 340,
-                type, 720, 390,
-                behavior, 720, 440,
-                movement, 720, 540
-        );
+
+        health.setTranslateX(720);
+        health.setTranslateY(240);
+        mana.setTranslateX(780);
+        mana.setTranslateY(240);
+        attack.setTranslateX(720);
+        attack.setTranslateY(290);
+        race.setTranslateX(720);
+        race.setTranslateY(340);
+        type.setTranslateX(720);
+        type.setTranslateY(390);
+        behavior.setTranslateX(720);
+        behavior.setTranslateY(440);
+        movement.setTranslateX(720);
+        movement.setTranslateY(540);
     }
 
     private static void drawCharactersData() {
-        switch (row) {
-            case first:
-                switch (col) {
-                    case first:
-                        labelVisibilizer(health, mana, attack, race, type, behavior, movement);
-                        graphics.drawImage(new Image("higlobFace.png"), 740, 20);
-                        health.setText("HP: 7");
-                        mana.setText("MP: 15");
-                        attack.setText("Attack: 2");
-                        race.setText("Raza: Goblin");
-                        type.setText("Tipo: Sanador");
-                        behavior.setText("Personalidad: Distraído,\nhalagador e inocente.");
-                        movement.setText("Movimiento: 4");
-                        break;
-                    case second:
-                        labelVisibilizer(health, attack, race, type, behavior, movement);
-                        graphics.drawImage(new Image("dravenFace.png"), 740, 20);
-                        health.setText("HP: 10");
-                        attack.setText("Attack: 3");
-                        race.setText("Raza: Humano");
-                        type.setText("Tipo: Guerrero");
-                        behavior.setText("Personalidad: Valiente,\nleal e impulsivo.");
-                        movement.setText("Movimiento: 2");
-                        break;
-                    case third:
-                        labelVisibilizer(health, attack, race, type, behavior, movement);
-                        graphics.drawImage(new Image("zorakFace.png"), 740, 20);
-                        health.setText("HP: 10");
-                        attack.setText("Attack: 5");
-                        race.setText("Raza: Orco");
-                        type.setText("Tipo: Berserker");
-                        behavior.setText("Personalidad: Experimen-\ntado, fuerte y sereno.");
-                        movement.setText("Movimiento: 3");
-                        break;
-                    case fourth:
-                        labelVisibilizer(health, mana, attack, race, type, behavior, movement);
-                        graphics.drawImage(new Image("heloroFace.png"), 740, 20);
-                        health.setText("HP: 7");
-                        mana.setText("MP: 10 ");
-                        attack.setText("Attack: 5");
-                        race.setText("Raza: Elfo");
-                        type.setText("Tipo: Mago");
-                        behavior.setText("Personalidad: Sabio,\npreocupado y justo.");
-                        movement.setText("Movimiento: 4");
-                        break;
-                }
-                break;
-            case second:
-                if (col == first) {
-                    labelVisibilizer(health, attack, race, type, behavior, movement);
-                    graphics.drawImage(new Image("lyrasaFace.png"), 740, 20);
-                    health.setText("HP: 6");
-                    attack.setText("Attack: 5");
-                    race.setText("Raza: Elfa");
-                    type.setText("Tipo: Arquera");
-                    behavior.setText("Personalidad: Silenciosa,\nprecisa y desconfiada.");
-                    movement.setText("Movimiento: 3");
-                }
-                break;
+        if (row == first && col == first) {
+            labelVisibilizer(health,mana,attack,race, type,behavior,movement);
+            graphics.drawImage(new Image("higlobFace.png"), 740, 20);
+            health.setText("HP: 7");
+            mana.setText("MP: 15");
+            attack.setText("Attack: 2");
+            race.setText("Raza: Goblin");
+            type.setText("Tipo: Sanador");
+            behavior.setText("Personalidad: Distraído,\nhalagador e inocente.");
+            movement.setText("Movimiento: 4");
         }
+        if (row == first && col == second) {
+            labelVisibilizer(health,attack,race, type,behavior,movement);
+            graphics.drawImage(new Image("dravenFace.png"), 740, 20);
+            health.setText("HP: 10");
+            attack.setText("Attack: 3");
+            race.setText("Raza: Humano");
+            type.setText("Tipo: Guerrero");
+            behavior.setText("Personalidad: Valiente,\nleal e impulsivo.");
+            movement.setText("Movimiento: 2");
+        }
+        if (row == first && col == third) {
+            labelVisibilizer(health,attack,race, type,behavior,movement);
+            graphics.drawImage(new Image("zorakFace.png"), 740, 20);
+            health.setText("HP: 10");
+            attack.setText("Attack: 5");
+            race.setText("Raza: Orco");
+            type.setText("Tipo: Berserker");
+            behavior.setText("Personalidad: Experimen-\ntado, fuerte y sereno.");
+            movement.setText("Movimiento: 3");
+        }
+        if (row == first && col == fourth) {
+            labelVisibilizer(health,mana,attack,race, type,behavior,movement);
+            graphics.drawImage(new Image("heloroFace.png"), 740, 20);
+            health.setText("HP: 7");
+            mana.setText("MP: 10 ");
+            attack.setText("Attack: 5");
+            race.setText("Raza: Elfo");
+            type.setText("Tipo: Mago");
+            behavior.setText("Personalidad: Sabio,\npreocupado y justo.");
+            movement.setText("Movimiento: 4");
+        }
+        if (row == second && col == first) {
+            labelVisibilizer(health,attack,race, type,behavior,movement);
+            graphics.drawImage(new Image("lyrasaFace.png"), 740, 20);
+            health.setText("HP: 6");
+            attack.setText("Attack: 5");
+            race.setText("Raza: Elfa");
+            type.setText("Tipo: Arquera");
+            behavior.setText("Personalidad: Silenciosa,\nprecisa y desconfiada.");
+            movement.setText("Movimiento: 3");
+        }
+
     }
 
     private static void drawSelectedCharacters() {
@@ -339,48 +341,70 @@ public class Roaster {
         }
 
         String imageName = "";
+        String closestImageName = "";
+        String characterName = "";
         boolean noAllowed = false;
+        int health = 0;
+        int attack = 0;
 
         switch (row) {
-            case first -> {
+            case first:
                 switch (col) {
-                    case first -> {
-                        PlayerCharacter Higlob = new Higlob();
-                        player[selectedCharacters] = Higlob;
-                        imageName = Higlob.getImageName();
-                    }
-                    case second -> {
-                        PlayerCharacter Draven = new Draven();
-                        player[selectedCharacters] = Draven;
+                    case first:
+                        imageName = "higlob.png";
+                        closestImageName = "closerHiglob.png";
+                        characterName = "Higlob";
+                        health = 7;
+                        attack = 2;
+
+                        break;
+                    case second:
+                        Draven Draven = new Draven();
                         imageName = Draven.getImageName();
-                    }
-                    case third -> {
-                        PlayerCharacter Zorak = new Zorak();
-                        player[selectedCharacters] = Zorak;
-                        imageName = Zorak.getImageName();
-                    }
-                    case fourth -> {
-                        PlayerCharacter Heloro = new Heloro();
-                        player[selectedCharacters] = Heloro;
-                        imageName = Heloro.getImageName();
-                    }
-                    default -> noAllowed = true;
+                        closestImageName = Draven.getClosestImageName();
+                        characterName = Draven.getCharacterName();
+                        health = Draven.getHealth();
+                        attack = Draven.getAttack();
+                        break;
+                    case third:
+                        imageName = "zorak.png";
+                        closestImageName = "closerZorak.png";
+                        characterName = "Zorak";
+                        health = 5;
+                        attack = 1;
+                        break;
+                    case fourth:
+                        imageName = "heloro.png";
+                        closestImageName = "closerHeloro.png";
+                        characterName = "Heloro";
+                        health = 5;
+                        attack = 1;
+                        break;
+                    default:
+                        noAllowed = true;
+                        break;
                 }
-            }
-            case second -> {
+                break;
+            case second:
                 switch (col) {
-                    case first -> {
-                        PlayerCharacter Lyrasa = new Lyrasa();
-                        player[selectedCharacters] = Lyrasa;
-                        imageName = Lyrasa.getImageName();
-                    }
-                    default -> noAllowed = true;
+                    case first:
+                        imageName = "lyrasa.png";
+                        closestImageName = "closerLyrasa.png";
+                        characterName = "Lyrasa";
+                        health = 6;
+                        attack = 2;
+                        break;
+                    default:
+                        noAllowed = true;
+                        break;
                 }
-            }
-            default -> noAllowed = true;
+                break;
+            default:
+                noAllowed = true;
+                break;
         }
 
-        if (!noAllowed) {
+        if(!noAllowed) {
             boolean alreadySelected = false;
             for (int i = 0; i < selectedCharacters; i++) {
                 if (player[i].getImageName().equals(imageName)) {
@@ -391,6 +415,10 @@ public class Roaster {
 
             if (!alreadySelected) {
                 player[selectedCharacters].setImageName(imageName);
+                player[selectedCharacters].setClosestImageName(closestImageName);
+                player[selectedCharacters].setCharacterName(characterName);
+                player[selectedCharacters].setHealth(health);
+                player[selectedCharacters].setAttack(attack);
                 player[selectedCharacters].setX(64);
                 player[selectedCharacters].setY(64);
                 selected[selectedCharacters] = new SelectedCharacters(row, col, selectedCharacters, true);
@@ -398,35 +426,41 @@ public class Roaster {
                 System.out.println("No puede seleccionar este personaje de nuevo.");
                 selectedCharacters--;
             }
-        } else {
+        }else{
             System.out.println("De momento, no hay un personaje a seleccionar aqui.");
             selectedCharacters--;
         }
     }
 
-    private static EventHandler<ActionEvent> threeActions() {
+    private static EventHandler<ActionEvent> threeActions(){
         animationTimer.stop();
         Campaign.initialize();
         AudioPlayer.playRoasterButtonSound();
         return null;
     }
-
-    private static void reset() {
+    private static void reset(){
         selectedCharacters = -1;
         cantMove = false;
+        player[0] = new PlayerCharacter();
+        player[1] = new PlayerCharacter();
+        player[2] = new PlayerCharacter();
+        player[3] = new PlayerCharacter();
+        player[4] = new PlayerCharacter();
 
-        for (int i = 0; i <= 4; i++) {
-            player[i] = new PlayerCharacter();
-            selected[i] = new SelectedCharacters();
-        }
 
-        if (message != null && yes != null && no != null) {
+        selected[0] = new SelectedCharacters();
+        selected[1] = new SelectedCharacters();
+        selected[2] = new SelectedCharacters();
+        selected[3] = new SelectedCharacters();
+        selected[4] = new SelectedCharacters();
+
+        if(message != null && yes != null && no != null){
+
             labelInvisibilizer(message);
             buttonInvisibilizer(yes, no);
             animationTimer.start();
         }
     }
-
     public static PlayerCharacter[] getPlayer() {
         return player;
     }

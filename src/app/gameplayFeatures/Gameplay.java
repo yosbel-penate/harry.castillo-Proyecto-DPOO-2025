@@ -4,6 +4,7 @@ import app.fastFeatures.AudioPlayer;
 import app.fastFeatures.LabelManager;
 import app.Roaster;
 import app.menus.PauseMenu;
+import domain.dangers.Ether_Storm;
 import domain.generalClasses.Inventory;
 import domain.generalClasses.EnemyCharacter;
 import domain.generalClasses.PlayerCharacter;
@@ -46,6 +47,7 @@ public class Gameplay {
     private static EnemyCharacter[] enemy;
     private static long time;
     private static Font font;
+    private static boolean methodDone=false;
 
     private static final Set<String> activeKeys = new HashSet<>();
 
@@ -100,6 +102,7 @@ public class Gameplay {
     }
 
     private static void setupAnotherConfigs() {
+        Ether_Storm.randomPosition();
         TileMap.setPlayer(player);
         if (!(Inventory.isAlreadyCreated())) {
             inventory = Inventory.createInventory();
@@ -201,6 +204,7 @@ public class Gameplay {
         drawPlayer();
         drawConsumableAtMap();
         drawConsumableAtInventory();
+        Ether_Storm.drawStorm(graphics);
     }
 
     private static void drawBackground() {
@@ -280,6 +284,32 @@ public class Gameplay {
         checkIfDrawInventory();
         checkIfPlayerCollideWithEnemy();
 
+        applyStormDamageOnce();
+
+
+    }
+
+    private static void applyStormDamageOnce(){
+        boolean condition=isPlayerInsideStorm();
+
+        condition=Ether_Storm.getIsConditionReady();
+        if (condition && !methodDone ){
+            Ether_Storm.damageStorm(player,player[0].getX(),player[0].getY(),Ether_Storm.getCauseDamage());
+            methodDone=true;
+        }
+        if (!condition){
+            methodDone=false;
+        }
+    }
+    private static boolean isPlayerInsideStorm() {
+        int x = player[0].getX();
+        int y = player[0].getY();
+        for (int i = 0; i <= 2; i++) {
+            if (x == Ether_Storm.xPosition[i] && y == Ether_Storm.yPosition[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void checkIfYouLoose() {
@@ -531,6 +561,7 @@ public class Gameplay {
                 case "R":
                     actionPoints = 2;
                     enemy[0].move(player[0].getX(), player[0].getY(), enemy[0].getX(), enemy[0].getY());
+                    Ether_Storm.moveEtherStorm();
                     break;
                 case "T":
                     activateRange = !activateRange;
