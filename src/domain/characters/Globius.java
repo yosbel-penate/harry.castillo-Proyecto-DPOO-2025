@@ -6,7 +6,7 @@ public class Globius extends PlayerCharacter {
     private int health = 7;
     private int attack = 5;
     private boolean havesMana = false;
-    private String characterName = "globius";
+    private String characterName = "Globius";
     private String imageName = "globiud.png";
     private String closestImageName = "closerGlobius.png";
 
@@ -32,5 +32,10 @@ public class Globius extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

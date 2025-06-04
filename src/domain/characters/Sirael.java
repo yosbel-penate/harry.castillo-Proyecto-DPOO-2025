@@ -6,7 +6,7 @@ public class Sirael extends PlayerCharacter {
     private int health = 20;
     private int attack = 7;
     private boolean havesMana = false;
-    private String characterName = "sirael";
+    private String characterName = "Sirael";
     private String imageName = "sirael.png";
     private String closestImageName = "closerSirael.png";
 
@@ -32,5 +32,10 @@ public class Sirael extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

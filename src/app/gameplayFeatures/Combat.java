@@ -76,7 +76,7 @@ public class Combat {
         player = Gameplay.getPlayer();
         enemy = Gameplay.getEnemy();
         inventory = Gameplay.getInventory();
-        AudioPlayer.stopIfPlaying("TileMap");
+        AudioPlayer.stopIfPlaying("tileMap");
         AudioPlayer.playCombatMusic();
     }
 
@@ -114,7 +114,7 @@ public class Combat {
         if (enemy[selectedEnemy].getHealth() <= 0) {
             switchToAliveEnemy();
         }
-        if (areAllPlayersDead()) {
+        if (areAllCharactersDead()) {
             AudioPlayer.stopIfPlaying("combatMusic");
             Gameover.gameOver(combatScene, animationForCombat);
         }
@@ -144,7 +144,7 @@ public class Combat {
         }
     }
 
-    private static boolean areAllPlayersDead() {
+    private static boolean areAllCharactersDead() {
         for (PlayerCharacter p : player) {
             if (p.getHealth() > 0) {
                 return false;
@@ -447,8 +447,6 @@ public class Combat {
         boolean runAwaySuccess = new Random().nextBoolean();
         if (runAwaySuccess) {
             noRandomPosition = true;
-            System.out.println("Posicion X: " + player[0].getX());
-            System.out.println("Posicion X: " + player[0].getY());
             AudioPlayer.stopIfPlaying("combatMusic");
             window.setScene(getGameplayScene());
             animationForCombat.stop();

@@ -6,7 +6,7 @@ public class Xaviru extends PlayerCharacter {
     private int health = 15;
     private int attack = 10;
     private boolean havesMana = false;
-    private String characterName = "xaviru";
+    private String characterName = "Xaviru";
     private String imageName = "xaviru.png";
     private String closestImageName = "closerXaviru.png";
 
@@ -33,7 +33,13 @@ public class Xaviru extends PlayerCharacter {
     public int getHealth() {
         return health;
     }
-    public static void queBola(String[] args){
+
+    public static void queBola(){
         System.out.println("El Papucho");
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

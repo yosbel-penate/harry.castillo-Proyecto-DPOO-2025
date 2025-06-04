@@ -20,7 +20,7 @@ public class AudioPlayer {
         sounds.put("mainMenu", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/mainMenu.mp3").toUri().toString())));
         sounds.put("combatMusic", new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/combatMusic.mp3").toUri().toString())));
         sounds.put("gameOver",new MediaPlayer(new Media(Paths.get("src/DAO/audios/music/gameOver.mp3").toUri().toString())));
-        sounds.put("TileMap",new MediaPlayer(new Media(Paths.get( "src/DAO/audios/music/tileMap.mp3").toUri().toString())));
+        sounds.put("tileMap",new MediaPlayer(new Media(Paths.get( "src/DAO/audios/music/tileMap.mp3").toUri().toString())));
 
         for (MediaPlayer player : sounds.values()) {
             player.setVolume(MusicVolumen);
@@ -134,11 +134,11 @@ public class AudioPlayer {
         }
     }
     public static void playTileMap() {
-        MediaPlayer player = sounds.get("TileMap");
+        MediaPlayer player = sounds.get("tileMap");
         if (player != null) {
             player.setVolume(MusicVolumen);
             player.play();
-            activeSounds.put("TileMap", player);
+            activeSounds.put("tileMap", player);
         }
     }
 }

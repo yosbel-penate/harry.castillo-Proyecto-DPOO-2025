@@ -39,4 +39,9 @@ public class Draven extends PlayerCharacter {
     public int getHealth() {
         return health;
     }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
+    }
 }

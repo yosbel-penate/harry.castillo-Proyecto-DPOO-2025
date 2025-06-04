@@ -7,7 +7,7 @@ public class Higlob extends PlayerCharacter {
     private int attack = 6;
     private boolean havesMana = true;
     private int mana = 25;
-    private String characterName = "higlob";
+    private String characterName = "Higlob";
     private String imageName = "higlob.png";
     private String closestImageName = "closerHiglob.png";
 
@@ -37,5 +37,10 @@ public class Higlob extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

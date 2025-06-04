@@ -1,5 +1,6 @@
 package app.gameplayFeatures;
 
+import app.fastFeatures.AudioPlayer;
 import app.fastFeatures.LabelManager;
 import app.Roaster;
 import app.menus.PauseMenu;
@@ -17,7 +18,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import static app.fastFeatures.PublicVariables.*;
 
@@ -43,6 +46,9 @@ public class Gameplay {
     private static EnemyCharacter[] enemy;
     private static long time;
     private static Font font;
+
+    private static final Set<String> activeKeys = new HashSet<>();
+
 
 
     // Labels y botones.
@@ -157,7 +163,7 @@ public class Gameplay {
         manaQuantity.setVisible(false);
         int y = 80;
         for (int i=0;i<5;i++){
-            characterData[i]=LabelManager.createLabel(705,y,player[i].getCharacterName()+": "+player[i].getHealth(),Color.WHITE,font);
+            characterData[i]=LabelManager.createLabel(705,y,player[i].getCharacterName()+": HP: "+player[i].getHealth()+" AP: "+ player[i].getAttack(),Color.WHITE,font);
             root.getChildren().add(characterData[i]);
             y+=20;
         }
@@ -181,7 +187,6 @@ public class Gameplay {
                 */
                 draw();
                 actualizeState();
-
 
             }
         };
@@ -268,6 +273,7 @@ public class Gameplay {
 
     private static void actualizeState() {
         actualizeCharacterData();
+        checkIfYouLoose();
         checkIfCharacterIsAlive();
         checkIfEnemyIsAlive();
         checkIfPlayerCollideWithConsumable();
@@ -276,18 +282,35 @@ public class Gameplay {
 
     }
 
+    private static void checkIfYouLoose() {
+        if(areAllCharactersDead()){
+            AudioPlayer.stopIfPlaying("tileMap");
+            Gameover.gameOver(gameplayScene, gameplayTimer);
+        }
+    }
+
+    private static boolean areAllCharactersDead() {
+        for (PlayerCharacter p : player) {
+            if (p.getHealth() > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static void checkIfCharacterIsAlive() {
         for (int i=0;i<5;i++){
             if(player[i].getHealth() < 1){
                 characterData[i].setVisible(false);
-
+            }else{
+                characterData[i].setVisible(true);
             }
         }
     }
 
     private static void actualizeCharacterData() {
         for (int i=0;i<5;i++){
-            characterData[i].setText(player[i].getCharacterName()+": "+player[i].getHealth());
+            characterData[i].setText(player[i].getCharacterName()+": "+player[i].getHealth()+" AP: "+ player[i].getAttack());
         }
     }
 
@@ -356,13 +379,19 @@ public class Gameplay {
 
 
     private static void playerMovement() {
-        /* Por cada tecla presionada, el codigo evaluara
+        /* Por cada tecla presionada, el codigo evaluará
         los puntos de accion y la posicion del jugador
         y determinara si se mueve o no se mueve.
         */
+        gameplayScene.setOnKeyPressed(event -> activeKeys.add(event.getCode().toString()));
 
         gameplayScene.setOnKeyReleased(event -> {
+            activeKeys.remove(event.getCode().toString());
+
+            if (!activeKeys.isEmpty()) return; // Si hay más de una tecla activa, no mover al jugador.
+
             switch (event.getCode().toString()) {
+
                 case "A":
                     // Tecla A mueve el jugador hacia la izquierda-abajo (X-48, Y+32)
                    previusX = player[0].getX();

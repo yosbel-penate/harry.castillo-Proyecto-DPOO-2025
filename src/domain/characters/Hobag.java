@@ -7,7 +7,7 @@ public class Hobag extends PlayerCharacter {
     private int attack = 3;
     private boolean havesMana = true;
     private int mana = 8;
-    private String characterName = "hobag";
+    private String characterName = "Hobag";
     private String imageName = "hobag.png";
     private String closestImageName = "closerHobag.png";
 
@@ -37,5 +37,10 @@ public class Hobag extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

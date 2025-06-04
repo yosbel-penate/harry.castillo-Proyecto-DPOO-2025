@@ -6,7 +6,7 @@ public class Zorak extends PlayerCharacter {
     private int health = 8;
     private int attack = 6;
     private boolean havesMana = false;
-    private String characterName = "zorak";
+    private String characterName = "Zorak";
     private String imageName = "zorak.png";
     private String closestImageName = "closerZorak.png";
 
@@ -32,5 +32,10 @@ public class Zorak extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

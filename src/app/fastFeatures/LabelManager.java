@@ -371,4 +371,51 @@ public class LabelManager {
         l7.setTextFill(c);
     }
 
+    public static void labelLocator(Label label, int x, int y) {
+        label.setTranslateX(x);
+        label.setTranslateY(y);
+    }
+
+    public static void labelLocator(Label label1, int x1, int y1, Label label2, int x2, int y2) {
+        labelLocator(label1, x1, y1);
+        labelLocator(label2, x2, y2);
+    }
+
+    public static void labelLocator(Label label1, int x1, int y1, Label label2, int x2, int y2, Label label3, int x3, int y3) {
+        labelLocator(label1, x1, y1, label2, x2, y2);
+        labelLocator(label3, x3, y3);
+    }
+
+    public static void labelLocator(Label label1, int x1, int y1, Label label2, int x2, int y2, Label label3, int x3, int y3,
+                                    Label label4, int x4, int y4) {
+        labelLocator(label1, x1, y1, label2, x2, y2, label3, x3, y3);
+        labelLocator(label4, x4, y4);
+    }
+
+    public static void labelLocator(Label label1, int x1, int y1, Label label2, int x2, int y2, Label label3, int x3, int y3,
+                                    Label label4, int x4, int y4, Label label5, int x5, int y5) {
+        labelLocator(label1, x1, y1, label2, x2, y2, label3, x3, y3, label4, x4, y4);
+        labelLocator(label5, x5, y5);
+    }
+
+    public static void labelLocator(Label label1, int x1, int y1, Label label2, int x2, int y2, Label label3, int x3, int y3,
+                                    Label label4, int x4, int y4, Label label5, int x5, int y5, Label label6, int x6, int y6) {
+        labelLocator(label1, x1, y1, label2, x2, y2, label3, x3, y3, label4, x4, y4, label5, x5, y5);
+        labelLocator(label6, x6, y6);
+    }
+
+    public static void labelLocator(Label label1, int x1, int y1, Label label2, int x2, int y2, Label label3, int x3, int y3,
+                                    Label label4, int x4, int y4, Label label5, int x5, int y5, Label label6, int x6, int y6,
+                                    Label label7, int x7, int y7) {
+        labelLocator(label1, x1, y1, label2, x2, y2, label3, x3, y3, label4, x4, y4, label5, x5, y5, label6, x6, y6);
+        labelLocator(label7, x7, y7);
+    }
+
+    public static void labelLocator(Label label1, int x1, int y1, Label label2, int x2, int y2, Label label3, int x3, int y3,
+                                    Label label4, int x4, int y4, Label label5, int x5, int y5, Label label6, int x6, int y6,
+                                    Label label7, int x7, int y7, Label label8, int x8, int y8) {
+        labelLocator(label1, x1, y1, label2, x2, y2, label3, x3, y3, label4, x4, y4, label5, x5, y5, label6, x6, y6, label7, x7, y7);
+        labelLocator(label8, x8, y8);
+    }
+
 }

@@ -7,7 +7,7 @@ public class Alessandra extends PlayerCharacter {
     private int attack = 2;
     private boolean havesMana = true;
     private int mana = 15;
-    private String characterName = "alessandra";
+    private String characterName = "Alessandra";
     private String imageName = "alessandra.png";
     private String closestImageName = "closerAlessandra.png";
 
@@ -37,5 +37,10 @@ public class Alessandra extends PlayerCharacter {
 
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 }
