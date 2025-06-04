@@ -55,7 +55,7 @@ public class Ether_Storm {
      }
      public static void moveEtherStorm(){
         for(int i=0;i<3;i++){
-             int move=new Random().nextInt(1,6);
+             int move=new Random().nextInt(1,7);
              switch (move){
                   case 1:
                        if (yPosition[i] == upLimitEven) {
