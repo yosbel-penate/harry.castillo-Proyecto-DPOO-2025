@@ -47,6 +47,7 @@ public class EnemyCharacter {
             if(enemi[row][i] == null){
                 enemi[row][i] = new Wolf();
                 enemi[row][i].setAlive(false);
+                enemi[row][i].setHealth(-1);
             }else{
                 enemi[row][i].setAlive(true);
             }

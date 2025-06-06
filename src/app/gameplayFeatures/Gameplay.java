@@ -418,7 +418,14 @@ public class Gameplay {
         }
     }
     private static void checkIfPlayerCollideWithEnemy() {
-        player[0].collideRange();
+
+        for (int i = 0; i<enemiSize;i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                if (enemi[i][0].isAlive()){
+                    player[0].collideRange(enemi[i][0]);
+                }
+            }
+        }
 
 
         for (int i = 0; i<enemiSize;i++){
