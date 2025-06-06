@@ -62,8 +62,8 @@ public class Combat {
     private static boolean noRandomPosition;
     private static boolean dropConsumable;
 
-    public static void setupCombat() {
-        setupConfigurations();
+    public static void setupCombat(EnemyCharacter[] enemi) {
+        setupConfigurations(enemi);
         setupWindow();
         setupCombatAnimation();
         setupKeyHandling();
@@ -73,10 +73,10 @@ public class Combat {
         }
 
 
-    private static void setupConfigurations() {
+    private static void setupConfigurations(EnemyCharacter[] enemi) {
         Gameplay.stopGameplayTimer();
         player = Gameplay.getPlayer();
-        enemy = Gameplay.getEnemy();
+        enemy = enemi;
         inventory = Gameplay.getInventory();
         AudioPlayer.stopIfPlaying("tileMap");
         AudioPlayer.playCombatMusic();
@@ -407,20 +407,20 @@ public class Combat {
             manaPotionButton = createButton("Usar poción de mana.",330,600, e -> useManaPotion(), statsFont);
             manaPotionButton.setFocusTraversable(false);
 
+
             hideConsumablesButton = createButton("Atrás", 330, 650, e -> hideConsumables(), statsFont);
             hideConsumablesButton.setFocusTraversable(false);
-
 
 
             root.getChildren().addAll(vitalityPotionButton, manaPotionButton, hideConsumablesButton);
         }
     }
+
     private static void hideConsumables() {
         manaPotionButton.setVisible(false);
         vitalityPotionButton.setVisible(false);
         hideConsumablesButton.setVisible(false);
     }
-
 
     private static void useManaPotion() {
         if (player[selectedCharacter].isHavesMana()) {

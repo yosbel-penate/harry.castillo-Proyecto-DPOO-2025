@@ -4,7 +4,7 @@ import app.fastFeatures.AudioPlayer;
 import app.fastFeatures.LabelManager;
 import app.Roaster;
 import app.menus.PauseMenu;
-import domain.dangers.Ether_Storm;
+import domain.dangers.EtherStorm;
 import domain.generalClasses.Inventory;
 import domain.generalClasses.EnemyCharacter;
 import domain.generalClasses.PlayerCharacter;
@@ -24,6 +24,7 @@ import java.util.Random;
 import java.util.Set;
 
 import static app.fastFeatures.PublicVariables.*;
+import static domain.generalClasses.EnemyCharacter.randomQuantity;
 
 public class Gameplay {
 
@@ -45,6 +46,9 @@ public class Gameplay {
     private static Random random = new Random();
     private static PlayerCharacter[] player;
     private static EnemyCharacter[] enemy;
+    private static EnemyCharacter[][] enemi = new EnemyCharacter[5][5];
+    private static int enemiSize;
+    private static ArrayList<EnemyCharacter[]> enemies = new ArrayList<EnemyCharacter[]>(){};
     private static long time;
     private static Font font;
     private static boolean methodDone=false;
@@ -76,6 +80,7 @@ public class Gameplay {
         setupWindow();
         setupAnotherConfigs();
         setupEnemy();
+        setupEnemies();
         playerMovement();
         labelConfigurations();
         gameLoop();
@@ -87,7 +92,6 @@ public class Gameplay {
 
     private static void setupPlayer() {
         player = Roaster.getPlayer();
-        player[0].setEnemy(enemy);
     }
     private static void setupWindow() {
         root = new Group();
@@ -102,7 +106,7 @@ public class Gameplay {
     }
 
     private static void setupAnotherConfigs() {
-        Ether_Storm.randomPosition();
+        EtherStorm.randomPosition();
         TileMap.setPlayer(player);
         if (!(Inventory.isAlreadyCreated())) {
             inventory = Inventory.createInventory();
@@ -112,21 +116,70 @@ public class Gameplay {
 
 
     private static void setupEnemy() {
+
         enemy = new EnemyCharacter[3];
         // El lobito tiene tre na ma.
         for (int i = 0; i < 3; i++){
             enemy[i] = new EnemyCharacter();
             enemy[i].setAlive(true);
         }
-        if (enemy[0].isAlive()) {
-            if (!Combat.isNoRandomPosition()) {
-                randomPosition();
-                enemy[0].setCharacter(player[0]);
+
+    }
+
+
+    private static void setupEnemies() {
+        int enemia = new Random().nextInt(1, 6);
+        System.out.println("Puse "+enemia+" enemigos.");
+        switch (enemia){
+            case 1:
+                randomQuantity(enemi, 0);
+                enemiSize = 1;
+                break;
+            case 2:
+                randomQuantity(enemi, 0);
+                randomQuantity(enemi, 1);
+                enemiSize = 2;
+                break;
+            case 3:
+                randomQuantity(enemi, 0);
+                randomQuantity(enemi, 1);
+                randomQuantity(enemi, 2);
+                enemiSize = 3;
+                break;
+            case 4:
+                randomQuantity(enemi, 0);
+                randomQuantity(enemi, 1);
+                randomQuantity(enemi, 2);
+                randomQuantity(enemi, 3);
+                enemiSize = 4;
+                break;
+            case 5:
+                randomQuantity(enemi, 0);
+                randomQuantity(enemi, 1);
+                randomQuantity(enemi, 2);
+                randomQuantity(enemi, 3);
+                randomQuantity(enemi, 4);
+                enemiSize = 5;
+                break;
+        }
+
+        for (int i = 0; i < enemiSize; i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                if (enemi[i][j].isAlive()){
+                    if(!Combat.isNoRandomPosition()){
+                        randomPositionEnemies(enemi[i][0]);
+                        enemi[i][j].setCharacter(player[0]);
+                        enemi[i][j].setX(enemi[i][0].getX());
+                        enemi[i][j].setY(enemi[i][0].getY());
+                        System.out.println("Posicion del enemigo["+i+"]["+j+"] X: "+enemi[i][j].getX());
+                        System.out.println("Posicion del enemigo["+i+"]["+j+"] Y: "+enemi[i][j].getY());
+                    }
+                }
             }
         }
     }
 
-    private static void randomPosition() {
+    private static void randomPositionEnemies(EnemyCharacter enemyCharacter) {
         int xPos = random.nextInt(7, 11);
         int yPos = random.nextInt(1, 10);
         int firstCol = 64;
@@ -150,10 +203,12 @@ public class Gameplay {
 
         xPos = firstCol + ((xPos-1) * right);
 
-        enemy[0].setX(xPos);
-        enemy[0].setY(yPos);
+        enemyCharacter.setX(xPos);
+        enemyCharacter.setY(yPos);
         // Se le pone al enemigo la posicion aleatoria generada.
     }
+
+
 
     private static void labelConfigurations() {
         font = new Font("Arial", 20);
@@ -202,9 +257,23 @@ public class Gameplay {
         drawCampaignMap();
         drawRange();
         drawPlayer();
+        drawEnemy();
         drawConsumableAtMap();
         drawConsumableAtInventory();
-        Ether_Storm.drawStorm(graphics);
+        EtherStorm.drawStorm(graphics);
+    }
+
+    private static void drawEnemy() {
+
+        for (int i =0; i< enemiSize; i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                if(enemi[i][0].isAlive()){
+                    enemi[i][0].range(enemi[i][0], graphics, time);
+                    enemi[i][0].draw(enemi[i][0], graphics);
+                    rangeCollitionAllEnemies();
+                }
+            }
+        }
     }
 
     private static void drawBackground() {
@@ -237,11 +306,6 @@ public class Gameplay {
 
     private static void drawRange() {
         player[0].range(graphics, time);
-        if (enemy[0].isAlive()) {
-            enemy[0].range(graphics, time);
-            enemy[0].draw(graphics);
-            rangeCollition();
-        }
     }
 
     private static void drawPlayer() {
@@ -281,11 +345,7 @@ public class Gameplay {
         checkIfPlayerCollideWithConsumable();
         checkIfDrawInventory();
         checkIfPlayerCollideWithEnemy();
-
-
         applyStormDamageOnce();
-
-
     }
 
     private static void applyStormDamageOnce(){
@@ -293,7 +353,7 @@ public class Gameplay {
         boolean condition=isPlayerInsideStorm();
 
         if (condition && !methodDone ){
-            Ether_Storm.damageStorm(player);
+            EtherStorm.damageStorm(player);
             methodDone=true;
         }
         if (!condition){
@@ -304,14 +364,12 @@ public class Gameplay {
         int x = player[0].getX();
         int y = player[0].getY();
         for (int i = 0; i <= 2; i++) {
-            if (x == Ether_Storm.xPosition[i] && y == Ether_Storm.yPosition[i]) {
+            if (x == EtherStorm.xPosition[i] && y == EtherStorm.yPosition[i]) {
                 return true;
             }
         }
         return false;
     }
-
-
 
 
     private static void checkIfYouLoose() {
@@ -347,9 +405,7 @@ public class Gameplay {
     }
 
     private static void checkIfEnemyIsAlive() {
-        if (enemy[0].isAlive()) {
-            enemy[0].collideRange();
-        }
+
     }
     private static void checkIfPlayerCollideWithConsumable() {
         player[0].collideWithConsumable(inventory);
@@ -362,27 +418,47 @@ public class Gameplay {
         }
     }
     private static void checkIfPlayerCollideWithEnemy() {
-        player[0].collideRange();
 
-        /* Llama a los metodos que comprueban las
-         colisiones en cada enemigo y personaje.
-        */
+        for (int i = 0; i<enemiSize;i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                if (enemi[i][0].isAlive()){
+                    player[0].collideRange(enemi[i][0]);
+                }
+            }
+        }
 
-        if (EnemyCharacter.isCollidePlayer() && PlayerCharacter.isCollideEnemy()) {
-            Combat.setupCombat();
-            EnemyCharacter.setCollidePlayer(false);
-            PlayerCharacter.setCollideEnemy(false);
+
+        for (int i = 0; i<enemiSize;i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                if (enemi[i][0].isAlive()){
+                    enemi[i][0].collideRange(enemi[i][0]);
+                }
+            }
         }
-        if (EnemyCharacter.isCollidePlayer()) {
-            Combat.setupCombat();
-            EnemyCharacter.setCollidePlayer(false);
-            PlayerCharacter.setCollideEnemy(false);
+
+        for (int i = 0; i<enemiSize;i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                if (enemi[i][j].isAlive()){
+                    if (EnemyCharacter.isCollidePlayer() && PlayerCharacter.isCollideEnemy()) {
+                        Combat.setupCombat(enemi[i]);
+                        EnemyCharacter.setCollidePlayer(false);
+                        PlayerCharacter.setCollideEnemy(false);
+                    }
+                    if (EnemyCharacter.isCollidePlayer()) {
+                        Combat.setupCombat(enemi[i]);
+                        EnemyCharacter.setCollidePlayer(false);
+                        PlayerCharacter.setCollideEnemy(false);
+                    }
+                    if (PlayerCharacter.isCollideEnemy()) {
+                        Combat.setupCombat(enemi[i]);
+                        EnemyCharacter.setCollidePlayer(false);
+                        PlayerCharacter.setCollideEnemy(false);
+                    }
+                }
+            }
         }
-        if (PlayerCharacter.isCollideEnemy()) {
-            Combat.setupCombat();
-            EnemyCharacter.setCollidePlayer(false);
-            PlayerCharacter.setCollideEnemy(false);
-        }
+
+
 
     }
 
@@ -562,8 +638,16 @@ public class Gameplay {
                     break;
                 case "R":
                     actionPoints = 2;
-                    enemy[0].move(player[0].getX(), player[0].getY(), enemy[0].getX(), enemy[0].getY());
-                    Ether_Storm.moveEtherStorm();
+
+
+                    for (int i = 0; i<enemiSize;i++){
+                        for (int j = 0; j < enemi[i].length; j++){
+                            if (enemi[i][j].isAlive() && j == 0){
+                                enemi[i][0].move(player[0].getX(), player[0].getY(), enemi[i][0].getX(),enemi[i][0].getY(), enemi[i][0]);
+                            }
+                        }
+                    }
+                    EtherStorm.moveEtherStorm();
                     break;
                 case "T":
                     activateRange = !activateRange;
@@ -579,61 +663,63 @@ public class Gameplay {
     }
 
 
-    private static void rangeCollition() {
-        int xDistanceEvP = enemy[0].getX() - player[0].getX();
-        int yDistanceEvP = enemy[0].getY() - player[0].getY();
-        if (activateRange) {
-            if (time % 2 == 0) {
-                Image rangoSobrepuesto = new Image("overRangeTerrain.png");
-                if (xDistanceEvP == 96 && yDistanceEvP == 0) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + right, player[0].getY() + diagonalDown);
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + right, player[0].getY() + diagonalUp);
-                }
-                if (xDistanceEvP == -96 && yDistanceEvP == 0) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + left, player[0].getY() + diagonalDown);
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + left, player[0].getY() + diagonalUp);
-                }
-                if (xDistanceEvP == 96 && yDistanceEvP == 64) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + right, player[0].getY() + diagonalDown);
-                }
-                if (xDistanceEvP == 96 && yDistanceEvP == -64) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + right, player[0].getY() + diagonalUp);
-                }
-                if (xDistanceEvP == -96 && yDistanceEvP == 64) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + left, player[0].getY() + diagonalDown);
-                }
-                if (xDistanceEvP == -96 && yDistanceEvP == -64) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + left, player[0].getY() + diagonalUp);
-                }
-                // Los tres primeros ifs son a la derecha y los tres ultimos a la izquierda.
+    private static void rangeCollitionAllEnemies() {
+        for(int i= 0; i< enemiSize; i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                int xDistanceEvP = enemi[i][j].getX() - player[0].getX();
+                int yDistanceEvP =  enemi[i][j].getY() - player[0].getY();
+                if (activateRange) {
+                    if (time % 2 == 0) {
+                        Image rangoSobrepuesto = new Image("overRangeTerrain.png");
+                        if (xDistanceEvP == 96 && yDistanceEvP == 0) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + right, player[0].getY() + diagonalDown);
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + right, player[0].getY() + diagonalUp);
+                        }
+                        if (xDistanceEvP == -96 && yDistanceEvP == 0) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + left, player[0].getY() + diagonalDown);
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + left, player[0].getY() + diagonalUp);
+                        }
+                        if (xDistanceEvP == 96 && yDistanceEvP == 64) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + right, player[0].getY() + diagonalDown);
+                        }
+                        if (xDistanceEvP == 96 && yDistanceEvP == -64) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + right, player[0].getY() + diagonalUp);
+                        }
+                        if (xDistanceEvP == -96 && yDistanceEvP == 64) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + left, player[0].getY() + diagonalDown);
+                        }
+                        if (xDistanceEvP == -96 && yDistanceEvP == -64) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + left, player[0].getY() + diagonalUp);
+                        }
+                        if (xDistanceEvP == 0 && yDistanceEvP == 128) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + down);
 
+                        }
+                        if (xDistanceEvP == 48 && yDistanceEvP == 96) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + down);
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + 48, player[0].getY() + diagonalDown);
+                        }
+                        if (xDistanceEvP == -48 && yDistanceEvP == 96) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + down);
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() - 48, player[0].getY() + diagonalDown);
+                        }
+                        if (xDistanceEvP == 0 && yDistanceEvP == -128) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + up);
 
-                if (xDistanceEvP == 0 && yDistanceEvP == 128) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + down);
-
-                }
-                if (xDistanceEvP == 48 && yDistanceEvP == 96) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + down);
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + 48, player[0].getY() + diagonalDown);
-                }
-                if (xDistanceEvP == -48 && yDistanceEvP == 96) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + down);
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() - 48, player[0].getY() + diagonalDown);
-                }
-                if (xDistanceEvP == 0 && yDistanceEvP == -128) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + up);
-
-                }
-                if (xDistanceEvP == 48 && yDistanceEvP == -96) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + up);
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() + 48, player[0].getY() + diagonalUp);
-                }
-                if (xDistanceEvP == -48 && yDistanceEvP == -96) {
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + up);
-                    graphics.drawImage(rangoSobrepuesto, player[0].getX() - 48, player[0].getY() + diagonalUp);
+                        }
+                        if (xDistanceEvP == 48 && yDistanceEvP == -96) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + up);
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() + 48, player[0].getY() + diagonalUp);
+                        }
+                        if (xDistanceEvP == -48 && yDistanceEvP == -96) {
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX(), player[0].getY() + up);
+                            graphics.drawImage(rangoSobrepuesto, player[0].getX() - 48, player[0].getY() + diagonalUp);
+                        }
+                    }
                 }
             }
         }
+
     }
 
     public static boolean isGrabConsumable() {

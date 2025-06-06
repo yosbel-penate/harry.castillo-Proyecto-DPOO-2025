@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="harry.castillo-Proyecto-DPOO-2025">
+    <output-path>$PROJECT_DIR$/../../Proband</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="app.Game" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="Juego" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="harry_castillo_Proyecto_DPOO_2025.jar">
+        <element id="module-output" name="harry.castillo-Proyecto-DPOO-2025" />
+        <element id="dir-copy" path="$USER_HOME$/Descargas/javafx-sdk-24/lib" />
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -141,49 +141,37 @@ public class PlayerCharacter{
         }
     }
 
-    public void collideRange() {
-        if (enemy[0].isAlive()) {
-            int enemyX = enemy[0].getX();
-            int enemyY = enemy[0].getY();
+    public void collideRange(EnemyCharacter enemi) {
+            int enemyX = enemi.getX();
+            int enemyY = enemi.getY();
             if ((enemyX == x && (enemyY == y || enemyY == y + up || enemyY == y + down)) ||
                     ((enemyX == x + right || enemyX == x + left) && (enemyY == y + diagonalUp || enemyY == y + diagonalDown))) {
                 collideEnemy = true;
             }
         }
-    }
+
 
     public void collideWithConsumable(ArrayList<Consumables> inventory){
 
         enemy = Gameplay.getEnemy();
-        if (!enemy[0].isAlive()){
-        if (inventory.size() == 2){
+
             if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
                 inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 1);
                 Gameplay.setGrabConsumable(true);
                 Gameplay.setDrawConsumable(false);
                 inventory.getFirst().setDrawAtMap(false);
-                x = playerInitialPositionX;
-                y = playerInitialPositionY;
-                enemy[0].setX(enemyInitialPositionX);
-                enemy[0].setY(enemyInitialPositionY);
-                for (EnemyCharacter enemyCharacter : enemy) {
-                    enemyCharacter.setAlive(true);
-                }
+                inventory.getFirst().setX(0);
+                inventory.getFirst().setY(0);
             }
         else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
             inventory.get(1).setQuantity(inventory.get(1).getQuantity() + 1);
             Gameplay.setGrabConsumable(true);
             Gameplay.setDrawConsumable(false);
             inventory.get(1).setDrawAtMap(false);
-            x = playerInitialPositionX;
-            y = playerInitialPositionY;
-            enemy[0].setX(enemyInitialPositionX);
-            enemy[0].setY(enemyInitialPositionY);
-                for (EnemyCharacter enemyCharacter : enemy) {
-                    enemyCharacter.setAlive(true);
-                }
+            inventory.get(1).setY(0);
+            inventory.get(1).setX(0);
         }
-        } }
+
     }
 
     public static boolean isCollideEnemy() {
@@ -198,8 +186,6 @@ public class PlayerCharacter{
 
     public void setAttack(int attack) {this.attack = attack;}
 
-
-    public void setEnemy(EnemyCharacter[] enemy) {this.enemy = enemy;}
 
     public String getCharacterName() {
         return characterName;

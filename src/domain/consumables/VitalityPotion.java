@@ -9,7 +9,6 @@ public class VitalityPotion extends app.gameplayFeatures.Consumables implements 
     public VitalityPotion() {
     }
 
-
     public int getPointsAdded() {
         return healthAdded;
     }
