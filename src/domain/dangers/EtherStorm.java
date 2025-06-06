@@ -11,7 +11,7 @@ import static app.fastFeatures.PublicVariables.diagonalDown;
 
 
 
-public class Ether_Storm {
+public class EtherStorm {
      public static int[] xPosition = new int[3];
      public static int[] yPosition = new int[3];;
      private int nextXPosition;
@@ -22,9 +22,9 @@ public class Ether_Storm {
      private static boolean isDamageCaused;
      private static boolean isConditionReady=false;
 
-     public Ether_Storm(){
+     public EtherStorm(){
      }
-     public Ether_Storm(int xPosition, int yPosition){
+     public EtherStorm(int xPosition, int yPosition){
      }
      public static void randomPosition() {
           for (int i = 0; i<3;i++){

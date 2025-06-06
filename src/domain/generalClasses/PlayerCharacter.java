@@ -199,8 +199,6 @@ public class PlayerCharacter{
     public void setAttack(int attack) {this.attack = attack;}
 
 
-    public void setEnemy(EnemyCharacter[] enemy) {this.enemy = enemy;}
-
     public String getCharacterName() {
         return characterName;
     }

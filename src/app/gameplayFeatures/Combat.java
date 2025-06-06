@@ -55,13 +55,15 @@ public class Combat {
     private static Button runAway;
     private static Button passTurn;
     private static Button useConsumable;
-
+    private static Button vitalityPotionButton;
+    private static Button manaPotionButton;
+    private static Button hideConsumablesButton;
 
     private static boolean noRandomPosition;
     private static boolean dropConsumable;
 
-    public static void setupCombat() {
-        setupConfigurations();
+    public static void setupCombat(EnemyCharacter[] enemi) {
+        setupConfigurations(enemi);
         setupWindow();
         setupCombatAnimation();
         setupKeyHandling();
@@ -71,10 +73,10 @@ public class Combat {
         }
 
 
-    private static void setupConfigurations() {
+    private static void setupConfigurations(EnemyCharacter[] enemi) {
         Gameplay.stopGameplayTimer();
         player = Gameplay.getPlayer();
-        enemy = Gameplay.getEnemy();
+        enemy = enemi;
         inventory = Gameplay.getInventory();
         AudioPlayer.stopIfPlaying("tileMap");
         AudioPlayer.playCombatMusic();
@@ -399,15 +401,25 @@ public class Combat {
         if (inventory.isEmpty()) {
             message.setText("¡No tienes consumibles! ¿¡Para qué tocas el botón?");
         } else {
-            Button vitalityPotionButton = createButton("Usar poción de vitalidad.", 330, 550, e -> useVitalityPotion(), statsFont);
+            vitalityPotionButton = createButton("Usar poción de vitalidad.", 330, 550, e -> useVitalityPotion(), statsFont);
             vitalityPotionButton.setFocusTraversable(false);
 
-            Button manaPotionButton = createButton("Usar poción de mana.",330,600, e -> useManaPotion(), statsFont);
+            manaPotionButton = createButton("Usar poción de mana.",330,600, e -> useManaPotion(), statsFont);
             manaPotionButton.setFocusTraversable(false);
 
 
-            root.getChildren().addAll(vitalityPotionButton, manaPotionButton);
+            hideConsumablesButton = createButton("Atrás", 330, 650, e -> hideConsumables(), statsFont);
+            hideConsumablesButton.setFocusTraversable(false);
+
+
+            root.getChildren().addAll(vitalityPotionButton, manaPotionButton, hideConsumablesButton);
         }
+    }
+
+    private static void hideConsumables() {
+        manaPotionButton.setVisible(false);
+        vitalityPotionButton.setVisible(false);
+        hideConsumablesButton.setVisible(false);
     }
 
     private static void useManaPotion() {

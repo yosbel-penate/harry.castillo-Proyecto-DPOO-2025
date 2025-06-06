@@ -5,6 +5,7 @@ import java.util.Random;
 import app.gameplayFeatures.Gameplay;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import domain.enemies.Wolf;
 
 import static app.fastFeatures.PublicVariables.*;
 
@@ -27,6 +28,31 @@ public class EnemyCharacter {
         graphics.drawImage(new Image(imageName), x, y);
     }
 
+    public void draw(EnemyCharacter enemi, GraphicsContext graphics) {
+        graphics.drawImage(new Image(enemi.getImageName()), enemi.getX(), enemi.getY());
+    }
+
+
+    public static void randomQuantity(EnemyCharacter[][] enemi, int row){
+
+
+        int random = new Random().nextInt(1, 6);
+
+        for (int i = 0; i<random; i++){
+            enemi[row][i] = new Wolf();
+               }
+
+
+        for (int i = 0; i < enemi[row].length; i++){
+            if(enemi[row][i] == null){
+                enemi[row][i] = new Wolf();
+                enemi[row][i].setAlive(false);
+            }else{
+                enemi[row][i].setAlive(true);
+            }
+        }
+
+    }
 
     public void move(int playerx, int playery, int enemyx, int enemyy) {
         int distanceX = playerx - enemyx;
@@ -71,6 +97,51 @@ public class EnemyCharacter {
         if (distanceX > 0 && distanceY < 0) {
             x = enemyx + right;
             y = enemyy + diagonalUp;
+        }
+    }
+
+    public void move(int playerx, int playery, int enemyx, int enemyy, EnemyCharacter enemi) {
+        int distanceX = playerx - enemyx;
+        int distanceY = playery - enemyy;
+        if (distanceX < 0 && distanceY < 0) {
+            if (distanceY < (enemyy + diagonalDown) + distanceY) {
+                enemi.setX(enemyx + left);
+                enemi.setY(enemyy + diagonalUp);
+            } else {
+                enemi.setX(enemyx + right);
+                enemi.setY(enemyy + diagonalUp);
+            }
+        }
+        if (distanceX < 0 && distanceY == 0) {
+            enemi.setX(enemyx + left);
+            enemi.setY(enemyy + diagonalDown);
+        }
+        if (distanceX == 0 && distanceY < 0) {
+            enemi.setY(enemyy + up);
+        }
+        if (distanceX < 0 && distanceY > 0) {
+            enemi.setX(enemyx + left);
+            enemi.setY(enemyy + diagonalDown);
+        }
+        if (distanceX > 0 && distanceY > 0) {
+            if (distanceY > (enemyy + diagonalDown) + distanceY) {
+                enemi.setX(enemyx + left);
+                enemi.setY(enemyy + diagonalDown);
+            } else {
+                enemi.setX(enemyx + right);
+                enemi.setY(enemyy + diagonalDown);
+            }
+        }
+        if (distanceX > 0 && distanceY == 0) {
+            enemi.setX(enemyx + right);
+            enemi.setY(enemyy + diagonalDown);
+        }
+        if (distanceX == 0 && distanceY > 0) {
+            enemi.setY(enemyy + down);
+        }
+        if (distanceX > 0 && distanceY < 0) {
+            enemi.setX(enemyx + right);
+            enemi.setY(enemyy + diagonalUp);
         }
     }
 
@@ -169,13 +240,111 @@ public class EnemyCharacter {
         }
     }
 
-    public void collideRange() {
-            int characterX = character.getX();
-            int characterY = character.getY();
-            if ((characterX == x && (characterY == y || characterY == y + up || characterY == y + down)) ||
-                    ((characterX == x + right || characterX == x + left) && (characterY == y + diagonalUp || characterY == y + diagonalDown))) {
-                collidePlayer = true;
+    public void range(EnemyCharacter enemi, GraphicsContext graphics, long time) {
+        Image rango = new Image("rangeTerrain.png");
+        if (!Gameplay.isActivateRange() || time % 2 != 0) {
+            return;
+        }
+
+        boolean actived = false;
+        boolean corner = false;
+
+        if (enemi.getX() == xLeftDownCornerLimit && enemi.getY() == yLeftDownCornerLimit) {
+            graphics.drawImage(rango, enemi.getX(), enemi.getY() + left);
+            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalUp);
+            corner = true;
+        } else if (enemi.getX() == xLeftUpCornerLimit && enemi.getY() == yLeftUpCornerLimit) {
+            graphics.drawImage(rango, enemi.getX(), enemi.getY() + down);
+            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalUp);
+            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalDown);
+            corner = true;
+        } else if (enemi.getX() == xRightDownCornerLimit && enemi.getY() == yRightDownCornerLimit) {
+            graphics.drawImage(rango, enemi.getX(), enemi.getY() + up);
+            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalUp);
+            corner = true;
+        } else if (enemi.getX() == xRightUpCornerLimit && enemi.getY() == yRightUpCornerLimit) {
+            graphics.drawImage(rango, enemi.getX(), enemi.getY() + down);
+            graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalUp);
+            graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalDown);
+            corner = true;
+        }
+
+        if (corner) {
+        } else {
+            if (enemi.getX() == upLimit) {
+                graphics.drawImage(rango, enemi.getX(), enemi.getY() + up);
+                graphics.drawImage(rango, enemi.getX(), enemi.getY() + down);
+                graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalUp);
+                graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalDown);
+                actived = true;
+            } else if (enemi.getX() == downLimit) {
+                graphics.drawImage(rango, enemi.getX(), enemi.getY() + up);
+                graphics.drawImage(rango, enemi.getX(), enemi.getY() + down);
+                graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalUp);
+                graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalDown);
+                actived = true;
             }
+
+            for (int col = 1; col <= 11; col++) {
+                if (col % 2 == 0) {
+                    for (int posEven = initialEvenRow; posEven <= finalEvenRow; posEven += nextRowEven) {
+                        if (enemi.getY() == upLimitEven && enemi.getX() == posEven) {
+                            graphics.drawImage(rango, enemi.getX(), enemi.getY() + down);
+                            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalDown);
+                            graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalDown);
+                            actived = true;
+                        }
+                        if (enemi.getY() == downLimitEven && enemi.getX() == posEven) {
+                            graphics.drawImage(rango, enemi.getX(), enemi.getY() + up);
+                            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalUp);
+                            graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalUp);
+                            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalDown);
+                            graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalDown);
+                            actived = true;
+                        }
+                    }
+                } else {
+                    for (int posOdd = initialOddRow; posOdd <= finalOddRow; posOdd += nextRowOdd) {
+                        if (enemi.getY() == upLimitOdd && enemi.getX() == posOdd) {
+                            graphics.drawImage(rango, enemi.getX(), enemi.getY() + down);
+                            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalDown);
+                            graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalDown);
+                            graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalUp);
+                            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalUp);
+                            actived = true;
+                        }
+                        if (enemi.getY() == downLimitOdd && enemi.getX() == posOdd) {
+                            graphics.drawImage(rango, enemi.getX(), enemi.getY() + up);
+                            graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalUp);
+                            graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalUp);
+                            actived = true;
+                        }
+                    }
+                }
+            }
+
+            if (!actived) {
+                graphics.drawImage(rango, enemi.getX(), enemi.getY() + down);
+                graphics.drawImage(rango, enemi.getX(), enemi.getY() + up);
+                graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalUp);
+                graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalUp);
+                graphics.drawImage(rango, enemi.getX() + right, enemi.getY() + diagonalDown);
+                graphics.drawImage(rango, enemi.getX() + left, enemi.getY() + diagonalDown);
+            }
+        }
+    }
+
+    public void collideRange(EnemyCharacter enemi) {
+        int characterX = character.getX();
+        int characterY = character.getY();
+
+            int enemyX = enemi.getX();
+            int enemyY = enemi.getY();
+            if ((characterX == enemyX && (characterY == enemyY || characterY == enemyY + up || characterY == enemyY + down)) ||
+                    ((characterX == enemyX + right || characterX == enemyX + left) && (characterY == enemyY + diagonalUp || characterY == enemyY + diagonalDown))) {
+                collidePlayer = true;
+
+        }
     }
 
     public void setCharacter(PlayerCharacter character) {
@@ -235,7 +404,6 @@ public class EnemyCharacter {
     public static void setCollidePlayer(boolean collidePlayer) {
         EnemyCharacter.collidePlayer = collidePlayer;
     }
-
 
 }
 
