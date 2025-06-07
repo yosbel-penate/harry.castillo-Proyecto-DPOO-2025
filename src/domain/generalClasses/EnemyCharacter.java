@@ -335,17 +335,13 @@ public class EnemyCharacter {
         }
     }
 
-    public void collideRange(EnemyCharacter enemi) {
-        int characterX = character.getX();
-        int characterY = character.getY();
-
-            int enemyX = enemi.getX();
-            int enemyY = enemi.getY();
-            if ((characterX == enemyX && (characterY == enemyY || characterY == enemyY + up || characterY == enemyY + down)) ||
-                    ((characterX == enemyX + right || characterX == enemyX + left) && (characterY == enemyY + diagonalUp || characterY == enemyY + diagonalDown))) {
-                collidePlayer = true;
-
-        }
+    public boolean collideRange(PlayerCharacter player) {
+        int characterX = player.getX();
+        int characterY = player.getY();
+        int x = this.getX();
+        int y = this.getY();
+        return (characterX == x && (characterY == y || characterY == y + up || characterY == y + down)) ||
+                ((characterX == x + right || characterX == x + left) && (characterY == y + diagonalUp || characterY == y + diagonalDown));
     }
 
     public void setCharacter(PlayerCharacter character) {

@@ -79,7 +79,6 @@ public class Gameplay {
         setupPlayer();
         setupWindow();
         setupAnotherConfigs();
-        setupEnemy();
         setupEnemies();
         playerMovement();
         labelConfigurations();
@@ -115,20 +114,10 @@ public class Gameplay {
     }
 
 
-    private static void setupEnemy() {
-
-        enemy = new EnemyCharacter[3];
-        // El lobito tiene tre na ma.
-        for (int i = 0; i < 3; i++){
-            enemy[i] = new EnemyCharacter();
-            enemy[i].setAlive(true);
-        }
-
-    }
 
 
     private static void setupEnemies() {
-        int enemia = new Random().nextInt(1, 6);
+        int enemia = new Random().nextInt(1,6);
         System.out.println("Puse "+enemia+" enemigos.");
         switch (enemia){
             case 1:
@@ -421,35 +410,49 @@ public class Gameplay {
 
         for (int i = 0; i<enemiSize;i++){
             for (int j = 0; j < enemi[i].length; j++){
-                if (enemi[i][0].isAlive()){
-                    player[0].collideRange(enemi[i][0]);
+                if (enemi[i][j].isAlive()){
+                    player[0].collideRange(enemi[i][j]);
                 }
             }
         }
 
-
-        for (int i = 0; i<enemiSize;i++){
-            for (int j = 0; j < enemi[i].length; j++){
-                if (enemi[i][0].isAlive()){
-                    enemi[i][0].collideRange(enemi[i][0]);
-                }
-            }
-        }
 
         for (int i = 0; i<enemiSize;i++){
             for (int j = 0; j < enemi[i].length; j++){
                 if (enemi[i][j].isAlive()){
-                    if (EnemyCharacter.isCollidePlayer() && PlayerCharacter.isCollideEnemy()) {
+                    enemi[i][j].collideRange(player[0]);
+                }
+            }
+        }
+        for (int i = 0; i<enemiSize;i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                EnemyCharacter enemy = enemi[i][j];
+                if (enemy != null && enemy.isAlive()){
+                    if(player[0].collideRange(enemy)){
+                        Combat.setupCombat(enemi[i]);
+                    }
+                }
+            }
+        }
+
+        /*
+        for (int i = 0; i<enemiSize;i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                if (enemi[i][j].isAlive()){
+                    if (enemi[i][j].isCollidePlayer() && player[0].isCollideEnemy()) {
+                        System.out.println("Me activo yo.");
                         Combat.setupCombat(enemi[i]);
                         EnemyCharacter.setCollidePlayer(false);
                         PlayerCharacter.setCollideEnemy(false);
                     }
                     if (EnemyCharacter.isCollidePlayer()) {
+                        System.out.println("Me activo yo, el segundo.");
                         Combat.setupCombat(enemi[i]);
                         EnemyCharacter.setCollidePlayer(false);
                         PlayerCharacter.setCollideEnemy(false);
                     }
                     if (PlayerCharacter.isCollideEnemy()) {
+                        System.out.println("Me activo yo, el tercero.");
                         Combat.setupCombat(enemi[i]);
                         EnemyCharacter.setCollidePlayer(false);
                         PlayerCharacter.setCollideEnemy(false);
@@ -457,7 +460,7 @@ public class Gameplay {
                 }
             }
         }
-
+        */
 
 
     }
@@ -666,8 +669,8 @@ public class Gameplay {
     private static void rangeCollitionAllEnemies() {
         for(int i= 0; i< enemiSize; i++){
             for (int j = 0; j < enemi[i].length; j++){
-                int xDistanceEvP = enemi[i][j].getX() - player[0].getX();
-                int yDistanceEvP =  enemi[i][j].getY() - player[0].getY();
+                int xDistanceEvP = enemi[i][0].getX() - player[0].getX();
+                int yDistanceEvP =  enemi[i][0].getY() - player[0].getY();
                 if (activateRange) {
                     if (time % 2 == 0) {
                         Image rangoSobrepuesto = new Image("overRangeTerrain.png");

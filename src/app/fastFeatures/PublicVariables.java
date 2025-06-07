@@ -1,5 +1,7 @@
 package app.fastFeatures;
 
+import domain.characters.*;
+import domain.generalClasses.PlayerCharacter;
 import javafx.stage.Stage;
 
 public class PublicVariables {
@@ -57,5 +59,30 @@ public class PublicVariables {
     public static final int finalEvenRow = 496;
     public static final int initialOddRow = 64;
     public static final int finalOddRow = 544;
+
+    // Personajes inicializados.
+
+    public static PlayerCharacter Alessandra = new Alessandra();
+    public static PlayerCharacter Azeli = new Azeli();
+    public static PlayerCharacter Cintya = new Cintya();
+    public static PlayerCharacter Draven = new Draven();
+    public static PlayerCharacter Drekker = new Drekker();
+    public static PlayerCharacter Globius = new Globius();
+    public static PlayerCharacter Goldan = new Goldan();
+    public static PlayerCharacter Gortana = new Gortana();
+    public static PlayerCharacter Grisha = new Grisha();
+    public static PlayerCharacter Groshta = new Groshta();
+    public static PlayerCharacter Heloro = new Heloro();
+    public static PlayerCharacter Higlob = new Higlob();
+    public static PlayerCharacter Hobag = new Hobag();
+    public static PlayerCharacter Hobgrou = new Hobgrou();
+    public static PlayerCharacter Jax = new Jax();
+    public static PlayerCharacter Lina = new Lina();
+    public static PlayerCharacter Lyffa = new Lyffa();
+    public static PlayerCharacter Lyrasa = new Lyrasa();
+    public static PlayerCharacter Shira = new Shira();
+    public static PlayerCharacter Sirael = new Sirael();
+    public static PlayerCharacter Xaviru = new Xaviru();
+    public static PlayerCharacter Zorak = new Zorak();
 
 }

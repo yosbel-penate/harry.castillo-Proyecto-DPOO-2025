@@ -47,7 +47,7 @@ public class Alessandra extends PlayerCharacter {
     }
 
     @Override
-    public void setAttack(int attack){
-        this.attack=attack;
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 }

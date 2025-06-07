@@ -186,7 +186,6 @@ public class Combat {
         if (dropConsumable) {
             boolean life = new Random().nextBoolean();
             if (life) {
-                System.out.println("Me activo");
                 inventory.getFirst().setX(enemy[0].getX());
                 inventory.getFirst().setY(enemy[0].getY());
                 inventory.getFirst().setImage("vitality_potion.png");

@@ -141,14 +141,12 @@ public class PlayerCharacter{
         }
     }
 
-    public void collideRange(EnemyCharacter enemi) {
-            int enemyX = enemi.getX();
-            int enemyY = enemi.getY();
-            if ((enemyX == x && (enemyY == y || enemyY == y + up || enemyY == y + down)) ||
-                    ((enemyX == x + right || enemyX == x + left) && (enemyY == y + diagonalUp || enemyY == y + diagonalDown))) {
-                collideEnemy = true;
-            }
-        }
+    public boolean collideRange(EnemyCharacter enemi) {
+        int enemyX = enemi.getX();
+        int enemyY = enemi.getY();
+        return (enemyX == x && (enemyY == y || enemyY == y + up || enemyY == y + down)) ||
+                ((enemyX == x + right || enemyX == x + left) && (enemyY == y + diagonalUp || enemyY == y + diagonalDown));
+    }
 
 
     public void collideWithConsumable(ArrayList<Consumables> inventory){

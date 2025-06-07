@@ -1,5 +1,6 @@
 package app.gameplayFeatures;
 
+import app.Roaster;
 import app.fastFeatures.AudioPlayer;
 import domain.generalClasses.PlayerCharacter;
 import javafx.animation.*;
@@ -92,13 +93,12 @@ public class Gameover {
     private static void setupRestartListener(Scene gameOverScene) {
         gameOverScene.setOnKeyPressed(event -> {
             if ("F".equals(event.getCode().toString())) {
-                for (PlayerCharacter p : player) {
-                    p.setHealth(5);
+                for (int i=0; i<player.length; i++){
+                    player[i].setHealth(5);
                 }
                 gameOverScene.setRoot(new Group());
                 Combat.setNoRandomPosition(false);
-                window.setScene(Gameplay.getGameplayScene());
-                Gameplay.startGameplayTimer();
+                window.setScene(Roaster.getRoasterScene());
 
             }
         });
