@@ -354,9 +354,13 @@ public class Combat {
 
     private static void setupButtons() {
         attack = createButton("Atacar.", 150, 550, e -> playerAttack(), statsFont);
+        attack.getStyleClass().add("combat-button");
         passTurn = createButton("Pasar turno.", 150, 600, e -> playerPassTurn(), statsFont);
+        passTurn.getStyleClass().add("combat-button");
         useConsumable = createButton("Usar item.", 150, 650, e -> playerUseConsumable(), statsFont);
+        useConsumable.getStyleClass().add("combat-button");
         runAway = createButton("Huir.", 150, 700, e -> playerRunAway(), statsFont);
+        runAway.getStyleClass().add("combat-button");
     }
 
     private static void setupRoot() {
@@ -402,13 +406,16 @@ public class Combat {
             message.setText("¡No tienes consumibles! ¿¡Para qué tocas el botón?");
         } else {
             vitalityPotionButton = createButton("Usar poción de vitalidad.", 330, 550, e -> useVitalityPotion(), statsFont);
+            vitalityPotionButton.getStyleClass().add("combat-button");
             vitalityPotionButton.setFocusTraversable(false);
 
             manaPotionButton = createButton("Usar poción de mana.",330,600, e -> useManaPotion(), statsFont);
+            manaPotionButton.getStyleClass().add("combat-button");
             manaPotionButton.setFocusTraversable(false);
 
 
             hideConsumablesButton = createButton("Atrás", 330, 650, e -> hideConsumables(), statsFont);
+            hideConsumablesButton.getStyleClass().add("combat-button");
             hideConsumablesButton.setFocusTraversable(false);
 
 

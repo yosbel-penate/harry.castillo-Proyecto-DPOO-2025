@@ -6,7 +6,8 @@ import domain.generalClasses.PlayerCharacter;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import static app.gameplayFeatures.TerrainEffects.applyTerrainEffects;
+import static app.gameplayFeatures.TerrainEffects.*;
+
 
 public class TileMap {
     private static final int initialColPos = 64;
@@ -204,10 +205,16 @@ public class TileMap {
         if (upperActualTerrain == 1 && player[0].getX() == x && player[0].getY() == y){
             graphics.drawImage(new Image(upperThingsImages[upperActualTerrain]), 713, 430);
         }
-        applyTerrainEffects(player,actualTerrain,upperActualTerrain,x,y);
+
+        applyTerrainEffects(player,actualTerrain,x,y);
+        applyUpperTerrainEffects(player,upperActualTerrain);
+
+
       }
-    public static void setPlayer(PlayerCharacter[] player){
+
+      public static void setPlayer(PlayerCharacter[] player){
         TileMap.player = player;}
     }
+
 
 

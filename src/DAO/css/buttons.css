@@ -18,6 +18,25 @@
     -fx-scale-y: 1.05;
 }
 
+.combat-button{
+    -fx-background-color: rgba(160, 82, 45, 0.6);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 12 10 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, black, 3, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-alignment: center;
+}
+
+.combat-button: hover{
+    -fx-rotate: -5;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
 
 .slider-label {
     -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

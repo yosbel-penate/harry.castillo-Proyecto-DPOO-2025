@@ -26,10 +26,12 @@ public class Globius extends PlayerCharacter {
         return havesMana;
     }
 
+    @Override
     public int getAttack() {
         return attack;
     }
 
+    @Override
     public int getHealth() {
         return health;
     }
@@ -37,5 +39,10 @@ public class Globius extends PlayerCharacter {
     @Override
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    @Override
+    public void setAttack(int attack){
+        this.attack=attack;
     }
 }

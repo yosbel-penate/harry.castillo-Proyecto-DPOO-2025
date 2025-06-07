@@ -312,9 +312,11 @@ public class Roaster {
                     Color.WHITE, font);
 
             yes = createButton("Si.", 32, 730, e -> threeActions(), font);
+            yes.getStyleClass().add("combat-button");
             yes.setTextFill(Color.BLACK);
 
             no = createButton("No.", 92, 730, e -> reset(), font);
+            no.getStyleClass().add("combat-button");
             no.setTextFill(Color.BLACK);
 
 

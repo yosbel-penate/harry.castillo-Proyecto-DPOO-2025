@@ -24,6 +24,7 @@ public class Draven extends PlayerCharacter {
         return imageName;
     }
 
+    @Override
     public String getCharacterName() {
         return characterName;
     }
@@ -32,10 +33,12 @@ public class Draven extends PlayerCharacter {
         return havesMana;
     }
 
+    @Override
     public int getAttack() {
         return attack;
     }
 
+    @Override
     public int getHealth() {
         return health;
     }
@@ -43,5 +46,10 @@ public class Draven extends PlayerCharacter {
     @Override
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    @Override
+    public void setAttack(int attack){
+        this.attack=attack;
     }
 }

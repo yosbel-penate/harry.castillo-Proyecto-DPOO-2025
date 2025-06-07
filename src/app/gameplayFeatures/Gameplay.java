@@ -398,7 +398,7 @@ public class Gameplay {
         }
     }
 
-    private static void actualizeCharacterData() {
+    public static void actualizeCharacterData() {
         for (int i=0;i<5;i++){
             characterData[i].setText(player[i].getCharacterName()+": "+player[i].getHealth()+" AP: "+ player[i].getAttack());
         }

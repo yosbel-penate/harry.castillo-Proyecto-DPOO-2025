@@ -26,20 +26,23 @@ public class Xaviru extends PlayerCharacter {
         return havesMana;
     }
 
+    @Override
     public int getAttack() {
         return attack;
     }
 
+    @Override
     public int getHealth() {
         return health;
-    }
-
-    public static void queBola(){
-        System.out.println("El Papucho");
     }
 
     @Override
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    @Override
+    public void setAttack(int attack){
+        this.attack=attack;
     }
 }
