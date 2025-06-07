@@ -150,7 +150,6 @@ public class PlayerCharacter{
 
 
     public void collideWithConsumable(ArrayList<Consumables> inventory){
-
         enemy = Gameplay.getEnemy();
 
             if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
@@ -160,8 +159,7 @@ public class PlayerCharacter{
                 inventory.getFirst().setDrawAtMap(false);
                 inventory.getFirst().setX(0);
                 inventory.getFirst().setY(0);
-            }
-        else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
+            } else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
             inventory.get(1).setQuantity(inventory.get(1).getQuantity() + 1);
             Gameplay.setGrabConsumable(true);
             Gameplay.setDrawConsumable(false);

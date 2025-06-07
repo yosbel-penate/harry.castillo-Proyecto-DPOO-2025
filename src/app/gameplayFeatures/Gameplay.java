@@ -329,8 +329,8 @@ public class Gameplay {
     private static void actualizeState() {
         actualizeCharacterData();
         checkIfYouLoose();
+        checfIfYouWin();
         checkIfCharacterIsAlive();
-        checkIfEnemyIsAlive();
         checkIfPlayerCollideWithConsumable();
         checkIfDrawInventory();
         checkIfPlayerCollideWithEnemy();
@@ -368,6 +368,13 @@ public class Gameplay {
         }
     }
 
+
+    private static void checfIfYouWin() {
+        if (areAllEnemiesDead()){
+            System.out.println("¡Has ganado esta partida!");
+        }
+    }
+
     private static boolean areAllCharactersDead() {
         for (PlayerCharacter p : player) {
             if (p.getHealth() > 0) {
@@ -393,9 +400,18 @@ public class Gameplay {
         }
     }
 
-    private static void checkIfEnemyIsAlive() {
+    private static boolean areAllEnemiesDead() {
+        for(int i = 0; i < enemiSize; i++) {
+            for (int j = 0; i < enemi[i].length;i++) {
+                if (enemi[i][j].getHealth() > 0) {
+                    return false;
+                }
+            }
+        }
+            return true;
+        }
 
-    }
+
     private static void checkIfPlayerCollideWithConsumable() {
         player[0].collideWithConsumable(inventory);
     }
@@ -426,7 +442,7 @@ public class Gameplay {
         }
         for (int i = 0; i<enemiSize;i++){
             for (int j = 0; j < enemi[i].length; j++){
-                EnemyCharacter enemy = enemi[i][j];
+                EnemyCharacter enemy = enemi[i][0];
                 if (enemy != null && enemy.isAlive()){
                     if(player[0].collideRange(enemy)){
                         Combat.setupCombat(enemi[i]);
@@ -464,6 +480,7 @@ public class Gameplay {
 
 
     }
+
 
     public static void actualizeConsumablesAtInventary(){
        actualizePotionAtInventary();
