@@ -152,20 +152,19 @@ public class PlayerCharacter{
     public void collideWithConsumable(ArrayList<Consumables> inventory){
         enemy = Gameplay.getEnemy();
 
-            if (inventory.getFirst().getX() == x && inventory.getFirst().getY() == y) {
-                inventory.getFirst().setQuantity(inventory.getFirst().getQuantity() + 1);
+        for (Consumables consumable : inventory) {
+            if (consumable.getX() == x && consumable.getY() == y && consumable.isDrawAtMap()) {
+                consumable.setQuantity(consumable.getQuantity() + 1);
                 Gameplay.setGrabConsumable(true);
                 Gameplay.setDrawConsumable(false);
-                inventory.getFirst().setDrawAtMap(false);
-                inventory.getFirst().setX(0);
-                inventory.getFirst().setY(0);
-            } else if (inventory.get(1).getX() == x && inventory.get(1).getY() == y){
-            inventory.get(1).setQuantity(inventory.get(1).getQuantity() + 1);
-            Gameplay.setGrabConsumable(true);
-            Gameplay.setDrawConsumable(false);
-            inventory.get(1).setDrawAtMap(false);
-            inventory.get(1).setY(0);
-            inventory.get(1).setX(0);
+                consumable.setDrawAtMap(false);
+                System.out.println("Posicion del consumible antes de cambiarla: "+consumable.getX());
+                consumable.setX(0);
+                consumable.setY(0);
+
+                System.out.println("Posicion del consumible despues de cambiarla: "+consumable.getX());
+                return;
+            }
         }
 
     }

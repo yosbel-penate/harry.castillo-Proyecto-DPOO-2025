@@ -32,7 +32,6 @@ public class Gameplay {
 
     private static boolean grabConsumable;
     private static boolean drawConsumable;
-    private static boolean addConsumable;
     private static boolean activateRange;
     private static AnimationTimer gameplayTimer;
     private static ArrayList<Consumables> inventory;
@@ -117,7 +116,7 @@ public class Gameplay {
 
 
     private static void setupEnemies() {
-        int enemia = new Random().nextInt(1,6);
+        int enemia = 5;
         System.out.println("Puse "+enemia+" enemigos.");
         switch (enemia){
             case 1:
@@ -440,43 +439,32 @@ public class Gameplay {
                 }
             }
         }
+        /*
         for (int i = 0; i<enemiSize;i++){
             for (int j = 0; j < enemi[i].length; j++){
-                EnemyCharacter enemy = enemi[i][0];
-                if (enemy != null && enemy.isAlive()){
-                    if(player[0].collideRange(enemy)){
+                if (enemi[i][0] != null && enemi[i][0].isAlive()){
+                    if(player[0].collideRange(enemi[i][0])){
                         Combat.setupCombat(enemi[i]);
+                    }
+                }
+            }
+        }*/
+
+
+        for (int i = 0; i<enemiSize;i++){
+            for (int j = 0; j < enemi[i].length; j++){
+                if (enemi[i][j].isAlive()){
+                    if (player[0].collideRange(enemi[i][0])) {
+                        System.out.println("Me activo yo.");
+                        Combat.setupCombat(enemi[i]);
+                        EnemyCharacter.setCollidePlayer(false);
+                        PlayerCharacter.setCollideEnemy(false);
+                        return;
                     }
                 }
             }
         }
 
-        /*
-        for (int i = 0; i<enemiSize;i++){
-            for (int j = 0; j < enemi[i].length; j++){
-                if (enemi[i][j].isAlive()){
-                    if (enemi[i][j].isCollidePlayer() && player[0].isCollideEnemy()) {
-                        System.out.println("Me activo yo.");
-                        Combat.setupCombat(enemi[i]);
-                        EnemyCharacter.setCollidePlayer(false);
-                        PlayerCharacter.setCollideEnemy(false);
-                    }
-                    if (EnemyCharacter.isCollidePlayer()) {
-                        System.out.println("Me activo yo, el segundo.");
-                        Combat.setupCombat(enemi[i]);
-                        EnemyCharacter.setCollidePlayer(false);
-                        PlayerCharacter.setCollideEnemy(false);
-                    }
-                    if (PlayerCharacter.isCollideEnemy()) {
-                        System.out.println("Me activo yo, el tercero.");
-                        Combat.setupCombat(enemi[i]);
-                        EnemyCharacter.setCollidePlayer(false);
-                        PlayerCharacter.setCollideEnemy(false);
-                    }
-                }
-            }
-        }
-        */
 
 
     }
@@ -742,6 +730,27 @@ public class Gameplay {
 
     }
 
+    public static void cleanup() {
+        if (gameplayTimer != null) {
+            gameplayTimer.stop();
+            gameplayTimer = null;
+        }
+        if (gameplayScene != null) {
+            gameplayScene.setOnKeyPressed(null);
+            gameplayScene.setOnKeyReleased(null);
+        }
+        if (root != null) {
+            root.getChildren().clear();
+            root = null;
+        }
+        if (canvas != null) {
+            canvas = null;
+        }
+        graphics = null;
+        actionPoints = 2;
+        time = 0;
+    }
+
     public static boolean isGrabConsumable() {
         return grabConsumable;
     }
@@ -754,9 +763,6 @@ public class Gameplay {
         Gameplay.drawConsumable = drawConsumable;
     }
 
-    public static void setAddConsumable(boolean addConsumable) {
-        Gameplay.addConsumable = addConsumable;
-    }
 
     public static boolean isActivateRange() {
         return activateRange;

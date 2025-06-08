@@ -125,6 +125,7 @@ public class Combat {
             resetEnemiesAfterBattle();
             dropConsumable();
             changeToGameplay();
+
         }
     }
 
@@ -186,17 +187,16 @@ public class Combat {
         if (dropConsumable) {
             boolean life = new Random().nextBoolean();
             if (life) {
+                System.out.println("Me estoy activando.");
                 inventory.getFirst().setX(enemy[0].getX());
                 inventory.getFirst().setY(enemy[0].getY());
                 inventory.getFirst().setImage("vitality_potion.png");
                 inventory.getFirst().setDrawAtMap(true);
-                Gameplay.setAddConsumable(true);
             } else {
                 inventory.get(1).setX(enemy[0].getX());
                 inventory.get(1).setY(enemy[0].getY());
                 inventory.get(1).setImage("mana_potion.png");
                 inventory.get(1).setDrawAtMap(true);
-                Gameplay.setAddConsumable(true);
             }
 
         }
@@ -467,8 +467,8 @@ public class Combat {
             noRandomPosition = true;
             AudioPlayer.stopIfPlaying("combatMusic");
             window.setScene(getGameplayScene());
-            animationForCombat.stop();
             Gameplay.startGameplayTimer();
+            animationForCombat.stop();
             player[0].setX(64);
             player[0].setY(64);
         } else {
@@ -482,6 +482,7 @@ public class Combat {
             }
         }
     }
+
 
 
 
