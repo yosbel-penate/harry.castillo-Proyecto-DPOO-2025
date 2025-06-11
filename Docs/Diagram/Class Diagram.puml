@@ -1,0 +1,683 @@
+@startuml
+skinparam groupInheritance 2
+skinparam classAttributeIconSize 0
+
+' 1. Jerarquía de personajes
+together {
+  class PlayerCharacter {
+    - havesMana : static boolean
+    - mana : int
+    - x : int
+    - y : int
+    - attack : int
+    - health : int
+    - characterName : String
+    - imageName : String
+    - closestImageName : String
+    - enemy : EnemyCharacter[]
+    - collideEnemy : static boolean
+
+    + range(graphics : GraphicsContext, time : long) : void
+    + collideRange(enemi : EnemyCharacter) : boolean
+    + collideWithConsumable(inventory : ArrayList<Consumables>) : void
+  }
+
+  class EnemyCharacter {
+    - x : int
+    - y : int
+    - attack : int
+    - Health : int
+    - alive : boolean
+    - imageName : String
+    - closestImageName : String
+    - character : PlayerCharacter
+    - collidePlayer : static boolean
+    - random : static Random
+
+    + draw(graphics : GraphicsContext) : void
+    + draw(enemi : EnemyCharacter, graphics : GraphicsContext) : void
+    + move(playerx : int, playery : int, enemyx : int, enemyy : int) : void
+    + move(playerx : int, playery : int, enemyx : int, enemyy : int, enemi : EnemyCharacter) : void
+    + range(graphics : GraphicsContext, time : long) : void
+    + range(enemi : EnemyCharacter, graphics : GraphicsContext, time : long) : void
+    + collideRange(player : PlayerCharacter) : boolean
+    + static randomQuantity(enemi : EnemyCharacter[][], row : int) : void
+  }
+
+  Wolf --|> EnemyCharacter
+
+  ' Subclases de PlayerCharacter
+  Alessandra --|> PlayerCharacter
+  Azeli --|> PlayerCharacter
+  Cintya --|> PlayerCharacter
+  Draven --|> PlayerCharacter
+  Drekker --|> PlayerCharacter
+  Globius --|> PlayerCharacter
+  Goldan --|> PlayerCharacter
+  Gortana --|> PlayerCharacter
+  Grisha --|> PlayerCharacter
+  Groshta --|> PlayerCharacter
+  Heloro --|> PlayerCharacter
+  Higlob --|> PlayerCharacter
+  Hobag --|> PlayerCharacter
+  Hobgrou --|> PlayerCharacter
+  Jax --|> PlayerCharacter
+  Lina --|> PlayerCharacter
+  Lyffa --|> PlayerCharacter
+  Lyrasa --|> PlayerCharacter
+  Shira --|> PlayerCharacter
+  Sirael --|> PlayerCharacter
+  Xaviru --|> PlayerCharacter
+  Zorak --|> PlayerCharacter
+}
+
+' 2. Sistema de consumibles
+together {
+  interface consumable {
+    + int getPointsAdded()
+    + void setPointsAdded(int x)
+  }
+
+  class Consumables {
+    - x : int
+    - y : int
+    - image : String
+    - quantity : int
+    - drawAtMap : boolean
+
+    + getImage() : String
+    + setImage(image : String) : void
+    + getQuantity() : int
+    + setQuantity(quantity : int) : void
+    + getX() : int
+    + setX(x : int) : void
+    + getY() : int
+    + setY(y : int) : void
+    + isDrawAtMap() : boolean
+    + setDrawAtMap(drawAtMap : boolean) : void
+  }
+
+  Consumables ..|> consumable
+
+   ManaPotion --|> Consumables
+   VitalityPotion --|> Consumables
+   ShardOfAether --|> Consumables
+}
+
+' 3. Núcleo del juego
+left to right direction
+class Game {
+    - static Scene mainScene
+    - static StackPane stackPane = new StackPane()
+    - HBox mainContainer
+    - VBox leftContainer
+    - StackPane rightContainer
+    + static void main(String[] args)
+    + void start(Stage window)
+    - void cssSettings()
+    - void settings()
+    + static Scene getMainScene()
+}
+
+class Campaign {
+    + static void initialize()
+}
+
+class Gameplay {
+    - player: PlayerCharacter[]
+    - enemi: EnemyCharacter[][]
+    - enemiSize: int
+    - inventory: ArrayList<Consumables>
+    - characterData: Label[]
+    - potionQuantity: Label
+    - manaQuantity: Label
+    - emptyInventoryLabel: Label
+    - previusX: int
+    - previusY: int
+    - actionPoints: int
+    - noPoints: int
+    - activateRange: boolean
+    - grabConsumable: boolean
+    - drawConsumable: boolean
+    - gameplayTimer: AnimationTimer
+    - gameplayScene: Scene
+    - root: Pane
+    - canvas: Canvas
+    - graphics: GraphicsContext
+    - time: int
+    - left: int
+    - right: int
+    - up: int
+    - down: int
+    - diagonalUp: int
+    - diagonalDown: int
+    - leftLimit: int
+    - rightLimit: int
+    - upLimitOdd: int
+    - upLimitEven: int
+    - downLimitOdd: int
+    - downLimitEven: int
+
+    + checkIfYouWin(): void
+    + areAllCharactersDead(): boolean
+    + checkIfCharacterIsAlive(): void
+    + actualizeCharacterData(): void
+    + areAllEnemiesDead(): boolean
+    + checkIfPlayerCollideWithConsumable(): void
+    + checkIfDrawInventory(): void
+    + checkIfPlayerCollideWithEnemy(): void
+    + actualizeConsumablesAtInventary(): void
+    + actualizePotionAtInventary(): void
+    + actualizeManaAtInventary(): void
+    + playerMovement(): void
+    + rangeCollitionAllEnemies(): void
+    + cleanup(): void
+    + isGrabConsumable(): boolean
+    + setGrabConsumable(grab: boolean): void
+    + setDrawConsumable(draw: boolean): void
+    + isActivateRange(): boolean
+    + startGameplayTimer(): void
+    + stopGameplayTimer(): void
+}
+
+class Combat {
+    - static PlayerCharacter[] player
+    - static EnemyCharacter[] enemy
+    - static int selectedCharacter
+    - static int selectedEnemy
+    - static int playerTurn
+    - static GraphicsContext graphics
+    - static AnimationTimer animationForCombat
+    - static Scene combatScene
+    - static Group root
+    - static Canvas canvas
+    - static ArrayList<Consumables> inventory
+    - static boolean selectEnemyToAttack
+    - static boolean attackToSelectedEnemy
+    - static Label message, playerLife, playerAttack, playerTurnLabel, enemyLife, enemyAttackL
+    - static Font statsFont
+    - static Button attack, runAway, passTurn, useConsumable, vitalityPotionButton, manaPotionButton, hideConsumablesButton
+    - static boolean noRandomPosition
+    - static boolean dropConsumable
+
+    + static void setupCombat(EnemyCharacter[])
+    - static void setupConfigurations(EnemyCharacter[])
+    - static void setupWindow()
+    - static void setupCombatAnimation()
+    - static void checkLifeStatus()
+    - static void switchToAlivePlayer()
+    - static void switchToAliveEnemy()
+    - static boolean areAllCharactersDead()
+    - static boolean areAllEnemiesDead()
+    - static void updateEnemyState()
+    - static void resetEnemiesAfterBattle()
+    - static void dropConsumable()
+    - static void changeToGameplay()
+    - static void updateState()
+    - static void draw()
+    - static void drawAssets()
+    - static void drawPlayer()
+    - static void drawEnemy()
+    - static void drawSelector()
+    - static void drawPortraits()
+    - static void enemyTurn()
+    - static void enemyAttack()
+    - static void setupKeyHandling()
+    - static void setupLabels()
+    - static void setupButtons()
+    - static void setupRoot()
+    - static void playerAttack()
+    - static int selectAlivePlayerForAttack(int)
+    - static void playerPassTurn()
+    - static void playerUseConsumable()
+    - static void hideConsumables()
+    - static void useManaPotion()
+    - static void useVitalityPotion()
+    - static void playerRunAway()
+    + static boolean isNoRandomPosition()
+    + static void setNoRandomPosition(boolean)
+    + static boolean isDropConsumable()
+}
+
+class Gameover {
+  - player : PlayerCharacter[]
+  - gameOverRoot : Group
+  - gameOverScene : Scene
+  - canvas : Canvas
+  - gameOver : ImageView
+  - restartLabel : Label
+
+  + gameOver(sceneToGameOver : Scene, animationTimerToStop : AnimationTimer) : void
+  - gameOverScreenConfig() : void
+  - labelConfigurations() : void
+  - setupRestartListener(gameOverScene : Scene) : void
+}
+
+' 4. Gestión de menús
+together {
+  class MainMenu {
+        - static Button play
+        - static Button options
+        - static Button exit
+        - static VBox mainMenu
+
+        + static void initMainMenu()
+        + static VBox getMainMenu()
+  }
+
+  class ControlsInstructions{
+        - static VBox controlsVBox
+        - static Label controlsLabel
+        - static Button back
+
+        + static void initControlsInstructions()
+        + static void hideMenu()
+        + static void showMenu()
+  }
+
+  class GameModeMenu{
+        - static Button campaign
+        - static Button pvp
+        - static Button back
+        - static VBox gameModeMenu
+
+        + static void initGameModeMenu()
+        + static VBox getGameModeMenu()
+        + static void hideMenu()
+        + static void showMenu()
+  }
+
+  class OptionsMenu{
+        - static Button controls
+        - static Button video
+        - static Button audio
+        - static Button back
+        - static VBox optionsMenu
+
+        + static void initOptionsMenu()
+        + static void showMenu()
+        + static void hideMenu()
+  }
+
+  class PauseMenu{
+        - static VBox pauseMenu
+        - static Button resume
+        - static Button options
+        - static Button exitGame
+        - static Button video
+        - static Button audio
+        - static Button back
+        - static Label MusicSound
+        - static Slider MusicVolumen
+        - static Label EffectSound
+        - static Slider EffectVolumen
+        - static Label brightnessLabel
+        - static Slider brightnessSlider
+        - static ColorAdjust brightness
+
+        + static void initPauseMenu()
+        + static void managePauseMenu()
+        + static void hide()
+        + static void hideLabels()
+        + static void showLabels()
+        + static void showOptionsButtons()
+        + static void hideOptionsButtons()
+        + static void showVolumeSliders()
+        + static void hideVolumeSliders()
+        + static void showBrightnessSlider()
+        + static void hideBrightnessSlider()
+  }
+
+  class SlidersBrightnessMenu{
+        + static Label brightnessLabel
+        + static Slider brightnessSlider
+        + static VBox brightnessVbox
+        + static Button back
+
+        + static void initBrightnessSlider()
+        + static void showSlider()
+        + static void hideSlider()
+  }
+
+  class SlidersSoundsMenu{
+        - static Label MasterSound
+        - static Slider MasterVolumen
+        - static Label MusicSound
+        - static Slider MusicVolumen
+        - static Label EffectSound
+        - static Slider EffectVolumen
+        - static Button back
+        - static VBox allSlider
+
+        + static void initSlidersForVolumen()
+        + static void showSlider()
+        + static void hideSlider()
+  }
+}
+
+' 5. Utilidades y managers
+together {
+  class AudioPlayer{
+     - sounds : Map<String, MediaPlayer>
+     - clips : Map<String, AudioClip>
+     - MusicVolumen : double
+     - ClipsVolumen : double
+     - activeSounds : Map<String, MediaPlayer>
+     - activeClips : Map<String, AudioClip>
+
+     + initMediaPlayer() : void
+     + initAudioClips() : void
+     + playSelectedCharacter() : void
+     + playMainMenu() : void
+     + stopMainMenu() : void
+     + playButtonSound() : void
+     + playRoasterButtonSound() : void
+     + playCombatMusic() : void
+     + playGameOver() : void
+     + stopIfPlaying(soundKey : String) : void
+     + playTileMap() : void
+  }
+
+  class ButtonManager {
+    + createButton(text : String, x : double, y : double, action : EventHandler<ActionEvent>, font : Font) : Button
+    + buttonDisabler(btn : Button) : void
+    + buttonDisabler(btn : Button, btn1 : Button) : void
+    + buttonDisabler(btn : Button, btn1 : Button, btn2 : Button) : void
+    + buttonDisabler(btn : Button, btn1 : Button, btn2 : Button, btn3 : Button) : void
+    + buttonDisabler(btn : Button, btn1 : Button, btn2 : Button, btn3 : Button, btn4 : Button) : void
+    + buttonEnabler(btn : Button) : void
+    + buttonEnabler(btn : Button, btn1 : Button) : void
+    + buttonEnabler(btn : Button, btn1 : Button, btn2 : Button) : void
+    + buttonEnabler(btn : Button, btn1 : Button, btn2 : Button, btn3 : Button) : void
+    + buttonEnabler(btn : Button, btn1 : Button, btn2 : Button, btn3 : Button, btn4 : Button) : void
+    + buttonInvisibilizer(btn : Button) : void
+    + buttonInvisibilizer(btn : Button, btn1 : Button) : void
+    + buttonInvisibilizer(btn : Button, btn1 : Button, btn2 : Button) : void
+    + buttonInvisibilizer(btn : Button, btn1 : Button, btn2 : Button, btn3 : Button) : void
+    + buttonInvisibilizer(btn : Button, btn1 : Button, btn2 : Button, btn3 : Button, btn4 : Button) : void
+    + buttonVisibilizer(btn : Button) : void
+    + buttonVisibilizer(btn : Button, btn1 : Button) : void
+    + buttonVisibilizer(btn : Button, btn1 : Button, btn2 : Button) : void
+    + buttonVisibilizer(btn : Button, btn1 : Button, btn2 : Button, btn3 : Button) : void
+    + buttonVisibilizer(btn : Button, btn1 : Button, btn2 : Button, btn3 : Button, btn4 : Button) : void
+  }
+
+  class LabelManager {
+    + createLabel(double x, double y, String text, Color color, Font font) : Label
+    + labelDisabler(Label... lbls) : void
+    + labelEnabler(Label... lbls) : void
+    + labelInvisibilizer(Label... lbls) : void
+    + labelVisibilizer(Label... lbls) : void
+    + labelSetFont(Label... lbls, Font f) : void
+    + labelSetColor(Label... lbls, Color c) : void
+    + labelLocator(Label label, int x, int y) : void
+    + labelLocator(...) : void
+  }
+
+  class PublicVariables {
+    + boolean campaing
+    + final int screenWidth
+    + final int screenHeight
+    + Stage window
+
+    + final int left
+    + final int right
+    + final int diagonalUp
+    + final int diagonalDown
+    + final int up
+    + final int down
+    + final int noPoints
+    + final int upLimitEven
+    + final int upLimitOdd
+    + final int downLimitEven
+    + final int downLimitOdd
+    + final int leftLimit
+    + final int rightLimit
+
+    + final int playerInitialPositionX
+    + final int playerInitialPositionY
+    + final int enemyInitialPositionX
+    + final int enemyInitialPositionY
+
+    + final int xLeftDownCornerLimit
+    + final int yLeftDownCornerLimit
+    + final int xLeftUpCornerLimit
+    + final int yLeftUpCornerLimit
+    + final int xRightDownCornerLimit
+    + final int yRightDownCornerLimit
+    + final int xRightUpCornerLimit
+    + final int yRightUpCornerLimit
+    + final int upLimit
+    + final int downLimit
+    + final int nextRowEven
+    + final int nextRowOdd
+    + final int initialEvenRow
+    + final int finalEvenRow
+    + final int initialOddRow
+    + final int finalOddRow
+
+    + PlayerCharacter Alessandra
+    + PlayerCharacter Azeli
+    + PlayerCharacter Cintya
+    + PlayerCharacter Draven
+    + PlayerCharacter Drekker
+    + PlayerCharacter Globius
+    + PlayerCharacter Goldan
+    + PlayerCharacter Gortana
+    + PlayerCharacter Grisha
+    + PlayerCharacter Groshta
+    + PlayerCharacter Heloro
+    + PlayerCharacter Higlob
+    + PlayerCharacter Hobag
+    + PlayerCharacter Hobgrou
+    + PlayerCharacter Jax
+    + PlayerCharacter Lina
+    + PlayerCharacter Lyffa
+    + PlayerCharacter Lyrasa
+    + PlayerCharacter Shira
+    + PlayerCharacter Sirael
+    + PlayerCharacter Xaviru
+    + PlayerCharacter Zorak
+  }
+
+  class Initializer {
+    + InitAllMethods() : void
+  }
+
+  class SelectedCharacters {
+    - int x
+    - int y
+    - int numberImage
+    - boolean characterActivated
+  }
+}
+
+' 6. Sistema de mapas y efectos
+together {
+  class TerrainEffects {
+        - static boolean isActiveEffect
+        - static int attackIncremented
+        - static int[] playerAttack
+        - static boolean isAttackSaved
+        + static void applyTerrainEffects(PlayerCharacter[] player, int actualTerrain, int x, int y)
+        + static void applyUpperTerrainEffects(PlayerCharacter[] player, int upperActualTerrain)
+  }
+
+  class TileMap {
+         - static final int initialColPos
+         - static final int finalColPos
+         - static final int initialEvenRowPos
+         - static final int finalEvenRowPos
+         - static final int initialOddRowPos
+         - static final int finalOddRowPos
+         - static final int nextCol
+         - static final int nextRow
+         - static final int initialPos
+         - static final int realocate
+         - static final int realocateCol
+         - static final int realocateRow
+         - static GraphicsContext graphics
+         - static PlayerCharacter[] player
+         - static boolean returnToNormal
+         - static int[][] matrix
+         - static int[][] upperThingsMatrix
+         - static String[] images
+         - static String[] upperThingsImages
+
+         + static void drawTutorialMap(GraphicsContext graphics)
+         + static void drawCampaignMap(GraphicsContext graphics)
+         + static void drawPvPMap(GraphicsContext graphics)
+         - static void checkTerrains(int actualTerrain, int upperActualTerrain, int x, int y, int col, int fil)
+  }
+
+  class Maps {
+    - static int[][] firstMap
+    - static int[][] firstMapUpperThingsMatrix
+    - static int[][] tutorialMap
+    - static int[][] PvpMap
+    - static int[][] PvpMapUpperThingsMatrix
+  }
+
+  class EtherStorm {
+    + xPosition : int[3]
+    + yPosition : int[3]
+    - nextXPosition : int
+    - nextYPosition : int
+    - causeDamage : int
+    - imageName : String
+    - nameDanger : String
+    - isDamageCaused : boolean
+    - isConditionReady : boolean
+
+    + randomPosition() : void
+    + drawStorm(graphics : GraphicsContext) : void
+    + moveEtherStorm() : void
+    + damageStorm(player : PlayerCharacter[]) : void
+  }
+
+  ' 7. Selección de personajes
+  class Roaster {
+      - root : Group
+      - canvas : Canvas
+      - graphics : GraphicsContext
+      - roasterScene : Scene
+      - animationTimer : AnimationTimer
+      - selectedCharacters : int
+      - selected : SelectedCharacters[]
+      - numberImages : String[]
+      - cantMove : boolean
+      - player : PlayerCharacter[]
+      - col : int
+      - row : int
+      - message : Label
+      - name : Label
+      - health : Label
+      - attack : Label
+      - mana : Label
+      - race : Label
+      - type : Label
+      - behavior : Label
+      - font : Font
+      - yes : Button
+      - no : Button
+      - next : int <<const>>
+      - first : int <<const>>
+      - second : int <<const>>
+      - third : int <<const>>
+      - fourth : int <<const>>
+      - fifth : int <<const>>
+      --
+      + setup() : void
+      - setupWindow() : void
+      - setupCharactersArray() : void
+      - setupSelectedArray() : void
+      - setupCharactersObjetcts() : void
+      - moveSelectionSquare() : void
+      - drawAndActualizePosition() : void
+      - drawBackgroundAndSquares() : void
+      - drawCharacters() : void
+      - drawSelectionSquare() : void
+      - settingLabels() : void
+      - drawCharactersData() : void
+      + drawSelectedCharacters() : void
+      + allCharactersSelected() : void
+      + selectCharacter() : void
+      + reset() : void
+      + threeActions() : EventHandler<ActionEvent>
+  }
+
+  ' 8. Inventario
+  class Inventory {
+      - drawAtMap : static boolean
+      - alreadyCreated : static boolean
+
+      + createInventory() : ArrayList<Consumables>
+      + isDrawAtMap() : boolean
+      + isAlreadyCreated() : boolean
+  }
+
+  ' 9. Relaciones con etiquetas
+  Game "1" *-- "1" Initializer : "initializes"
+  Gameplay "1" *-- "1" Roaster : "haves"
+  Gameplay "1" *-- "1" Combat : "haves"
+  Gameplay "1" *-- "1" TileMap : "contains"
+
+  AudioPlayer "1" o-- "1" Gameplay : "provides audio to"
+  AudioPlayer "1" o-- "1" Combat : "provides audio to"
+  AudioPlayer "1" o-- "1" Gameover : "provides audio to"
+  AudioPlayer "1" o-- "1" Roaster : "provides audio to"
+  AudioPlayer "1" o-- "1" MainMenu : "provides audio to"
+  AudioPlayer "1" o-- "1" ControlsInstructions : "provides audio to"
+  AudioPlayer "1" o-- "1" GameModeMenu : "provides audio to"
+  AudioPlayer "1" o-- "1" OptionsMenu : "provides audio to"
+  AudioPlayer "1" o-- "1" PauseMenu : "provides audio to"
+  AudioPlayer "1" o-- "1" SlidersBrightnessMenu : "provides audio to"
+  AudioPlayer "1" o-- "1" SlidersSoundsMenu : "provides audio to"
+
+  ButtonManager "1" *-- "1" Gameplay : "manages"
+  ButtonManager "1" *-- "1" Combat : "manages"
+
+  LabelManager "1" o-- "1" Gameplay : "manages"
+  LabelManager "1" o-- "1" Combat : "manages"
+
+  PublicVariables "1" *-- "1" Combat : "stores data for"
+  PublicVariables "1" *-- "1" Roaster : "stores data for"
+  PublicVariables "1" *-- "1" Gameplay : "stores data for"
+  PublicVariables "1" *-- "1" PlayerCharacter : "stores data for"
+  PublicVariables "1" *-- "1" EnemyCharacter : "stores data for"
+
+  SelectedCharacters "1" *-- "1" Roaster : "contains"
+
+  Campaign "1" *-- "1" Gameplay : "controls"
+  Campaign "1" ..> "1" Roaster : "uses"
+
+  Combat "1" ..> "1" Gameplay : "depends on"
+
+  Consumables "0..*" o-- "1" Inventory : "contained in"
+  Consumables "0..*" --> "1" Combat : "used in"
+
+  Gameover "1" o-- "1" Combat : "triggered by"
+  Gameover "1" o-- "1" Gameplay : "triggered by"
+
+  TerrainEffects "0..*" --> "1" Gameplay : "affects"
+  TerrainEffects "0.." o-- "1.." TileMap : "applies to"
+  Maps "0..*" *-- "1" TileMap : "defines"
+
+  ControlsInstructions "1" o-- "1" MainMenu : "navigated from"
+  GameModeMenu "1" o-- "1" MainMenu : "navigated from"
+  OptionsMenu "1" o-- "1" MainMenu : "navigated from"
+  SlidersBrightnessMenu "1" o-- "1" OptionsMenu : "child of"
+  SlidersSoundsMenu "1" o-- "1" OptionsMenu : "child of"
+  PauseMenu "1" o-- "1" Gameplay : "pauses"
+  PauseMenu "1" o-- "1" Combat : "pauses"
+
+  Roaster "1" --> "1" GameModeMenu : "selected from"
+
+  EtherStorm "0..*" o-- "1" Gameplay : "occurs in"
+
+  PlayerCharacter "0..*" *-- "1" Roaster : "selected in"
+  EnemyCharacter "0..*" o-- "1" Gameplay : "appears in"
+  Inventory "1" o-- "0..*" Consumables : "contains"
+
+  @enduml
+}
