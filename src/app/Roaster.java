@@ -5,6 +5,7 @@ import app.gameModes.Campaign;
 import app.fastFeatures.AudioPlayer;
 import app.fastFeatures.PublicVariables;
 import app.menus.PauseMenu;
+import domain.characters.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -182,9 +183,38 @@ public class Roaster {
                 drawCharactersData();
                 drawSelectedCharacters();
                 allCharactersSelected();
+                restartMostOfCharactersDead();
             }
         };
         animationTimer.start();
+    }
+
+    private static void restartMostOfCharactersDead() {
+        if (restoreAllCharacters == 4) {
+            Alessandra = new Alessandra();
+            Azeli = new Azeli();
+            Cintya = new Cintya();
+            Draven = new Draven();
+            Drekker = new Drekker();
+            Globius = new Globius();
+            Goldan = new Goldan();
+            Gortana = new Gortana();
+            Grisha = new Grisha();
+            Groshta = new Groshta();
+            Heloro = new Heloro();
+            Higlob = new Higlob();
+            Hobag = new Hobag();
+            Hobgrou = new Hobgrou();
+            Jax = new Jax();
+            Lina = new Lina();
+            Lyffa = new Lyffa();
+            Lyrasa = new Lyrasa();
+            Shira = new Shira();
+            Sirael = new Sirael();
+            Xaviru = new Xaviru();
+            Zorak = new Zorak();
+            restoreAllCharacters = 0;
+        }
     }
 
     private static void drawBackgroundAndSquares() {

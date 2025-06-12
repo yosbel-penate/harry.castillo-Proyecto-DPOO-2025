@@ -285,9 +285,11 @@ public class Gameplay {
 
     private static void useManaPotionInMap() {
         if(doAllHaveMana()) {
-            selectCharacterToConsumable = true;
-            useMana = true;
-            buttonInvisibilizer(useItem1, useItem3);
+            if (theresNoMoreManaCharacters()) {
+                selectCharacterToConsumable = true;
+                useMana = true;
+                buttonInvisibilizer(useItem1, useItem3);
+            }
         }
 
     }
@@ -999,23 +1001,23 @@ public class Gameplay {
                             }
                             break;
                         }
-                        if (useMana){
-                            if (player[selectedCharacter].getHealth() > 0) {
-                                if (player[selectedCharacter].havesMana()) {
-                                    Consumables potionConsumable = inventory.get(1);
-                                    ManaPotion potion = new ManaPotion();
-                                    player[selectedCharacter].setMana(player[selectedCharacter].getMana() + potion.getPointsAdded());
-                                    potionConsumable.setQuantity(potionConsumable.getQuantity() - 1);
-                                    if (potionConsumable.getQuantity() < 1) {
-                                        manaQuantity.setVisible(false);
+                        if (useMana) {
+                                if (player[selectedCharacter].getHealth() > 0) {
+                                    if (player[selectedCharacter].havesMana()) {
+                                        Consumables potionConsumable = inventory.get(1);
+                                        ManaPotion potion = new ManaPotion();
+                                        player[selectedCharacter].setMana(player[selectedCharacter].getMana() + potion.getPointsAdded());
+                                        potionConsumable.setQuantity(potionConsumable.getQuantity() - 1);
+                                        if (potionConsumable.getQuantity() < 1) {
+                                            manaQuantity.setVisible(false);
+                                        }
+                                        selectCharacterToConsumable = false;
+                                        useMana = false;
+                                        break;
                                     }
-                                    selectCharacterToConsumable = false;
-                                    useMana = false;
                                     break;
                                 }
                                 break;
-                            }
-                            break;
                         }
                         if (useShard){
                             if (player[selectedCharacter].getHealth() > 0) {
@@ -1041,6 +1043,15 @@ public class Gameplay {
         });
 
 
+    }
+
+    private static boolean theresNoMoreManaCharacters(){
+        for (int i = 0; i < player.length; i++){
+            if (player[i].havesMana() && player[i].getHealth() > 0){
+                return true;
+            }
+        }
+        return false;
     }
 
 

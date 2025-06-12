@@ -90,6 +90,8 @@ public class PublicVariables {
     public static PlayerCharacter Xaviru = new Xaviru();
     public static PlayerCharacter Zorak = new Zorak();
 
+    public static int restoreAllCharacters = 0;
+
     static Font font = new Font(20);
     public static Label actualTerrainData = createLabel(720, 350, "", Color.WHITE, font);
     public static Label upperActualTerrainData = createLabel(723, 430, "", Color.WHITE, font);

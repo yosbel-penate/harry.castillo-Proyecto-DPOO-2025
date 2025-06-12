@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import static app.Roaster.animationTimer;
+import static app.fastFeatures.PublicVariables.restoreAllCharacters;
 import static app.fastFeatures.PublicVariables.window;
 
 public class Gameover {
@@ -98,6 +99,7 @@ public class Gameover {
                 Combat.setNoRandomPosition(false);
                 animationTimer.start();
                 window.setScene(Roaster.getRoasterScene());
+                restoreAllCharacters++;
 
             }
         });
