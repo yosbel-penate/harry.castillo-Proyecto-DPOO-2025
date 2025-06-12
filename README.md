@@ -135,7 +135,7 @@ De momento, el sistema de carpetas del software sería:
 
 2- Historia: En el mundo mágico de Valthar, un torneo legendario convoca a los guerreros más formidables de todas las eras para competir por el Cáliz de las Eras, un artefacto capaz de alterar el destino.
 
-3- Cómo se juega: se utiliza teclado o mouse para elegir las casillas en las que se moverá el personaje, también se usan para las opciones del combate por turnos. Sus reglas son no usar más de cierta cantidad de consumibles, dependiendo del modo, las reglas se ajustan a los objetivos (si un objetivo es no matar a alguien, pues sería una regla), etc.
+3- Cómo se juega: se utiliza teclado para elegir las casillas en las que se moverá el personaje, también se usan para las opciones del combate por turnos.
 
 
 ### -Requisitos (mínimos) del sistema:
@@ -144,14 +144,14 @@ De momento, el sistema de carpetas del software sería:
 
 2- Sistema operativo: Windows, Linux o macOS.
 
-3- Memoria RAM: 1 o 2GB mínimo.
+3- Memoria RAM: 500 MB
 
 4- CPU’s Intel, Radeon modernos.
 
 5- Tarjeta gráfica (opcional).
 
 
-### -Instalación:
+### -Instrucciones de instalación:
 
 (Requerido tener Git):
 
@@ -169,25 +169,25 @@ De momento, el sistema de carpetas del software sería:
 Clases principales:
 
 
-1- Entities: representa a cualquier entidad del juego, contiene atributos como vida, daño, velocidad, etc.
+1-Game: contiene a la clase principal del programa a partir de la cual se inicia el juego.
 
-2- GamePanel: marco del juego.
+2-Gameplay: se gestiona gran parte de la lógica del juego, incluyendo al actualización del bucle 
+de juego, cargar los enemigos en el mapa, cargar labels y botones, etc.
 
-3- AssetsManager: gestor de recursos del juego.
+3-Combat: gestiona todo lo relacionado con la lógica del combate por turnos.
 
-4- Consumables: representa todos los consumibles del juego.
+4-Roaster: gestiona el sistema de selección de personajes en el Roaster.
 
-5-  Characters: representa a todos los personajes del juego.
+5-PlayerCharacter:se encarga de los personajes jugables y es la clase padre de todas las clases de los personajes 
+jugables.
 
-Todas estas clases son públicas, pero sus variables están encapsuladas.
-
-Para evitar duplicar el código de los Characters y los Consumables, se hizo que estas heredaran de Entities. En el caso de Consumables, ellos heredan estos valores porque estos valores son los que aumentarán a los personajes en caso de consumirlos (la relación de Entities con Characters y Consumables es fuerte). Assets Manager 
-
+Todas estas clases son públicas, pero sus variables están encapsuladas según las necesidades 
+de cada clase y de sus funciones.
 
 
 ### -Diagrama de clases: 
 
-(De momento vacío, se entregará la próxima semana según el calendario dado)
+El diagrama de clases se encuentra en el paquete "Docs", al igual que el diagrama de paquetes.
 
 
 ### -Funcionalidades implementadas:
@@ -196,9 +196,13 @@ Para evitar duplicar el código de los Characters y los Consumables, se hizo que
 
 -Combates por turnos.
 
--Interacción con el mapa y los enemigos.
+-Interacción con el mapa y los enemigos, así como con peligros en el mapa.
 
--Modos de juego: Torneo, Campaña y PvP.
+-Modos de juego: Campaña.
+
+-Musica de fondo y efectos de sonido.
+
+-Videos de inicio del juego y final(créditos). 
 
 
 ### -Pruebas y validación:
@@ -210,10 +214,17 @@ Para evitar duplicar el código de los Characters y los Consumables, se hizo que
 
 ### -Conclusiones: 
 
-(Se rellenará cuando terminemos el proyecto y se haya expuesto)
+La elaboración de este juego fue un factor decisivo en la mejora de nuestro conocimiento sobre Java y JavaFX,
+así como sobre el diseño orientado a objetos. Este proyecto aumentó nuestras espectativas y nos motivó aún más, a adentrarnos
+en el mundo de la programación y todos sus innumerables ramificaciones.
+
 
 ### -Referencias: 
 
-(Se pondrán más adelante, ya que de momento solo hemos usado de referencias algunos vídeos de Youtube y poco más)
+-Conferencias de la asignatura DOPP.
+-Curso de Java de PildorasInformaticas (Canal de Youtube).
+-Curso de JavaFX de Bro Code (Canal de Youtube)
+-Libro ¨Aprende a programar en Java¨. Autores: Alfonso Jiménez Marín y Francisco Manuel Pérez Montes.
+
 
 
