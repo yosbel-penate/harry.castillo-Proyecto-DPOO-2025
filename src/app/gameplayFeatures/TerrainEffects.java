@@ -5,10 +5,7 @@ import domain.generalClasses.PlayerCharacter;
 
 public class TerrainEffects {
 
-    private static boolean isActiveEffect = false;
-    private static int attackIncremented = 3;
-    private static int[] playerAttack = new int[5];
-    private static boolean isAttackSaved = false;
+
 
     public static void applyTerrainEffects(PlayerCharacter[] player, int actualTerrain, int x, int y) {
 

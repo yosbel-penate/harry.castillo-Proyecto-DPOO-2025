@@ -495,12 +495,7 @@ together {
 ' 6. Sistema de mapas y efectos
 together {
   class TerrainEffects {
-        - static boolean isActiveEffect
-        - static int attackIncremented
-        - static int[] playerAttack
-        - static boolean isAttackSaved
         + static void applyTerrainEffects(PlayerCharacter[] player, int actualTerrain, int x, int y)
-        + static void applyUpperTerrainEffects(PlayerCharacter[] player, int upperActualTerrain)
   }
 
   class TileMap {
