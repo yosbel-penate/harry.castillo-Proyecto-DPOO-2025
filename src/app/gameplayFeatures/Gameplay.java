@@ -284,9 +284,11 @@ public class Gameplay {
     }
 
     private static void useManaPotionInMap() {
-        selectCharacterToConsumable = true;
-        useMana = true;
-        buttonInvisibilizer(useItem1, useItem3);
+        if(doAllHaveMana()) {
+            selectCharacterToConsumable = true;
+            useMana = true;
+            buttonInvisibilizer(useItem1, useItem3);
+        }
 
     }
 
@@ -653,6 +655,15 @@ public class Gameplay {
             }
         }
         return true;
+    }
+
+    private static boolean doAllHaveMana(){
+        for (PlayerCharacter p : player){
+            if (p.havesMana()){
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void checkIfCharacterIsAlive() {

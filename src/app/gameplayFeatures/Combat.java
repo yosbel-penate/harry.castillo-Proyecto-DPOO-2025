@@ -48,7 +48,7 @@ public class Combat {
     private static Label message;
     private static Label playerLife;
     private static Label playerAttack;
-    private static Label playerMana;
+    private static Label playerMana = new Label();
     private static Label playerTurnLabel;
     private static Label enemyLife;
     private static Label enemyAttackL;
@@ -388,6 +388,7 @@ public class Combat {
                 playerMana.setVisible(false);
             }
         }
+
         playerAttack = createLabel(150, 480, "Attack points: " + player[0].getAttack(), Color.WHITE, statsFont);
         playerTurnLabel = createLabel(20, 780, "Acciones por turno: " + playerTurn, Color.WHITE, statsFont);
 
