@@ -5,8 +5,8 @@ import domain.generalClasses.EnemyCharacter;
 public class Golem extends EnemyCharacter {
     private int x;
     private int y;
-    private int health = 23;
-    private int attack = 4;
+    private int health = 15;
+    private int attack = 3;
     private String imageName = "golem.png";
     private String closestImageName = "closerGolem.png";
 

@@ -5,8 +5,8 @@ import domain.generalClasses.EnemyCharacter;
 public class Federico extends EnemyCharacter {
     private int x;
     private int y;
-    private int health = 31;
-    private int attack = 6;
+    private int health = 25;
+    private int attack = 3;
     private String imageName = "federico.png";
     private String closestImageName = "closerFederico.png";
 
