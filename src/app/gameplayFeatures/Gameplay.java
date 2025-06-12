@@ -70,6 +70,7 @@ public class Gameplay {
     private static int squareX = 705;
     private static int squareY = 100;
     private static int nextCharacter = 40;
+    private static int enemyToMove = -1;
 
     private static Button useItem1;
     private static Button useItem2;
@@ -967,12 +968,17 @@ public class Gameplay {
                         break;
                     }
                     actionPoints = 2;
+                    if (enemyToMove == enemiSize - 1) {
+                        enemyToMove = 0;
+                    } else {
+                        enemyToMove++;
+                    }
 
-
-                    for (int i = 0; i<enemiSize;i++){
-                        for (int j = 0; j < enemi[i].length; j++){
-                            if (enemi[i][j].isAlive() && j == 0){
-                                enemi[i][0].move(player[0].getX(), player[0].getY(), enemi[i][0].getX(),enemi[i][0].getY(), enemi[i][0]);
+                    for (int i = 0; i < enemiSize; i++) {
+                        for (int j = 0; j < enemi[i].length; j++) {
+                            if (enemi[i][0].isAlive()) {
+                                enemi[enemyToMove][0].move(player[0].getX(), player[0].getY(), enemi[enemyToMove][0].getX(), enemi[enemyToMove][0].getY(), enemi[enemyToMove][0]);
+                                return;
                             }
                         }
                     }
