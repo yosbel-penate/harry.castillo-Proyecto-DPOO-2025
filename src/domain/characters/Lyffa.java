@@ -3,7 +3,7 @@ package domain.characters;
 import domain.generalClasses.PlayerCharacter;
 
 public class Lyffa extends PlayerCharacter {
-    private int health = 6;
+    private int health = 9;
     private int attack = 5;
     private boolean havesMana = true;
     private int mana = 12;

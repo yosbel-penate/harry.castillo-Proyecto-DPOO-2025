@@ -3,7 +3,7 @@ package domain.characters;
 import domain.generalClasses.PlayerCharacter;
 
 public class Lyrasa extends PlayerCharacter {
-    private int health = 6;
+    private int health = 10;
     private int attack = 5;
     private boolean havesMana = false;
     private String characterName = "Lyrasa";

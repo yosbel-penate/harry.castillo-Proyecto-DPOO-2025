@@ -3,7 +3,7 @@ package domain.characters;
 import domain.generalClasses.PlayerCharacter;
 
 public class Hobag extends PlayerCharacter {
-    private int health = 7;
+    private int health = 9;
     private int attack = 3;
     private boolean havesMana = true;
     private int mana = 8;

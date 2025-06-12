@@ -988,14 +988,18 @@ public class Gameplay {
                     EtherStorm.moveEtherStorm();
 
                     for (int i = 0; i < enemiSize; i++) {
-                        for (int j = 0; j < enemi[i].length; j++) {
-                            if (enemi[i][0].isAlive()) {
-                                enemi[enemyToMove][0].move(player[0].getX(), player[0].getY(), enemi[enemyToMove][0].getX(), enemi[enemyToMove][0].getY(), enemi[enemyToMove][0]);
-                                return;
+                        if (enemi[i] != null) {
+                            for (int j = 0; j < enemi[i].length; j++) {
+                                if (enemi[i][0] != null && enemi[i][0].isAlive()) {
+                                    if (enemyToMove >= 0 && enemyToMove < enemi.length && enemi[enemyToMove] != null && enemi[enemyToMove][0] != null) {
+                                        enemi[enemyToMove][0].move(player[0].getX(), player[0].getY(), enemi[enemyToMove][0].getX(), enemi[enemyToMove][0].getY(), enemi[enemyToMove][0]);
+                                        return;
+                                    }
+                                }
                             }
                         }
                     }
-                    break;
+
                 case "T":
                     activateRange = !activateRange;
                     break;
