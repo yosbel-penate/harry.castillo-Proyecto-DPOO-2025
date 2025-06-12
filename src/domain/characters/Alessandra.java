@@ -4,7 +4,7 @@ import domain.generalClasses.PlayerCharacter;
 
 public class Alessandra extends PlayerCharacter {
     private int health = 6;
-    private int attack = 2;
+    private int attack = 4;
     private boolean havesMana = true;
     private int mana = 15;
     private String characterName = "Alessandra";
