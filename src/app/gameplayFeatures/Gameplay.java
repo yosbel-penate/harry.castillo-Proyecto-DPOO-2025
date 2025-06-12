@@ -13,6 +13,7 @@ import domain.generalClasses.Inventory;
 import domain.generalClasses.EnemyCharacter;
 import domain.generalClasses.PlayerCharacter;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -71,6 +72,7 @@ public class Gameplay {
     private static int squareY = 100;
     private static int nextCharacter = 40;
     private static int enemyToMove = -1;
+    private static boolean inCombat = false;
 
     private static Button useItem1;
     private static Button useItem2;
@@ -304,6 +306,7 @@ public class Gameplay {
 
     private static void nextMission(){
         mission++;
+        enemyToMove = -1;
         if(mission == 4){
             goToAnotherMission.setText("Creditos.");
             AudioPlayer.stopTileMap();
@@ -708,6 +711,7 @@ public class Gameplay {
         for (int i = 0; i < inventory.size(); i++){
             if(inventory.get(i).getQuantity() <= 0){
                 emptyInventoryLabel.setVisible(false);
+                emptyInventoryLabel.setVisible(false);
             }
         }
     }
@@ -730,13 +734,20 @@ public class Gameplay {
             }
         }
 
+       // if (inCombat) return;
         for (int i = 0; i<enemiSize;i++){
             for (int j = 0; j < enemi[i].length; j++){
                 if (enemi[i][j].isAlive()){
                     if (player[0].collideRange(enemi[i][0])) {
-                        Combat.setupCombat(enemi[i]);
-                        EnemyCharacter.setCollidePlayer(false);
-                        PlayerCharacter.setCollideEnemy(false);
+                       // inCombat = true;
+                        int finalI = i;
+                        Platform.runLater(() -> {
+                            Combat.setupCombat(enemi[finalI]);
+                            EnemyCharacter.setCollidePlayer(false);
+                            PlayerCharacter.setCollideEnemy(false);
+                        });
+
+
                         return;
                     }
                 }
@@ -974,6 +985,8 @@ public class Gameplay {
                         enemyToMove++;
                     }
 
+                    EtherStorm.moveEtherStorm();
+
                     for (int i = 0; i < enemiSize; i++) {
                         for (int j = 0; j < enemi[i].length; j++) {
                             if (enemi[i][0].isAlive()) {
@@ -982,7 +995,6 @@ public class Gameplay {
                             }
                         }
                     }
-                    EtherStorm.moveEtherStorm();
                     break;
                 case "T":
                     activateRange = !activateRange;

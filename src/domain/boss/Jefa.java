@@ -6,7 +6,7 @@ public class Jefa extends EnemyCharacter {
     private int x;
     private int y;
     private int health = 40;
-    private int attack = 10;
+    private int attack = 8;
     private String imageName = "jefaMala.png";
     private String closestImageName = "closerJefaMala.png";
 

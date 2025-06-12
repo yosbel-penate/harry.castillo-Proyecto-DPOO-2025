@@ -4,7 +4,7 @@ import domain.generalClasses.PlayerCharacter;
 
 public class Xaviru extends PlayerCharacter {
     private int health = 15;
-    private int attack = 10;
+    private int attack = 7;
     private boolean havesMana = false;
     private String characterName = "Xaviru";
     private String imageName = "xaviru.png";
