@@ -39,7 +39,7 @@ public class Maps {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}};
 
-    private static int[][] PvpMap = {
+    private static int[][] secondMap = {
             {5, 5, 5, 0, 0, 0, 0, 5, 0, 5, 0},
             {0, 8, 8, 8, 0, 0, 0, 5, 0, 5, 0},
             {5, 8, 8, 8, 0, 5, 5, 5, 5, 5, 0},
@@ -52,7 +52,7 @@ public class Maps {
             {5, 5, 0, 0, 0, 5, 5, 5, 0, 5, 0},
             {5, 5, 0, 5, 0, 0, 5, 5, 0, 0, 0}};
 
-    private static int[][] PvpMapUpperThingsMatrix = {
+    private static int[][] secondMapUpperThingsMatrix = {
             {3, 0, 0, 2, 2, 2, 0, 2, 3, 2},
             {2, 0, 0, 0, 2, 2, 0, 2, 0, 2},
             {3, 0, 0, 0, 2, 1, 0, 0, 0, 2},
@@ -64,6 +64,80 @@ public class Maps {
             {0, 0, 3, 2, 0, 0, 0, 0, 0, 1},
             {0, 0, 2, 2, 2, 1, 0, 2, 3, 2},
             {0, 0, 2, 1, 2, 0, 3, 2, 2, 2}};
+
+
+    private static int[][] thirdMap = {
+            {5, 5, 5, 5, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 0, 0, 5, 5, 5, 5, 5 ,5},
+            {5, 0, 8, 0, 5, 5, 5, 5, 5 ,5},
+            {5, 0, 8, 0, 5, 5, 5, 5, 5 ,5},
+            {5, 0, 0, 0, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 0, 5, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5 ,5}};
+
+    private static int[][] thirdMapUpperThingsMatrix = {
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 2, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 2, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+    private static int[][] lastMap = {
+            {5, 5, 5, 5, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 5, 5, 9, 5, 5, 5, 9 ,5},
+            {5, 5, 9, 5, 5, 5, 9, 5, 5 ,5},
+            {9, 5, 5, 5, 9, 5, 5, 5, 9 ,5},
+            {5, 5, 9, 5, 5, 5, 5, 9, 5 ,5},
+            {5, 5, 5, 9, 5, 9, 5, 5, 5 ,5},
+            {5, 9, 5, 5, 5, 5, 5, 5, 9 ,5},
+            {5, 5, 5, 5, 5, 5, 5, 5, 5 ,5},
+            {5, 9, 5, 5, 5, 5, 9, 5, 5 ,5},
+            {9, 5, 5, 9, 5, 5, 5, 5, 5 ,5},
+            {5, 5, 5, 5, 5, 9, 5, 5, 9 ,5}};
+
+    private static int[][] lastMapUpperThingsMatrix = {
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+    public static int[][] getLastMapUpperThingsMatrix() {
+        return lastMapUpperThingsMatrix;
+    }
+
+    public static int[][] getLastMap() {
+        return lastMap;
+    }
+
+
+    public static int[][] getThirdMap() {
+        return thirdMap;
+    }
+
+    public static int[][] getThirdMapUpperThingsMatrix() {
+        return thirdMapUpperThingsMatrix;
+    }
+
+
+
+
     public static int[][] getFirstMap() {
         return firstMap;
     }
@@ -77,11 +151,13 @@ public class Maps {
         return tutorialMap;
     }
 
-    public static int[][] getPvpMap(){
-        return PvpMap;
+
+    public static int[][] getSecondMapUpperThingsMatrix() {
+        return secondMapUpperThingsMatrix;
     }
-    public static int[][]getPvpMapUpperThingsMatrix(){
-        return PvpMapUpperThingsMatrix;
+
+    public static int[][] getSecondMap() {
+        return secondMap;
     }
 
 

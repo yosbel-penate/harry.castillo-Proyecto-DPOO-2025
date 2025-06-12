@@ -3,6 +3,9 @@ package domain.generalClasses;
 import java.util.Random;
 
 import app.gameplayFeatures.Gameplay;
+import domain.boss.Jefa;
+import domain.enemies.Federico;
+import domain.enemies.Golem;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import domain.enemies.Wolf;
@@ -16,9 +19,8 @@ public class EnemyCharacter {
     private int attack = 2;
     private int Health = 10;
     private boolean alive = true;
-    private String imageName = "wolf.png";
-    private String closestImageName = "closerWolf.png";
-    // (Bromita)
+    private String imageName;
+    private String closestImageName ;
     private PlayerCharacter character;
     private static boolean collidePlayer;
     private static Random random = new Random();
@@ -33,19 +35,47 @@ public class EnemyCharacter {
     }
 
 
-    public static void randomQuantity(EnemyCharacter[][] enemi, int row){
+    public static void randomQuantity(EnemyCharacter[][] enemi, int row, int mission){
 
 
         int random = new Random().nextInt(1, 6);
+        if (mission == 3){
+            random = 1;
+        }
 
         for (int i = 0; i<random; i++){
-            enemi[row][i] = new Wolf();
-               }
+            switch (mission){
+                case 0:
+                    enemi[row][i] = new Wolf();
+                    break;
+                case 1:
+                    enemi[row][i] = new Golem();
+                    break;
+                case 2:
+                    enemi[row][i] = new Federico();
+                    break;
+                case 3:
+                    enemi[row][i] = new Jefa();
+                    break;
+            }
+        }
 
 
         for (int i = 0; i < enemi[row].length; i++){
             if(enemi[row][i] == null){
-                enemi[row][i] = new Wolf();
+                switch (mission){
+                    case 0:
+                        enemi[row][i] = new Wolf();
+                        break;
+                    case 1:
+                        enemi[row][i] = new Golem();
+                        break;
+                    case 2:
+                        enemi[row][i] = new Federico();
+                        break;
+                    case 3:
+                        enemi[row][i] = new Jefa();
+                }
                 enemi[row][i].setAlive(false);
                 enemi[row][i].setHealth(-1);
             }else{

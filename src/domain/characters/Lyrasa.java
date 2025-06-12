@@ -22,7 +22,7 @@ public class Lyrasa extends PlayerCharacter {
         return characterName;
     }
 
-    public boolean isHavesMana() {
+    public boolean havesMana() {
         return havesMana;
     }
 

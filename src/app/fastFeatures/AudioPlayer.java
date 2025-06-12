@@ -61,6 +61,14 @@ public class AudioPlayer {
         }
     }
 
+    public static void stopTileMap() {
+        MediaPlayer player = activeSounds.get("tileMap");
+        if (player != null) {
+            player.stop();
+            activeSounds.remove("tileMap");
+        }
+    }
+
     public static void playButtonSound() {
         AudioClip clip = clips.get("buttonSound");
         if (clip != null) {

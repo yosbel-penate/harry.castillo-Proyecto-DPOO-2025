@@ -9,7 +9,7 @@ public class Azeli extends PlayerCharacter {
     private int mana = 12;
     private String characterName = "Azeli";
     private String imageName = "azeli.png";
-    private String closestImageName = "closerAzeli.png";
+    private String closestImageName = "closerAzely.png";
 
     public String getClosestImageName() {
         return closestImageName;
@@ -23,12 +23,8 @@ public class Azeli extends PlayerCharacter {
         return characterName;
     }
 
-    public boolean isHavesMana() {
+    public boolean havesMana() {
         return havesMana;
-    }
-    
-    public int getMana() {
-        return mana;
     }
 
     @Override
@@ -39,6 +35,16 @@ public class Azeli extends PlayerCharacter {
     @Override
     public int getHealth() {
         return health;
+    }
+
+    @Override
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    @Override
+    public int getMana() {
+        return mana;
     }
 
     @Override

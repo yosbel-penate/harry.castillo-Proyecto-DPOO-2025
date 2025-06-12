@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
+import static app.Roaster.animationTimer;
 import static app.fastFeatures.PublicVariables.window;
 
 public class Gameover {
@@ -93,11 +94,9 @@ public class Gameover {
     private static void setupRestartListener(Scene gameOverScene) {
         gameOverScene.setOnKeyPressed(event -> {
             if ("F".equals(event.getCode().toString())) {
-                for (int i=0; i<player.length; i++){
-                    player[i].setHealth(5);
-                }
                 gameOverScene.setRoot(new Group());
                 Combat.setNoRandomPosition(false);
+                animationTimer.start();
                 window.setScene(Roaster.getRoasterScene());
 
             }

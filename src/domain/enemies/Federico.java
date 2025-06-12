@@ -2,16 +2,13 @@ package domain.enemies;
 
 import domain.generalClasses.EnemyCharacter;
 
-public class Wolf extends EnemyCharacter {
+public class Federico extends EnemyCharacter {
     private int x;
     private int y;
-    private int health = 10;
-    private int attack = 2;
-
-
-
-    private String imageName = "wolf.png";
-    private String closestImageName = "closerWolf.png";
+    private int health = 31;
+    private int attack = 6;
+    private String imageName = "federico.png";
+    private String closestImageName = "closerFederico.png";
 
 
     @Override
@@ -57,12 +54,12 @@ public class Wolf extends EnemyCharacter {
     public String getImageName() {
         return imageName;
     }
-
     @Override
     public String getClosestImageName() {
         return closestImageName;
     }
 
-    public Wolf() {
+
+    public Federico() {
     }
 }

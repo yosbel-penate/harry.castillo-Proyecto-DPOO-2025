@@ -31,7 +31,7 @@ public class Roaster {
     private static Canvas canvas;
     private static GraphicsContext graphics;
     private static Scene roasterScene;
-    private static AnimationTimer animationTimer;
+    public static AnimationTimer animationTimer;
     private static int selectedCharacters = -1;
     private static SelectedCharacters[] selected;
     private static String[] numberImages = {"first.png", "second.png", "third.png", "fourth.png", "fifth.png"};
@@ -73,7 +73,6 @@ public class Roaster {
         setupWindow();
         setupCharactersArray();
         setupSelectedArray();
-        setupCharactersObjetcts();
         moveSelectionSquare();
         drawAndActualizePosition();
     }
@@ -101,10 +100,6 @@ public class Roaster {
         for(int i = 0; i<5;i++){
             selected[i] = new SelectedCharacters();
         }
-    }
-
-    private static void setupCharactersObjetcts() {
-
     }
 
 
@@ -236,13 +231,13 @@ public class Roaster {
     private static void settingLabels() {
 
         labelInvisibilizer(name, health, mana, attack, race, type, behavior);
-        labelSetFont(name, health, attack, race,type, behavior, font);
-        labelSetColor(name, health, attack, race, type, behavior, Color.WHITE);
+        labelSetFont(name, health, mana, attack, race,type, behavior, font);
+        labelSetColor(name, health, mana, attack, race, type, behavior, Color.WHITE);
 
         labelLocator(
                 name, 720, 240,
                 health, 720, 290,
-                mana, 780, 290,
+                mana, 790, 290,
                 attack, 720, 340,
                 race, 720, 390,
                 type, 720, 440,
@@ -264,6 +259,7 @@ public class Roaster {
                         race.setText("Raza: Humano");
                         type.setText("Tipo: Guerrero");
                         behavior.setText("Personalidad: Valiente,\nleal e impulsivo.");
+                        labelInvisibilizer(mana);
                         break;
                     case second:
                         graphics.drawImage(new Image("siraelFace.png"), 740, 20);
@@ -273,6 +269,7 @@ public class Roaster {
                         race.setText("Raza: Elfo");
                         type.setText("Tipo: Guerrero");
                         behavior.setText("Personalidad: Serio,\nhonorable e inalcanzable.");
+                        labelInvisibilizer(mana);
                         break;
                     case third:
                         graphics.drawImage(new Image("hobgrouFace.png"), 740, 20);
@@ -282,6 +279,7 @@ public class Roaster {
                         race.setText("Raza: Goblin");
                         type.setText("Tipo: Guerrero");
                         behavior.setText("Personalidad: Valiente,\ntenaz y reservado.");
+                        labelInvisibilizer(mana);
                         break;
                     case fourth:
                         graphics.drawImage(new Image("drekkerFace.png"), 740, 20);
@@ -291,6 +289,7 @@ public class Roaster {
                         race.setText("Raza: Orco");
                         type.setText("Tipo: Guerrero");
                         behavior.setText("Personalidad: Experimen-\ntado, fuerte y sereno.");
+                        labelInvisibilizer(mana);
                         break;
                 }
                 break;
@@ -304,6 +303,7 @@ public class Roaster {
                         race.setText("Raza: Humana");
                         type.setText("Tipo: Arquera");
                         behavior.setText("Personalidad: Testaruda,\nfamosa y demasiado\nsincera.");
+                        labelInvisibilizer(mana);
                         break;
 
                     case second:
@@ -314,6 +314,7 @@ public class Roaster {
                         race.setText("Raza: Elfa");
                         type.setText("Tipo: Arquera");
                         behavior.setText("Personalidad: Silenciosa,\nprecisa y desconfiada.");
+                        labelInvisibilizer(mana);
                         break;
                     case third:
                         graphics.drawImage(new Image("groshtaFace.png"), 740, 20);
@@ -323,6 +324,7 @@ public class Roaster {
                         race.setText("Raza: Goblin");
                         type.setText("Tipo: Arquero");
                         behavior.setText("Personalidad: Canalla,\nastuto y gloton.");
+                        labelInvisibilizer(mana);
                         break;
                     case fourth:
                         graphics.drawImage(new Image("grishaFace.png"), 740, 20);
@@ -332,6 +334,7 @@ public class Roaster {
                         race.setText("Raza: Orco");
                         type.setText("Tipo: Arquera");
                         behavior.setText("Personalidad: Sadica,\ndespiadada y grosera.");
+                        labelInvisibilizer(mana);
                         break;
                 }
                 break;
@@ -345,6 +348,7 @@ public class Roaster {
                         race.setText("Raza: Humano");
                         type.setText("Tipo: Barbaro");
                         behavior.setText("Personalidad: Canalla\n, frio y gruñon.");
+                        labelInvisibilizer(mana);
                         break;
 
                     case second:
@@ -355,6 +359,7 @@ public class Roaster {
                         race.setText("Raza: Elfo");
                         type.setText("Tipo: Berserker");
                         behavior.setText("Personalidad: Rencoroso,\nserio y de pocas palabras.");
+                        labelInvisibilizer(mana);
                         break;
                     case third:
                         graphics.drawImage(new Image("globiusFace.png"), 740, 20);
@@ -364,6 +369,7 @@ public class Roaster {
                         race.setText("Raza: Goblin");
                         type.setText("Tipo: Berserker");
                         behavior.setText("Personalidad: Principe,\nmal educado e irascible.");
+                        labelInvisibilizer(mana);
                         break;
                     case fourth:
                         graphics.drawImage(new Image("zorakFace.png"), 740, 20);
@@ -373,6 +379,7 @@ public class Roaster {
                         race.setText("Raza: Orco");
                         type.setText("Tipo: Berserker");
                         behavior.setText("Personalidad: Brutal,\nruidoso y caotico.");
+                        labelInvisibilizer(mana);
                         break;
                 }
                 break;
@@ -395,6 +402,7 @@ public class Roaster {
                         name.setText(Heloro.getCharacterName());
                         health.setText("HP: " + Heloro.getHealth());
                         attack.setText("Attack: " + Heloro.getAttack());
+                        mana.setText("MP: "+Heloro.getMana());
                         race.setText("Raza: Elfo");
                         type.setText("Tipo: Mago");
                         behavior.setText("Personalidad: Sabio,\npreocupado y justo.");
@@ -404,6 +412,7 @@ public class Roaster {
                         name.setText(Hobag.getCharacterName());
                         health.setText("HP: " + Hobag.getHealth());
                         attack.setText("Attack: " + Hobag.getAttack());
+                        mana.setText("MP: "+Hobag.getMana());
                         race.setText("Raza: Goblin");
                         type.setText("Tipo: Maga");
                         behavior.setText("Personalidad: Celosa,\nvaliente y poco amigable.");
@@ -437,6 +446,7 @@ public class Roaster {
                         name.setText(Alessandra.getCharacterName());
                         health.setText("HP: " + Alessandra.getHealth());
                         attack.setText("Attack: " + Alessandra.getAttack());
+                        mana.setText("MP: "+Alessandra.getMana());
                         race.setText("Raza: Humana");
                         type.setText("Tipo: Sanadora");
                         behavior.setText("Personalidad: Coqueta,\namable y extrovertida.");
@@ -447,6 +457,7 @@ public class Roaster {
                         name.setText(Lyffa.getCharacterName());
                         health.setText("HP: " + Lyffa.getHealth());
                         attack.setText("Attack: " + Lyffa.getAttack());
+                        mana.setText("MP: "+Lyffa.getMana());
                         race.setText("Raza: Elfa");
                         type.setText("Tipo: Sanadora");
                         behavior.setText("Personalidad: Princesa,\npervertida y sadica.");
@@ -456,6 +467,7 @@ public class Roaster {
                         name.setText(Higlob.getCharacterName());
                         health.setText("HP: " + Higlob.getHealth());
                         attack.setText("Attack: " + Higlob.getAttack());
+                        mana.setText("MP: "+Higlob.getMana());
                         race.setText("Raza: Goblin");
                         type.setText("Tipo: Sanadora");
                         behavior.setText("Personalidad: Distraido,\nhalagador e inocente.");
@@ -465,11 +477,13 @@ public class Roaster {
                         name.setText(Gortana.getCharacterName());
                         health.setText("HP: " + Gortana.getHealth());
                         attack.setText("Attack: " + Gortana.getAttack());
+                        mana.setText("MP: "+Gortana.getMana());
                         race.setText("Raza: Orco");
                         type.setText("Tipo: Sanadora");
                         behavior.setText("Personalidad: Sabia,\nvieja y amargada.");
                         break;
                     case fifth:
+                        labelInvisibilizer(mana);
                         graphics.drawImage(new Image("shiraFace.png"), 740, 20);
                         name.setText(Shira.getCharacterName());
                         health.setText("HP: " + Shira.getHealth());
@@ -510,7 +524,7 @@ public class Roaster {
             message = createLabel(32, 690, "¿Esta seguro de haber elegido todos los personajes en el orden correcto?",
                     Color.WHITE, font);
 
-            yes = createButton("Si", 32, 730, e -> threeActions(), font);
+            yes = createButton("Si", 32, 730, e -> fourActions(), font);
             yes.getStyleClass().add("combat-button");
             yes.setTextFill(Color.BLACK);
 
@@ -530,12 +544,11 @@ public class Roaster {
 
 
     private static void selectCharacter() {
-        if (!(selectedCharacters == 4)) {
+       if (!(selectedCharacters == 4)) {
             selectedCharacters++;
         }
 
         String imageName = "";
-        boolean noAllowed = false;
 
         switch (col) {
             case first -> {
@@ -663,14 +676,20 @@ public class Roaster {
 
         }
 
-        if(!noAllowed) {
+
             boolean alreadySelected = false;
+        if (player[selectedCharacters].getHealth()< 1){
+            player[selectedCharacters].setHealth(0);
+            alreadySelected = true;
+        }else {
             for (int i = 0; i < selectedCharacters; i++) {
                 if (player[i].getImageName().equals(imageName)) {
                     alreadySelected = true;
                     break;
                 }
+
             }
+        }
 
             if (!alreadySelected) {
                 player[selectedCharacters].setImageName(imageName);
@@ -678,19 +697,24 @@ public class Roaster {
                 player[selectedCharacters].setY(64);
                 selected[selectedCharacters] = new SelectedCharacters(col, row, selectedCharacters, true);
             } else {
-                System.out.println("No puede seleccionar este personaje de nuevo.");
                 selectedCharacters--;
             }
-        }else{
-            System.out.println("De momento, no hay un personaje a seleccionar aqui.");
-            selectedCharacters--;
-        }
+
     }
 
-    private static EventHandler<ActionEvent> threeActions(){
+    private static EventHandler<ActionEvent> fourActions(){
         animationTimer.stop();
         Campaign.initialize();
         AudioPlayer.playRoasterButtonSound();
+        for (int i = 0; i <= 4; i++) {
+            selected[i] = new SelectedCharacters();
+        }
+        cantMove = false;
+        selectedCharacters = -1;
+        if(message != null && yes != null && no != null){
+            labelInvisibilizer(message);
+            buttonInvisibilizer(yes, no);
+        }
         return null;
     }
     private static void reset(){
@@ -701,7 +725,6 @@ public class Roaster {
             selected[i] = new SelectedCharacters();
         }
         if(message != null && yes != null && no != null){
-
             labelInvisibilizer(message);
             buttonInvisibilizer(yes, no);
             animationTimer.start();

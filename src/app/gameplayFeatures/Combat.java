@@ -1,9 +1,11 @@
 package app.gameplayFeatures;
 
+import app.Game;
 import app.fastFeatures.AudioPlayer;
 
 import app.menus.PauseMenu;
 import domain.consumables.ManaPotion;
+import domain.consumables.ShardOfAether;
 import domain.consumables.VitalityPotion;
 import domain.generalClasses.EnemyCharacter;
 import domain.generalClasses.PlayerCharacter;
@@ -31,7 +33,7 @@ public class Combat {
     private static EnemyCharacter[] enemy;
     private static int selectedCharacter = 0;
     private static int selectedEnemy = 0;
-    private static int playerTurn = 5;
+    private static int playerTurn = 3;
     private static int enemiesXPosition = 792;
     private static GraphicsContext graphics;
 
@@ -46,6 +48,7 @@ public class Combat {
     private static Label message;
     private static Label playerLife;
     private static Label playerAttack;
+    private static Label playerMana;
     private static Label playerTurnLabel;
     private static Label enemyLife;
     private static Label enemyAttackL;
@@ -57,6 +60,7 @@ public class Combat {
     private static Button useConsumable;
     private static Button vitalityPotionButton;
     private static Button manaPotionButton;
+    private static Button shardAetherButton;
     private static Button hideConsumablesButton;
 
     private static boolean noRandomPosition;
@@ -182,22 +186,26 @@ public class Combat {
         }
     }
 
+
+
     private static void dropConsumable() {
         dropConsumable = true;
-        if (dropConsumable) {
-            boolean life = new Random().nextBoolean();
-            if (life) {
-                System.out.println("Me estoy activando.");
+            int probabilities = new Random().nextInt(1, 4);
+            if (probabilities == 1) {
                 inventory.getFirst().setX(enemy[0].getX());
                 inventory.getFirst().setY(enemy[0].getY());
-                inventory.getFirst().setImage("vitality_potion.png");
+                inventory.getFirst().setImage("vitalityPotion.png");
                 inventory.getFirst().setDrawAtMap(true);
-            } else {
+            } else if (probabilities == 2){
                 inventory.get(1).setX(enemy[0].getX());
                 inventory.get(1).setY(enemy[0].getY());
-                inventory.get(1).setImage("mana_potion.png");
+                inventory.get(1).setImage("manaPotion.png");
                 inventory.get(1).setDrawAtMap(true);
-            }
+            }else{
+                inventory.get(2).setX(enemy[0].getX());
+                inventory.get(2).setY(enemy[0].getY());
+                inventory.get(2).setImage("shardAether.png");
+                inventory.get(2).setDrawAtMap(true);
 
         }
     }
@@ -217,17 +225,50 @@ public class Combat {
         }
         playerLife.setText("HP: " + player[selectedCharacter].getHealth());
         playerAttack.setText("Attack points: " + player[selectedCharacter].getAttack());
+        if(player[selectedCharacter].havesMana()) {
+            playerMana.setText("MP: " + player[selectedCharacter].getMana());
+        }
         playerTurnLabel.setText("Acciones por turno: " + playerTurn);
         enemyLife.setText("HP: " + enemy[selectedEnemy].getHealth());
         enemyAttackL.setText("Attack points: " + enemy[selectedEnemy].getAttack());
+        if (player[selectedCharacter].havesMana()){
+            playerAttack.setTranslateY(500);
+            playerMana.setVisible(true);
+        }else{
+            playerAttack.setTranslateY(480);
+            playerMana.setVisible(false);
+        }
 
         if (attackToSelectedEnemy) {
-            enemy[selectedEnemy].setHealth(enemy[selectedEnemy].getHealth() - player[selectedCharacter].getAttack());
-            message.setText("¡Ay, Dios! ¡" + player[selectedCharacter].getCharacterName() +
-                    " ha atacado al lobo número " + selectedEnemy + "!");
-            selectEnemyToAttack = false;
-            attackToSelectedEnemy = false;
-            buttonEnabler(attack, runAway, useConsumable, passTurn);
+            if (player[selectedCharacter].havesMana()){
+                if (player[selectedCharacter].getMana() < 1){
+                    enemy[selectedEnemy].setHealth(enemy[selectedEnemy].getHealth() - (player[selectedCharacter].getAttack() - 3));
+                    message.setText("¡Como " + player[selectedCharacter].getCharacterName() +
+                            " no tiene mana, solamente ha hecho " + (player[selectedCharacter].getAttack() - 3) + "de daño!");
+                    selectEnemyToAttack = false;
+                    attackToSelectedEnemy = false;
+                    buttonEnabler(attack, runAway, useConsumable, passTurn);
+
+                }else {
+                    player[selectedCharacter].setMana(player[selectedCharacter].getMana() - 5);
+                    enemy[selectedEnemy].setHealth(enemy[selectedEnemy].getHealth() - (player[selectedCharacter].getAttack() + 4));
+                    message.setText("¡Ay, Dios! ¡" + player[selectedCharacter].getCharacterName() +
+                            " ha atacado al enemigo con su magia, haciendo mas daño de lo normal!");
+                    selectEnemyToAttack = false;
+                    attackToSelectedEnemy = false;
+                    buttonEnabler(attack, runAway, useConsumable, passTurn);
+                    if (player[selectedCharacter].getMana()<1){
+                        player[selectedCharacter].setMana(0);
+                    }
+                }
+            }else {
+                enemy[selectedEnemy].setHealth(enemy[selectedEnemy].getHealth() - player[selectedCharacter].getAttack());
+                message.setText("¡Ay, Dios! ¡" + player[selectedCharacter].getCharacterName() +
+                        " ha atacado al enemigo número " + selectedEnemy + "!");
+                selectEnemyToAttack = false;
+                attackToSelectedEnemy = false;
+                buttonEnabler(attack, runAway, useConsumable, passTurn);
+            }
         }
     }
 
@@ -279,7 +320,7 @@ public class Combat {
 
     private static void enemyTurn() {
         enemyAttack();
-        playerTurn = 5;
+        playerTurn = 3;
     }
 
     private static void enemyAttack() {
@@ -287,13 +328,12 @@ public class Combat {
             boolean attackSuccess = new Random().nextBoolean();
             int targetPlayerIndex = selectAlivePlayerForAttack(new Random().nextInt(player.length));
             if (enemy[i].isAlive()) {
-                System.out.println("Me he activao con el lobo: "+i);
                 if (attackSuccess) {
                     player[targetPlayerIndex].setHealth(player[targetPlayerIndex].getHealth() - enemy[i].getAttack());
-                    message.setText("¡El lobo número " + i + " ha atacado a " + player[targetPlayerIndex].getCharacterName() +
+                    message.setText("¡El enemigo número " + i + " ha atacado a " + player[targetPlayerIndex].getCharacterName() +
                             " y le ha hecho " + enemy[i].getAttack() + " de daño!");
                 } else {
-                    message.setText("¡El lobo número " + i + " intentó atacar a " + player[targetPlayerIndex].getCharacterName() +
+                    message.setText("¡El enemigo número " + i + " intentó atacar a " + player[targetPlayerIndex].getCharacterName() +
                             ", pero se resbaló y no pudo!");
                 }
             }
@@ -342,13 +382,19 @@ public class Combat {
         statsFont = new Font("Arial", 20);
 
         playerLife = createLabel(150, 450, "HP: " + player[0].getHealth(), Color.WHITE, statsFont);
+        for (int i = 0; i < player.length; i++) {
+            if (player[i].havesMana()) {
+                playerMana = createLabel(150, 480, "MP: " + player[i].getMana(), Color.WHITE, statsFont);
+                playerMana.setVisible(false);
+            }
+        }
         playerAttack = createLabel(150, 480, "Attack points: " + player[0].getAttack(), Color.WHITE, statsFont);
         playerTurnLabel = createLabel(20, 780, "Acciones por turno: " + playerTurn, Color.WHITE, statsFont);
 
         enemyLife = createLabel(735, 450, "HP: " + enemy[0].getHealth(), Color.WHITE, statsFont);
         enemyAttackL = createLabel(735, 480, "Attack points: " + enemy[0].getAttack(), Color.WHITE, statsFont);
 
-        message = createLabel(20, 750, "¡Te has encontrado a un lobo!", Color.WHITE, statsFont);
+        message = createLabel(20, 750, "¡Te has encontrado a un enemigo!", Color.WHITE, statsFont);
     }
 
     private static void setupButtons() {
@@ -363,7 +409,7 @@ public class Combat {
     }
 
     private static void setupRoot() {
-        root.getChildren().addAll(canvas, playerLife, playerAttack, enemyLife, enemyAttackL, attack, runAway, passTurn, useConsumable, message, playerTurnLabel, PauseMenu.getPauseMenu());
+        root.getChildren().addAll(canvas, playerMana, playerLife, playerAttack, enemyLife, enemyAttackL, attack, runAway, passTurn, useConsumable, message, playerTurnLabel, PauseMenu.getPauseMenu());
         root.setEffect(PauseMenu.getBrightness());
     }
 
@@ -396,7 +442,7 @@ public class Combat {
         if (enemyWillAttack) {
             enemyAttack();
         } else {
-            message.setText("¡Pasaste el turno, pero el lobo no te dañó porque se tropezó!");
+            message.setText("¡Pasaste el turno, pero el enemigo no te dañó porque se tropezó!");
         }
     }
 
@@ -412,34 +458,39 @@ public class Combat {
             manaPotionButton.getStyleClass().add("combat-button");
             manaPotionButton.setFocusTraversable(false);
 
+            shardAetherButton = createButton("Usar esquirla de Aether.",330,650, e -> useShardAether(), statsFont);
+            shardAetherButton.getStyleClass().add("combat-button");
+            shardAetherButton.setFocusTraversable(false);
 
-            hideConsumablesButton = createButton("Atrás", 330, 650, e -> hideConsumables(), statsFont);
+
+            hideConsumablesButton = createButton("Atrás", 330, 700, e -> hideConsumables(), statsFont);
             hideConsumablesButton.getStyleClass().add("combat-button");
             hideConsumablesButton.setFocusTraversable(false);
 
 
-            root.getChildren().addAll(vitalityPotionButton, manaPotionButton, hideConsumablesButton);
+            root.getChildren().addAll(vitalityPotionButton, manaPotionButton,shardAetherButton, hideConsumablesButton);
         }
     }
 
     private static void hideConsumables() {
         manaPotionButton.setVisible(false);
         vitalityPotionButton.setVisible(false);
+        shardAetherButton.setVisible(false);
         hideConsumablesButton.setVisible(false);
     }
 
     private static void useManaPotion() {
-        if (player[selectedCharacter].isHavesMana()) {
+        if (player[selectedCharacter].havesMana()) {
             Consumables potionConsumable = inventory.get(1);
             if (potionConsumable.getQuantity() > 0) {
                 ManaPotion potion = new ManaPotion();
-                player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() + potion.getPointsAdded());
-                message.setText("¡Has usado una poción de vitalidad! ¡Te curas " + potion.getPointsAdded() + " de vida!");
-                potion.setQuantity(potionConsumable.getQuantity() - 1);
-                playerLife.setText("HP: " + player[selectedCharacter].getHealth());
+                player[selectedCharacter].setMana(player[selectedCharacter].getMana() + potion.getPointsAdded());
+                message.setText("¡Has usado una poción de mana! ¡Recuperas " + potion.getPointsAdded() + " de mana!");
+                potionConsumable.setQuantity(potionConsumable.getQuantity() - 1);
+                playerMana.setText("MP: " + player[selectedCharacter].getMana());
                 playerTurn--;
             } else {
-                message.setText("¿Crees que vas a usar una poción de vitalidad que no tienes?");
+                message.setText("¿Crees que vas a usar una poción de mana que no tienes?");
             }
         } else {
             message.setText("Su personaje no tiene mana que restaurar.");
@@ -452,12 +503,29 @@ public class Combat {
         if (potionConsumable.getQuantity() > 0) {
             VitalityPotion potion = new VitalityPotion();
             player[selectedCharacter].setHealth(player[selectedCharacter].getHealth() + potion.getPointsAdded());
-            message.setText("¡Has usado una poción de vitalidad! ¡Te curas " + potion.getPointsAdded() + " de vida!");
+            message.setText("¡Has usado una poción de vitalidad! ¡Te curas " + potion.getPointsAdded() + " puntos de vida!");
             potionConsumable.setQuantity(potionConsumable.getQuantity() - 1);
             playerLife.setText("HP: " + player[selectedCharacter].getHealth());
             playerTurn--;
         } else {
             message.setText("¿Crees que vas a usar una poción de vitalidad que no tienes?");
+        }
+
+    }
+
+
+    private static void useShardAether() {
+        Consumables potionConsumable = inventory.get(2);
+        if (potionConsumable.getQuantity() > 0 ) {
+            ShardOfAether shard = new ShardOfAether();
+            player[selectedCharacter].setAttack(player[selectedCharacter].getAttack() + shard.getPointsAdded());
+            message.setText("¡Has usado una esquirla de Aether! ¡Aumentas " + shard.getPointsAdded() + " puntos de ataque permanentes a "
+                    +player[selectedCharacter].getCharacterName()+"!");
+            potionConsumable.setQuantity(potionConsumable.getQuantity() - 1);
+            playerAttack.setText("Attack points: " + player[selectedCharacter].getAttack());
+            playerTurn--;
+        } else {
+            message.setText("¿Crees que vas a usar una esquirla de Aether que no tienes?");
         }
     }
 
@@ -476,15 +544,17 @@ public class Combat {
             playerTurn--;
             if (enemyCounterAttack) {
                 enemyAttack();
-                message.setText("¡El lobo no te dejó huir y te hizo daño!");
+                message.setText("¡El enemigo no te dejó huir y te hizo daño!");
             } else {
-                message.setText("¡No escapaste pero el lobo falló el ataque!");
+                message.setText("¡No escapaste pero el enemigo falló el ataque!");
             }
         }
     }
 
 
-
+    public static void setDropConsumable(boolean dropConsumable) {
+        Combat.dropConsumable = dropConsumable;
+    }
 
 
     public static boolean isNoRandomPosition() {

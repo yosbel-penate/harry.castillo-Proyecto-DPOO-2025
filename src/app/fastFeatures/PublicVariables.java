@@ -2,7 +2,12 @@ package app.fastFeatures;
 
 import domain.characters.*;
 import domain.generalClasses.PlayerCharacter;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import static app.fastFeatures.LabelManager.createLabel;
 
 public class PublicVariables {
     // Campaing or Pvp
@@ -84,5 +89,9 @@ public class PublicVariables {
     public static PlayerCharacter Sirael = new Sirael();
     public static PlayerCharacter Xaviru = new Xaviru();
     public static PlayerCharacter Zorak = new Zorak();
+
+    static Font font = new Font(20);
+    public static Label actualTerrainData = createLabel(720, 350, "", Color.WHITE, font);
+    public static Label upperActualTerrainData = createLabel(723, 430, "", Color.WHITE, font);
 
 }
