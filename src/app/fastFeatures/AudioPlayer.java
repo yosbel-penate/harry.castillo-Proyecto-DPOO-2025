@@ -144,6 +144,7 @@ public class AudioPlayer {
     public static void playTileMap() {
         MediaPlayer player = sounds.get("tileMap");
         if (player != null) {
+            player.setCycleCount(MediaPlayer.INDEFINITE);
             player.setVolume(MusicVolumen);
             player.play();
             activeSounds.put("tileMap", player);
