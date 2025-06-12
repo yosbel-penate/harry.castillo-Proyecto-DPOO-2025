@@ -6,6 +6,7 @@ import app.menus.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -41,6 +42,14 @@ public class Game extends Application {
         /* Game.window es la variable publica estatica que usaran
         todas las clases para instanciar la ventana que necesiten.
          */
+
+        // Cargar la imagen del icono
+        Image icono = new Image("icono.jpg"); // Reemplaza con la ruta correcta
+
+        // Establecer el icono de la ventana
+        window.getIcons().add(icono);
+
+
         showIntroVideo(window);
     }
 
