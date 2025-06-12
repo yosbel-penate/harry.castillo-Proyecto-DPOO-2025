@@ -1114,7 +1114,6 @@ public class Gameplay {
 
     }
 
-
     public static boolean isGrabConsumable() {
         return grabConsumable;
     }

@@ -105,6 +105,7 @@ public class Combat {
                 draw();
                 drawPortraits();
 
+
                 if (playerTurn == 0) {
                     enemyTurn();
                 }
@@ -183,6 +184,7 @@ public class Combat {
         selectedEnemy = 0;
         for (EnemyCharacter en : enemy) {
             en.setHealth(10);
+
         }
     }
 
@@ -570,7 +572,7 @@ public class Combat {
         return dropConsumable;
     }
 
-
     public Combat() {
     }
+
 }
