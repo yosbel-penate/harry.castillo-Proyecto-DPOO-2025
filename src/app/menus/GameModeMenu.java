@@ -2,7 +2,6 @@ package app.menus;
 
 import app.fastFeatures.AudioPlayer;
 import app.Roaster;
-import app.gameModes.PvP;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
