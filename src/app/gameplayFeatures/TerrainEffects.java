@@ -22,36 +22,5 @@ public class TerrainEffects {
         }
     }
 
-    public static void applyUpperTerrainEffects(PlayerCharacter[] player, int upperActualTerrain) {
-            if (upperActualTerrain == 3 && !isActiveEffect) {
-
-                if (!isAttackSaved) {
-                    for (int i = 0; i < 5; i++) {
-                        playerAttack[i] = player[i].getAttack();
-                    }
-                    isAttackSaved = true;
-                }
-
-                for (PlayerCharacter p : player) {
-                    p.setAttack(p.getAttack() + attackIncremented);
-                }
-
-                isActiveEffect = true;
-            }
-
-
-            if (upperActualTerrain != 3 && isActiveEffect) {
-                for (int i = 0; i < 5; i++) {
-                    player[i].setAttack(playerAttack[i]);
-                }
-                isActiveEffect = false;
-                isAttackSaved = false;
-            }
-
-    }
-
-    public static boolean GetIsIsActiveEffect() {
-        return isActiveEffect;
-    }
 
 }

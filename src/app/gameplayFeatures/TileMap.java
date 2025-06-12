@@ -149,7 +149,7 @@ public class TileMap {
         }
 
         applyTerrainEffects(player,actualTerrain,x,y);
-        applyUpperTerrainEffects(player,upperActualTerrain);
+
 
 
 
