@@ -7,8 +7,14 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+
+import java.net.URL;
 // Cosas de JavaFX.
 
 
@@ -18,6 +24,8 @@ public class Game extends Application {
     private HBox mainContainer;
     private VBox leftContainer;
     private StackPane rightContainer;
+    private MediaPlayer mediaPlayer;
+    private boolean videoFinished = false;
     // Escena, graficos, raiz y lienzo activados para su uso en toda la aplicacion.
 
 
@@ -33,7 +41,52 @@ public class Game extends Application {
         /* Game.window es la variable publica estatica que usaran
         todas las clases para instanciar la ventana que necesiten.
          */
+        showIntroVideo(window);
+    }
 
+    private void showIntroVideo(Stage window) {
+        try {
+            URL videoUrl = getClass().getResource("/inicio.mp4");
+
+            Media media = new Media(videoUrl.toString());
+            mediaPlayer = new MediaPlayer(media);
+            MediaView mediaView = new MediaView(mediaPlayer);
+
+            mediaView.setPreserveRatio(true);
+            mediaView.setFitWidth(1000);
+            mediaView.setFitHeight(750);
+
+            StackPane videoPane = new StackPane(mediaView);
+            videoPane.setStyle("-fx-background-color: black;");
+
+            Scene videoScene = new Scene(videoPane, 1000, 750);
+
+            mediaPlayer.setOnEndOfMedia(() -> {
+                videoFinished = true;
+                startMainApplication(window);
+            });
+
+            videoScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+                if (!videoFinished) {
+                    mediaPlayer.stop();
+                    videoFinished = true;
+                    startMainApplication(window);
+                }
+            });
+
+            window.setScene(videoScene);
+            window.show();
+
+            mediaPlayer.play();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            startMainApplication(window);
+        }
+    }
+
+    private void startMainApplication(Stage window) {
+        // Inicializar la aplicación principal
         cssSettings();
         Initializer.InitAllMethods();
         settings();

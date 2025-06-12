@@ -154,15 +154,12 @@ public class PlayerCharacter{
 
         for (Consumables consumable : inventory) {
             if (consumable.getX() == x && consumable.getY() == y && consumable.isDrawAtMap()) {
-                consumable.setQuantity(consumable.getQuantity() + 1);
+                consumable.setQuantity(consumable.getQuantity() + 3);
                 Gameplay.setGrabConsumable(true);
-                Gameplay.setDrawConsumable(false);
                 consumable.setDrawAtMap(false);
-                System.out.println("Posicion del consumible antes de cambiarla: "+consumable.getX());
                 consumable.setX(0);
                 consumable.setY(0);
 
-                System.out.println("Posicion del consumible despues de cambiarla: "+consumable.getX());
                 return;
             }
         }
@@ -219,7 +216,7 @@ public class PlayerCharacter{
         this.health = health;
     }
 
-    public  boolean isHavesMana() {
+    public  boolean havesMana() {
         return havesMana;
     }
 

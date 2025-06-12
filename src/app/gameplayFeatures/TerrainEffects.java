@@ -34,7 +34,6 @@ public class TerrainEffects {
 
                 for (PlayerCharacter p : player) {
                     p.setAttack(p.getAttack() + attackIncremented);
-                    System.out.println("El ataque subio a  " + p.getAttack());
                 }
 
                 isActiveEffect = true;

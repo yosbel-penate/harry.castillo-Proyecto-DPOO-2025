@@ -26,6 +26,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/gameplayImages" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/roasterImages/interfaceSquares" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/DAO/images/mainWallpaper" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DAO/videos" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

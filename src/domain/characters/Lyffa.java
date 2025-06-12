@@ -23,13 +23,20 @@ public class Lyffa extends PlayerCharacter {
         return characterName;
     }
 
-    public boolean isHavesMana() {
+    public boolean havesMana() {
         return havesMana;
     }
-    
+
+    @Override
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    @Override
     public int getMana() {
         return mana;
     }
+
 
     @Override
     public int getAttack() {

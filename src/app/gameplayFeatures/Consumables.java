@@ -16,6 +16,7 @@ public class Consumables {
     public void setImage(String image) {
         this.image = image;
     }
+
     public int getQuantity() {
         return quantity;
     }

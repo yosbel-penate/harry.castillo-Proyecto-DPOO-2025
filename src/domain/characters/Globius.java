@@ -7,7 +7,7 @@ public class Globius extends PlayerCharacter {
     private int attack = 5;
     private boolean havesMana = false;
     private String characterName = "Globius";
-    private String imageName = "globiud.png";
+    private String imageName = "globius.png";
     private String closestImageName = "closerGlobius.png";
 
     public String getClosestImageName() {
@@ -22,7 +22,7 @@ public class Globius extends PlayerCharacter {
         return characterName;
     }
 
-    public boolean isHavesMana() {
+    public boolean havesMana() {
         return havesMana;
     }
 

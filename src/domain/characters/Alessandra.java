@@ -23,12 +23,8 @@ public class Alessandra extends PlayerCharacter {
         return characterName;
     }
 
-    public boolean isHavesMana() {
+    public boolean havesMana() {
         return havesMana;
-    }
-    
-    public int getMana() {
-        return mana;
     }
 
     @Override
@@ -50,4 +46,15 @@ public class Alessandra extends PlayerCharacter {
     public void setAttack(int attack) {
         this.attack = attack;
     }
+
+    @Override
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    @Override
+    public int getMana() {
+        return mana;
+    }
+
 }

@@ -8,6 +8,12 @@ public class Wolf extends EnemyCharacter {
     private int health = 10;
     private int attack = 2;
 
+
+
+    private String imageName = "wolf.png";
+    private String closestImageName = "closerWolf.png";
+
+
     @Override
     public int getX() {
         return x;
@@ -47,6 +53,15 @@ public class Wolf extends EnemyCharacter {
         this.attack = attack;
     }
 
+    @Override
+    public String getImageName() {
+        return imageName;
+    }
+
+    @Override
+    public String getClosestImageName() {
+        return closestImageName;
+    }
 
     public Wolf() {
     }

@@ -12,17 +12,15 @@ import static app.fastFeatures.PublicVariables.campaing;
 
 public class GameModeMenu {
     private  static Button campaign=new Button("Campaign");
-    private static Button pvp=new Button("PVP");
     private static Button back=new Button("Back");
     private static VBox gameModeMenu;
 
     public static void initGameModeMenu(){
         campaign.getStyleClass().add("menu-button");
-        pvp.getStyleClass().add("menu-button");
         back.getStyleClass().add("menu-button");
 
         gameModeMenu=new VBox(10);
-        gameModeMenu.getChildren().addAll(campaign,pvp,back);
+        gameModeMenu.getChildren().addAll(campaign,back);
         gameModeMenu.setAlignment(Pos.CENTER_RIGHT);
         gameModeMenu.setPadding(new Insets(0,0,0,20));
         gameModeMenu.setTranslateX(60);
@@ -33,14 +31,9 @@ public class GameModeMenu {
             AudioPlayer.playButtonSound();
             AudioPlayer.stopMainMenu();
             Roaster.setup();
-            campaing= true;
+            hideMenu();
         });
-        pvp.setOnAction(_ -> {
-            AudioPlayer.playButtonSound();
-            AudioPlayer.stopMainMenu();
-            Roaster.setup();
-            campaing= false;
-        });
+
         back.setOnAction(_ ->{
             AudioPlayer.playButtonSound();
             hideMenu();
