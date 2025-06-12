@@ -3,6 +3,7 @@ package app;
 import app.fastFeatures.Initializer;
 import app.fastFeatures.PublicVariables;
 import app.menus.*;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
 // Cosas de JavaFX.
@@ -96,14 +98,32 @@ public class Game extends Application {
 
     private void startMainApplication(Stage window) {
         // Inicializar la aplicación principal
-        cssSettings();
-        Initializer.InitAllMethods();
-        settings();
 
-        window.setScene(mainScene);
-        window.setTitle("Cronicas de Valthar: El Torneo de las Eras");
-        window.setResizable(true);
-        window.show();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), window.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(event -> {
+
+            cssSettings();
+            Initializer.InitAllMethods();
+            settings();
+
+            window.setScene(mainScene);
+            window.setTitle("Cronicas de Valthar: El Torneo de las Eras");
+            window.setResizable(true);
+            window.show();
+
+            // Hacer que la nueva escena aparezca con un fade-in
+            FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), window.getScene().getRoot());
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+        });
+
+        fadeOut.play();
+
+
     }
 
     private void cssSettings() {
