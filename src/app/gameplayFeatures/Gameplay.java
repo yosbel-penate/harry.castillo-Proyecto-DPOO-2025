@@ -999,6 +999,7 @@ public class Gameplay {
                             }
                         }
                     }
+                    break;
 
                 case "T":
                     activateRange = !activateRange;
