@@ -51,6 +51,10 @@ package src as "src"{
   
 
   package "domain" as domain{
+
+    package "boss" as domain_enemies{
+      class domain_enemies as "Jefa"
+    }
     
     package "characters" as domain_characters {
       class domain_characters_Alessandra as "Alessandra"
@@ -87,9 +91,11 @@ package src as "src"{
       class domain_dangers_EtherStorm as "EtherStorm"
     }
 
-    package "enemies" as domain_enemie{
+    package "enemies" as domain_enemies{
       
-      class domain_enemies as "Wolf"
+      class domain_enemies_Golem as "Golem"
+      class domain_enemies_Wolf as "Wolf"
+      class domain_enemies_Federico as "Federico"
     }
     
    package "generalClasses" as domain_generalClasses{

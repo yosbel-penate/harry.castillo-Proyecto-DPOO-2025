@@ -54,12 +54,12 @@ public class Game extends Application {
 
             mediaView.setPreserveRatio(true);
             mediaView.setFitWidth(1000);
-            mediaView.setFitHeight(750);
+            mediaView.setFitHeight(650);
 
             StackPane videoPane = new StackPane(mediaView);
             videoPane.setStyle("-fx-background-color: black;");
 
-            Scene videoScene = new Scene(videoPane, 1000, 750);
+            Scene videoScene = new Scene(videoPane, 1000, 650);
 
             mediaPlayer.setOnEndOfMedia(() -> {
                 videoFinished = true;
@@ -93,12 +93,12 @@ public class Game extends Application {
 
         window.setScene(mainScene);
         window.setTitle("Cronicas de Valthar: El Torneo de las Eras");
-        window.setResizable(false);
+        window.setResizable(true);
         window.show();
     }
 
     private void cssSettings() {
-        mainScene=new Scene(stackPane,1000,750);
+        mainScene=new Scene(stackPane,1000,650);
         mainScene.getStylesheets().add(getClass().getResource("/buttons.css").toExternalForm());
 
     }
