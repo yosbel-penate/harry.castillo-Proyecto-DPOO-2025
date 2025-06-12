@@ -1,0 +1,190 @@
+@startuml PackageDiagram
+
+package src as "src"{
+   
+  package "app" as app {
+    class app_Game as "Game"
+    class app_Maps as "Maps"
+    class app_Roaster as "Roaster"
+     
+    package "cutscenes" as app_cutscenes {
+      class app_cutscenes_NarratorFirstApparition as "NarratorFirstApparition"
+    }
+    
+    package "fastFeatures" as app_fastFeatures {
+      class app_fastFeatures_AudioPlayer as "AudioPlayer"
+      class app_fastFeatures_ButtonManager as "ButtonManager"
+      class app_fastFeatures_Initializer as "Initializer"
+      class app_fastFeatures_LabelManager as "LabelManager"
+      class app_fastFeatures_PublicVariables as "PublicVariables"
+      class app_fastFeatures_SelectedCharacters as "SelectedCharacters"
+    }
+    
+    package "gameModes" as app_gameModes {
+      
+      class app_gameModes_Campaign as "Campaign"
+      class app_gameModes_PvP as "PvP"
+
+    }
+
+    package "gameplayFeatures" as app_gameplayFeatures {
+      class app_gameplayFeatures_Combat as "Combat"
+      class app_gameplayFeatures_Consumables as "Consumables"
+      class app_gameplayFeatures_Gameover as "Gameover"
+      class app_gameplayFeatures_Gameplay as "Gameplay"
+      class app_gameplayFeatures_TerrainEffects as "TerrainEffects"
+      class app_gameplayFeatures_TileMap as "TileMap"
+    }
+    package "interfaces" as app_interfaces {
+        class app_interfaces_consumables as "consumables"
+    }
+    package "menus" as app_menus {
+      class app_menus_ControlsInstructions as "ControlsInstructions"
+      class app_menus_GameModeMenu as "GameModeMenu"
+      class app_menus_MainMenu as "MainMenu"
+      class app_menus_OptionsMenu as "OptionsMenu"
+      class app_menus_PauseMenu as "PauseMenu"
+      class app_menus_SlidersBrightnessMenu as "SlidersBrightnessMenu"
+      class app_menus_SlidersSoundsMenu as "SlidersSoundsMenu"
+    }
+  }
+  
+
+  package "domain" as domain{
+    
+    package "characters" as domain_characters {
+      class domain_characters_Alessandra as "Alessandra"
+      class domain_characters_Azeli as "Azeli"
+      class domain_characters_Cintya as "Cintya"
+      class domain_characters_Draven as "Draven"
+      class domain_characters_Drekker as "Drekker"
+      class domain_characters_Globius as "Globius"
+      class domain_characters_Goldan as "Goldan"
+      class domain_characters_Gortana as "Gortana"
+      class domain_characters_Grisha as "Grisha"
+      class domain_characters_Groshta as "Groshta"
+      class domain_characters_Heloro as "Heloro"
+      class domain_characters_Higlob as "Higlob"
+      class domain_characters_Hobag as "Hobag"
+      class domain_characters_Hobgrou as "Hobgrou"
+      class domain_characters_Jax as "Jax"
+      class domain_characters_Lina as "Lina"
+      class domain_characters_Lyffa as "Lyffa"
+      class domain_characters_Lyrasa as "Lyrasa"
+      class domain_characters_Shira as "Shira"
+      class domain_characters_Sirael as "Sirael"
+      class domain_characters_Xaviru as "Xaviru"
+      class domain_characters_Zorak as "Zorak"
+    } 
+
+    package "consumables" as domain_consumables {
+      class domain_consumables_ManaPotion as "ManaPotion"
+      class domain_consumables_ShardOfAether as "ShardOfAether"
+      class domain_consumables_VitalityPotion as "VitalityPotion"
+    }
+
+    package "dangers" as domain_dangers {
+      class domain_dangers_EtherStorm as "EtherStorm"
+    }
+
+    package "enemies" as domain_enemie{
+      
+      class domain_enemies as "Wolf"
+    }
+    
+   package "generalClasses" as domain_generalClasses{
+    
+    class domain_generalClasses_Inventory as "Inventory"
+    class domain_generalClasses_PlayerCharacter as "PlayerCharacter"
+    class domain_generalClasses_EnemyCharacter as "EnemyCharacter"
+    
+    }
+  }
+
+  package "DAO" as DAO{
+    
+  }
+
+  app ..> javafx_scene
+  app ..> javafx_event
+  app ..> javafx_geometry
+  app ..> javafx_scene_image
+  app ..> javafx_scene_paint
+  app ..> javafx_scene_control
+  app ..> javafx_scene_canvas
+  app ..> javafx_scene_text
+  app ..> javafx_animation
+  app ..> javafx_stage
+  app ..> javafx_scene_input
+  app ..> javafx_application
+
+  app_cutscenes ..> javafx_scene
+  app_cutscenes ..> javafx_scene_image
+  app_cutscenes ..> javafx_scene_paint
+  app_cutscenes ..> javafx_scene_control
+  app_cutscenes ..> javafx_scene_canvas
+  app_cutscenes ..> javafx_scene_text
+
+  app_fastFeatures ..> javafx_scene_paint
+  app_fastFeatures ..> javafx_scene_control
+  app_fastFeatures ..> javafx_scene_text
+  app_fastFeatures ..> javafx_stage
+  app_fastFeatures ..> javafx_scene_media
+  app_fastFeatures ..> java_nio_file
+  app_fastFeatures ..> java_util
+
+  app_gameplayFeatures ..> javafx_scene
+  app_gameplayFeatures ..> javafx_scene_image
+  app_gameplayFeatures ..> javafx_scene_paint
+  app_gameplayFeatures ..> javafx_scene_control
+  app_gameplayFeatures ..> javafx_scene_canvas
+  app_gameplayFeatures ..> javafx_scene_text
+  app_gameplayFeatures ..> javafx_animation
+  app_gameplayFeatures ..> javafx_util
+  app_gameplayFeatures ..> java_util
+
+  app_menus ..> javafx_geometry
+  app_menus ..> javafx_scene_control
+  app_menus ..> javafx_scene_effect
+  app_menus ..> javafx_scene_layout
+
+
+  domain_dangers ..> javafx_scene_image
+  domain_dangers ..> javafx_scene_canvas
+  domain_dangers ..> java_util
+
+  
+
+  app ..> app_menus
+  app ..> app_gameModes
+  app ..> app_fastFeatures
+  app ..> domain_generalClasses
+ 
+
+  app_fastFeatures ..> domain_generalClasses
+  
+  app_gameplayFeatures ..> app
+  app_gameplayFeatures ..> app_menus
+  app_gameplayFeatures ..> app_fastFeatures
+  app_gameplayFeatures ..> domain_dangers
+  app_gameplayFeatures ..> domain_consumables
+  app_gameplayFeatures <..> domain_generalClasses
+  app_gameModes ..> app_gameplayFeatures
+  
+  app_menus ..> app_fastFeatures
+  app_menus ..> app_gameModes
+  app_menus ..> app
+
+  domain_consumables ..> app_gameplayFeatures
+  domain_consumables ..> app_interfaces
+
+  domain_characters ..> domain_generalClasses
+
+  domain_dangers ..> domain_generalClasses
+
+  domain_enemie <..> domain_generalClasses
+
+  domain_generalClasses ..> domain_consumables
+
+}
+@enduml
