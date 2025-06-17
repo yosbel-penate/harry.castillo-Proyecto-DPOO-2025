@@ -125,6 +125,42 @@ De momento, el sistema de carpetas del software sería:
 4- Assets (música, efectos de sonido, sprites).
 
 
+# Distribución de las labores en el proyecto/
+
+
+//Aclaración: En gran parte del proceso se han tenido que realizar cambios sobre lo ya realizado por los integrantes del 
+equipo, por lo que puede haber confunsiones en los commits de los diferentes participantes. También se dieron los casos
+de que varios integrantes tuvieron que trabajar sobre una misma clase o elemento por lo que se hayan modificaciones. 
+Cabe aclarar de igual forma, que por la versatilidad a la hora de realizar el proyecto, debido a la gran cantidad de 
+trabajo realizado, puede en el siguiente apartado falten algunos elementos.
+ 
+
+-Harry Pérez Castillo: Organización de la estructura del proyecto. Creación del mapa del juego, implementando texturas.
+Implementación de personajes y enemigos. Realización de la lógica del combate por turnos y corrección de errores y bugs.
+Colaboración en la creación del diagrama UML.
+
+-Lázaro Luis Ayala Oquendo: Colaboración en la creación del diagrama UML y en la estructuración del proyecto. Creación e
+implementación de los consumibles. Creación del Roaster de personajes y de la lógica de selección. Creación del los 
+diferentes menús del juego con sus respectivas funcionalidades, así como trabajo con los audios. Estilizaciones con CSS 
+y agregando escena del GameOver. Añadiendo peligros al mapa y su implementanción. Correción de errores y bugs.
+
+-Arturo Alvarez González: Organización y depuración del juego. Trabajo sobre los menús del juego y desarrollo de lógica 
+en el ciclo principal del juego. Trabajo sobre los controles de los personajes del juego. Añadiendo música, efectos de 
+sonido e imágenes del juego (respecto a personajes y tipos de terreno). Modificaciones sobre el Roaster de personajes.
+Refactorización del código del juego para facilitar su trabajo y escalabilidad para futuros desarrolladores. Corrección 
+de bugs y errores.
+
+-Eduardo Cortés Odio: Trabajo sobre el diagrama de clases. Reestructuración y refactorización de elementos. Añadiendo 
+parte de la lógica del movimiento de los personajes del juego. Implementación de imágenes de terrenos. Colaboración en 
+la creación de mapas para los diferentes niveles. Estilizando el Roaster con fondo y ajustando posiciones de los botones.
+Trabajo en parte de la lógica de los personajes en el mapa. Elaboración del diagrama de paquetes del juego y empaquetado.
+
+
+-Xavier Alfonso Borges: Creación de todos los personajes jugables del juego y su implementación en clases del juego.
+Elaboración de las imágenes de los personajes. Trabajando en limpieza del código y depuración de elementos innecesarios
+en el juego. Arreglo de errores y trabajo sobre parte de la lógica de la campaña.
+
+
 # Documento de Requisitos:
 
 ### -Título del proyecto:
