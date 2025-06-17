@@ -191,14 +191,20 @@ en el juego. Arreglo de errores y trabajo sobre parte de la lógica de la campa�
 
 (Requerido tener Git):
 
-1- Clonar repositorio usando el comando git clone.
+1- Clonar repositorio usando las herramientas aportas por la pagina de Github
+2- Abrir el archivo launch.bat con un editor de texto cualquiera que está ubicado dentro de la carpeta out
+3- Modificar las siguientes líneas de código:
+set JAVA_HOME="(Dirección en donde se encuentra instalado su JDK)" 
 
-2- Navegar al directorio del proyecto con el comando cd.
+--module-path (Dirección en donde descomprimió el archivo .zip del repositorio hasta la carpeta lib) 
+Ejemplo: "C:\GAMES\CronicasDeValthar\lib"
 
-3- Compilar el proyecto con bash javac *. java.
+-Djava.library.path="(Dirección en donde descomprimió el archivo .zip del repositorio hasta la carpeta bin)"
+Ejemplo: "C:\GAMES\CronicasDeValthar\bin"
 
-4- Ejecutar el proyecto con bash java Main.
+Guardar los cambios, salir del editor de texto y abrir con doble click el archivo launch.bat
 
+Nota: Todas las direcciones deben estar encerradas entre comillas ""
 
 ### -Diseño del juego (POO):
 
